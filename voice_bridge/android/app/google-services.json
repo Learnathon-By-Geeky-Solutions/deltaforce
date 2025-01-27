@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "637869527446",
+    "project_id": "voicebridge-bfd4f",
+    "storage_bucket": "voicebridge-bfd4f.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:637869527446:android:8db8ac71d09da562a78db7",
+        "android_client_info": {
+          "package_name": "com.example.voice_bridge"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBmGcQUbYDBzSPCayPzvLPYnWL908RTD6Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
