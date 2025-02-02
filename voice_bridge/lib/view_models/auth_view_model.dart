@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:voice_bridge/models/user.dart';
 import 'package:voice_bridge/services/firebase_auth_service.dart';
+import 'package:voice_bridge/utils/message.dart';
 
 class AuthViewModel extends GetxController {
   final FirebaseAuthService _firebaseAuthService = FirebaseAuthService();
@@ -37,10 +38,10 @@ class AuthViewModel extends GetxController {
       _error.value = '';
 
       await _firebaseAuthService.signUpWithEmailAndPassword(email, password);
-      Get.snackbar("Success", "Sign up successful");
+      Get.snackbar("Success", Message.signupSuccess);
     } catch(e){
       _error.value = e.toString();
-      Get.snackbar("Error", "Error signing up");
+      Get.snackbar("Error", Message.signupError);
     } finally{
       _isLoading.value = false;
     }
@@ -53,10 +54,10 @@ class AuthViewModel extends GetxController {
       _error.value = '';
 
       await _firebaseAuthService.signInWithEmailAndPassword(email, password);
-      Get.snackbar("Success", "Successfully signed in");
+      Get.snackbar("Success", Message.signinSuccess);
     }catch(e){
       _error.value = e.toString();
-      Get.snackbar("Error", "Error signing in");
+      Get.snackbar("Error", Message.signinError);
     }finally{
       _isLoading.value = false;
     }
@@ -69,15 +70,12 @@ class AuthViewModel extends GetxController {
       _error.value = '';
 
       await _firebaseAuthService.signOut();
-      Get.snackbar("Success", "Successfully signed out");
+      Get.snackbar("Success", Message.signoutSuccess);
     }catch(e){
       _error.value = e.toString();
-      Get.snackbar("Error", "Error signing out");
+      Get.snackbar("Error", Message.signoutError);
     }finally{
       _isLoading.value = false;
     }
   }
-
-
-
 }
