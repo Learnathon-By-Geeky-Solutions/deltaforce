@@ -7,7 +7,9 @@ class FirebaseAuthService {
 
   // Sign up with email and password
   Future<UserCredential> signUpWithEmailAndPassword(String email, String password) async{
-    return await _firebaseAuth.createUserWithEmailAndPassword(email: email, password: password);
+    UserCredential userCredential =  await _firebaseAuth.createUserWithEmailAndPassword(email: email, password: password);
+    await userCredential.user?.sendEmailVerification();
+    return userCredential;
   }
 
   //sing in with email and password
@@ -18,5 +20,13 @@ class FirebaseAuthService {
   //sign out
   Future<void> signOut() async{
     return _firebaseAuth.signOut();
+  }
+
+  bool isEmailVerified(){
+    return _firebaseAuth.currentUser?.emailVerified ?? false;
+  }
+
+  Future<void> reloadUser() async{
+    await _firebaseAuth.currentUser?.reload();
   }
 }

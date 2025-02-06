@@ -7,4 +7,6 @@ class Message {
 
   static const String signoutSuccess = "Successfully signed out";
   static const String signoutError = "Error signing out";
+
+  static const String verificationMessage = "A verification eamil has been sent."; 
 }

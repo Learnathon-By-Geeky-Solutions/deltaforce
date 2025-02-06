@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:voice_bridge/view_models/auth_view_model.dart';
@@ -6,6 +7,7 @@ import 'signup_screen.dart';
 
 class LoginScreen extends StatelessWidget {
   final AuthViewModel _authController = Get.put(AuthViewModel());
+  final FirebaseAuth _auth = FirebaseAuth.instance;
 
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();

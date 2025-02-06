@@ -3,6 +3,8 @@ import 'package:get/get.dart';
 import 'package:voice_bridge/models/user.dart';
 import 'package:voice_bridge/services/firebase_auth_service.dart';
 import 'package:voice_bridge/utils/message.dart';
+import 'package:voice_bridge/views/auth/login_screen.dart';
+import 'package:voice_bridge/views/home/home_screen.dart';
 
 class AuthViewModel extends GetxController {
   final FirebaseAuthService _firebaseAuthService = FirebaseAuthService();
@@ -38,7 +40,16 @@ class AuthViewModel extends GetxController {
       _error.value = '';
 
       await _firebaseAuthService.signUpWithEmailAndPassword(email, password);
-      Get.snackbar("Success", Message.signupSuccess);
+            
+      // Get.to(() => LoginScreen());
+      Get.snackbar("Success", Message.verificationMessage);
+
+      if(_firebaseAuthService.isEmailVerified()){
+        Get.to(() => LoginScreen());
+      }
+      else{
+        Get.snackbar("Error", "Error creating account");
+      }
     } catch(e){
       _error.value = e.toString();
       Get.snackbar("Error", Message.signupError);
@@ -53,8 +64,15 @@ class AuthViewModel extends GetxController {
       _isLoading.value = true;
       _error.value = '';
 
-      await _firebaseAuthService.signInWithEmailAndPassword(email, password);
+      final UserCredential userCredential =  await _firebaseAuthService.signInWithEmailAndPassword(email, password);
+
+      if(!userCredential.user!.emailVerified){
+        Get.snackbar("Verify Email", "Please verify your email before log in");
+        await _firebaseAuthService.signOut();
+        return;
+      }
       Get.snackbar("Success", Message.signinSuccess);
+      Get.to(() => HomeScreen());
     }catch(e){
       _error.value = e.toString();
       Get.snackbar("Error", Message.signinError);

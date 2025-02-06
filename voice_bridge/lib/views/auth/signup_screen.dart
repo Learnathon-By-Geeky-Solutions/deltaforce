@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:voice_bridge/view_models/auth_view_model.dart';
+import 'package:voice_bridge/views/auth/login_screen.dart';
 import 'package:voice_bridge/widgets/custom_button.dart';
 
 class SignupScreen extends StatelessWidget {
@@ -8,6 +9,11 @@ class SignupScreen extends StatelessWidget {
 
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+
+  void _clearField(){
+    emailController.clear();
+    passwordController.clear();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,6 +38,7 @@ class SignupScreen extends StatelessWidget {
               text: "Sign Up",
               onPressed: () async {
                 await _authController.signUp(emailController.text, passwordController.text);
+                _clearField();
               },
             ),
             TextButton(
