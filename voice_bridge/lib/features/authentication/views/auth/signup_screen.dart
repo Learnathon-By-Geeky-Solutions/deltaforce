@@ -1,45 +1,49 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:voice_bridge/view_models/auth_view_model.dart';
+import 'package:voice_bridge/features/authentication/const/app_strings.dart';
+import 'package:voice_bridge/features/authentication/view_models/auth_view_model.dart';
 import 'package:voice_bridge/widgets/custom_button.dart';
-import 'signup_screen.dart';
 
-class LoginScreen extends StatelessWidget {
-  final AuthViewModel _authController = Get.put(AuthViewModel());
-  final FirebaseAuth _auth = FirebaseAuth.instance;
+class SignupScreen extends StatelessWidget {
+  final AuthViewModel _authController = Get.find<AuthViewModel>();
 
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
+  void _clearField(){
+    emailController.clear();
+    passwordController.clear();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Login")),
+      appBar: AppBar(title: Text(AppStrings.signUp)),
       body: Padding(
         padding: EdgeInsets.all(20),
         child: Column(
           children: [
             TextField(
               controller: emailController,
-              decoration: InputDecoration(labelText: "Email"),
+              decoration: InputDecoration(labelText: AppStrings.email),
             ),
             SizedBox(height: 10),
             TextField(
               controller: passwordController,
-              decoration: InputDecoration(labelText: "Password"),
+              decoration: InputDecoration(labelText: AppStrings.password),
               obscureText: true,
             ),
             SizedBox(height: 20),
             CustomButton(
-              text: "Login",
+              text: AppStrings.signUp,
               onPressed: () async {
-                await _authController.singIn(emailController.text, passwordController.text);
+                await _authController.signUp(emailController.text, passwordController.text);
+                _clearField();
               },
             ),
             TextButton(
-              onPressed: () => Get.to(() => SignupScreen()),
-              child: Text("Don't have an account? Sign up"),
+              onPressed: () => Get.back(),
+              child: Text(AppStrings.dontHaveAccount),
             ),
           ],
         ),

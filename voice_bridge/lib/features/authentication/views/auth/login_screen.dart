@@ -1,24 +1,21 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:voice_bridge/view_models/auth_view_model.dart';
-import 'package:voice_bridge/views/auth/login_screen.dart';
+import 'package:voice_bridge/features/authentication/view_models/auth_view_model.dart';
 import 'package:voice_bridge/widgets/custom_button.dart';
+import 'signup_screen.dart';
 
-class SignupScreen extends StatelessWidget {
-  final AuthViewModel _authController = Get.find<AuthViewModel>();
+class LoginScreen extends StatelessWidget {
+  final AuthViewModel _authController = Get.put(AuthViewModel());
+  final FirebaseAuth _auth = FirebaseAuth.instance;
 
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
-  void _clearField(){
-    emailController.clear();
-    passwordController.clear();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Sign Up")),
+      appBar: AppBar(title: Text("Login")),
       body: Padding(
         padding: EdgeInsets.all(20),
         child: Column(
@@ -35,15 +32,14 @@ class SignupScreen extends StatelessWidget {
             ),
             SizedBox(height: 20),
             CustomButton(
-              text: "Sign Up",
+              text: "Login",
               onPressed: () async {
-                await _authController.signUp(emailController.text, passwordController.text);
-                _clearField();
+                await _authController.signIn(emailController.text, passwordController.text);
               },
             ),
             TextButton(
-              onPressed: () => Get.back(),
-              child: Text("Already have an account? Login"),
+              onPressed: () => Get.to(() => SignupScreen()),
+              child: Text("Don't have an account? Sign up"),
             ),
           ],
         ),

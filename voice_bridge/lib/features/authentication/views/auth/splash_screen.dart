@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:voice_bridge/features/authentication/const/app_strings.dart';
 import 'login_screen.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -22,7 +23,7 @@ class _SplashScreenState extends State<SplashScreen> {
       backgroundColor: Colors.blueAccent,
       body: Center(
         child: Text(
-          "VoiceBridge",
+          AppStrings.appName,
           style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold, color: Colors.white),
         ),
       ),

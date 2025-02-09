@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:voice_bridge/features/authentication/const/app_strings.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -12,7 +13,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Text("Home Screen"),
+        child: Text(AppStrings.homeScreen),
       ),
     );
   }

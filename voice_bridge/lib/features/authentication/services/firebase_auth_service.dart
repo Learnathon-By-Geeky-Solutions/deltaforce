@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 class FirebaseAuthService {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
 
+  //Stream ensures app always reacts to authentication changes in real time.
   Stream<User?> get authStateChanges => _firebaseAuth.authStateChanges();
 
   // Sign up with email and password
