@@ -12,4 +12,7 @@ class AppStrings {
   static const String signUp = 'Sign Up';
   static const String login = 'Login';
   static const String dontHaveAccount = 'Don\'t have an account? Sign up';
+  static const String alreadyHaveAccount = 'Already have an account? Login';
+  static const String confirmPassword = 'Confirm Password';
+  static const String passwordMismatch = 'Passwords do not match';
 }

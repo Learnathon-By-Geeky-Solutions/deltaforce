@@ -5,15 +5,11 @@ import 'package:voice_bridge/features/authentication/view_models/auth_view_model
 import 'package:voice_bridge/widgets/custom_button.dart';
 
 class SignupScreen extends StatelessWidget {
-  final AuthViewModel _authController = Get.find<AuthViewModel>();
+  final AuthViewModel _authController = Get.put(AuthViewModel());
 
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-
-  void _clearField(){
-    emailController.clear();
-    passwordController.clear();
-  }
+  final TextEditingController confirmPasswordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -33,17 +29,29 @@ class SignupScreen extends StatelessWidget {
               decoration: InputDecoration(labelText: AppStrings.password),
               obscureText: true,
             ),
+            SizedBox(height: 10),
+            TextField(
+              controller: confirmPasswordController,
+              decoration: InputDecoration(labelText: AppStrings.confirmPassword),
+              obscureText: true,
+            ),
             SizedBox(height: 20),
             CustomButton(
               text: AppStrings.signUp,
-              onPressed: () async {
-                await _authController.signUp(emailController.text, passwordController.text);
-                _clearField();
+              onPressed: () {
+                if (passwordController.text == confirmPasswordController.text) {
+                  _authController.signUp(
+                    emailController.text,
+                    passwordController.text,
+                  );
+                } else {
+                  Get.snackbar("Error", AppStrings.passwordMismatch);
+                }
               },
             ),
             TextButton(
               onPressed: () => Get.back(),
-              child: Text(AppStrings.dontHaveAccount),
+              child: Text(AppStrings.alreadyHaveAccount),
             ),
           ],
         ),
