@@ -15,4 +15,9 @@ class AppStrings {
   static const String alreadyHaveAccount = 'Already have an account? Login';
   static const String confirmPassword = 'Confirm Password';
   static const String passwordMismatch = 'Passwords do not match';
+  static const String userName = 'Name';
+  static const String createAccount = 'Create your account';
+  static const String signUpWithGoogle = 'Sign up with Google';
+  static const String signInWithFacebook = 'Sign in with Facebook';
+  static const String GoogleSignInAborted = 'Sign in with Google';
 }
