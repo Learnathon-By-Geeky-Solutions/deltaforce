@@ -14,9 +14,9 @@ class BottomNavBar extends StatelessWidget {
       currentIndex: controller.selectedIndex.value,
       onTap: controller.changeTab,
       items: const [
-        BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
-        BottomNavigationBarItem(icon: Icon(Icons.school), label: "Practice"),
-        BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile"),
+        BottomNavigationBarItem(icon: Icon(Icons.checklist_rtl_outlined), label: 'Practice'),
+        BottomNavigationBarItem(icon: Icon(Icons.school), label: "Learn"),
+        BottomNavigationBarItem(icon: Icon(Icons.manage_accounts), label: "Parents"),
       ],
     ));
   }

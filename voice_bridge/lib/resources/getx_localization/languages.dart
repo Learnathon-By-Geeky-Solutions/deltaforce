@@ -13,6 +13,9 @@ class Languages extends Translations{
       'login' : 'Login',
       'signup' : 'Sign Up',
       'welcome_back' : 'Welcome\nBack',
+      'learn' : 'Learn',
+      'practice' : 'Practice',
+      'parents' : 'Parents',
     },
 
     'bn_BD' :{

@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 
 class HomeViewModel extends GetxController {
-  RxInt selectedIndex = 0.obs;
+  RxInt selectedIndex = 1.obs;
 
   void changeTab(int index) {
     selectedIndex.value = index;

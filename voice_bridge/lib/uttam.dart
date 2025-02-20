@@ -1,5 +1,9 @@
+// its an temporary file to test the apps
+
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:voice_bridge/resources/colors/app_color.dart';
 import 'package:voice_bridge/resources/getx_localization/languages.dart';
 import 'package:voice_bridge/resources/routes/routes.dart';
 
@@ -20,7 +24,7 @@ class MyApp extends StatelessWidget {
       fallbackLocale: Locale('en' , 'US'),// if locale language is not supported for the device
 
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor: AppColor.appBarColor),
         useMaterial3: true,
       ),
       getPages: AppRoutes.appRoutes(),

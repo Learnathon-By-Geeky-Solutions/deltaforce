@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:voice_bridge/resources/colors/app_color.dart';
 import 'package:voice_bridge/screens/learnScreen/views/learnScreenView.dart';
 import 'package:voice_bridge/screens/parentScreen/views/parentScreenView.dart';
 import 'package:voice_bridge/screens/practiceScreen/views/practiceScreenView.dart';
 
-import '../../drawer/views/appDrawer.dart';
+import '../../end_drawer/views/appDrawer.dart';
 import '../../navigation/bottomNavBar.dart';
 import '../view_model/home_view_model.dart';
 
@@ -16,17 +17,20 @@ class HomeView extends StatelessWidget {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   final List<Widget> pages = [
-    const LearnScreenView(),
     const PracticeScreenView(),
+    LearnScreenView(),
     const ParentScreenView(),
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
       key: _scaffoldKey,
       appBar: AppBar(
-        title: const Text("VoiceBridge"),
+        backgroundColor: AppColor.appBarColor,
+        title: const Text("Voice Bridge"),
+
           leading: Container(),
           actions: [
             IconButton(
@@ -35,7 +39,12 @@ class HomeView extends StatelessWidget {
                 _scaffoldKey.currentState?.openEndDrawer();
               },
             ),
-          ]
+          ],
+        elevation: 5,
+        shadowColor: Colors.brown,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(bottom: Radius.circular(20))
+        ),
       ),
       endDrawer: const AppDrawer(),
       body: Obx(() => pages[controller.selectedIndex.value]),
