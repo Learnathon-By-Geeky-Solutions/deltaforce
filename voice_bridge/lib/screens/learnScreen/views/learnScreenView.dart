@@ -26,7 +26,7 @@ class LearnScreenView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: GridView.builder(
-        padding: EdgeInsets.all(12),
+        padding: EdgeInsets.fromLTRB(12,12,12,100),
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
           crossAxisSpacing: 16,
