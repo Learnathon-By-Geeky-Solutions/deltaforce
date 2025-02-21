@@ -50,19 +50,19 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyBmGcQUbYDBzSPCayPzvLPYnWL908RTD6Q',
-    appId: '1:637869527446:android:8db8ac71d09da562a78db7',
-    messagingSenderId: '637869527446',
-    projectId: 'voicebridge-bfd4f',
-    storageBucket: 'voicebridge-bfd4f.firebasestorage.app',
+    apiKey: 'AIzaSyCHCMhOMlaiXU-fxYiJhWKGtv6tR1U9gnU',
+    appId: '1:269970079447:android:3632cdc983bad38e5afa92',
+    messagingSenderId: '269970079447',
+    projectId: 'voicebridge-bd5cb',
+    storageBucket: 'voicebridge-bd5cb.firebasestorage.app',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyDMcyKyyPzNBfOtRtdrUm70hdbcZmK0Tzs',
-    appId: '1:637869527446:ios:96a459864b5933e6a78db7',
-    messagingSenderId: '637869527446',
-    projectId: 'voicebridge-bfd4f',
-    storageBucket: 'voicebridge-bfd4f.firebasestorage.app',
+    apiKey: 'AIzaSyC6dqBdqhTBorXIx8acocxNZ_5ggFKkXKM',
+    appId: '1:269970079447:ios:134cce0ef4c4e3bd5afa92',
+    messagingSenderId: '269970079447',
+    projectId: 'voicebridge-bd5cb',
+    storageBucket: 'voicebridge-bd5cb.firebasestorage.app',
     iosBundleId: 'com.example.voiceBridge',
   );
 }

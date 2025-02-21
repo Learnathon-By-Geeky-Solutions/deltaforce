@@ -1,31 +1,22 @@
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:voice_bridge/resources/colors/app_color.dart';
-import 'package:voice_bridge/resources/getx_localization/languages.dart';
-import 'package:voice_bridge/resources/routes/routes.dart';
-
-void main() {
-  runApp(const MyApp());
+import 'package:firebase_core/firebase_core.dart';
+import 'package:voice_bridge/features/authentication/const/app_strings.dart';
+import 'package:voice_bridge/features/authentication/views/auth/splash_screen.dart';
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(); // Ensure Firebase is initialized before running the app
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      title: 'Flutter Demo',
-      translations: Languages(),
-      locale: Locale('en' , 'US'),
-      fallbackLocale: Locale('en' , 'US'),// if locale language is not supported for the device
-
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: AppColor.appBarColor),
-        useMaterial3: true,
-      ),
-      getPages: AppRoutes.appRoutes(),
+      debugShowCheckedModeBanner: false,
+      title: AppStrings.appName,
+      theme: ThemeData(primarySwatch: Colors.blue),
+      home: SplashScreen(),
     );
   }
 }
