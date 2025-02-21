@@ -67,18 +67,26 @@ class AuthViewModel extends GetxController {
     }
   }
 
-  Future<void> signInWithGoogle() async {
-    try {
-      _isLoading.value = true;
-      UserCredential userCredential = await _firebaseAuthService.signInWithGoogle();
-      _user.value = userCredential.user;
-      Get.snackbar(AppStrings.successful, AppStrings.googleSignInSuccess);
-      Get.to(() => HomeScreen());
-    } catch (e) {
-      _error.value = e.toString();
+Future<void> signInWithGoogle() async {
+  try {
+    _isLoading.value = true;
+    
+    User? user = await _firebaseAuthService.signInWithGoogle();
+
+    if (user == null) {
       Get.snackbar(AppStrings.error, AppStrings.googleSignInFailed);
-    } finally {
-      _isLoading.value = false;
+      return;
     }
+
+    _user.value = user;
+    Get.snackbar(AppStrings.successful, AppStrings.googleSignInSuccess);
+    Get.to(() => HomeScreen());
+  } catch (e) {
+    _error.value = e.toString();
+    Get.snackbar(AppStrings.error, AppStrings.googleSignInFailed);
+  } finally {
+    _isLoading.value = false;
   }
+}
+
 }

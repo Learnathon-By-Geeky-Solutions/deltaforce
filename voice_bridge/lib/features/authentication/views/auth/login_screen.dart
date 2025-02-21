@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:voice_bridge/features/authentication/const/app_strings.dart';
+import 'package:voice_bridge/features/authentication/services/firebase_auth_service.dart';
 import 'package:voice_bridge/features/authentication/view_models/auth_view_model.dart';
 import 'package:voice_bridge/features/authentication/views/auth/signup_screen.dart';
 import 'package:voice_bridge/features/authentication/views/home/home_screen.dart';
@@ -9,6 +10,7 @@ import 'package:voice_bridge/widgets/custom_button.dart';
 
 class LoginScreen extends StatelessWidget {
   final AuthViewModel _authController = Get.put(AuthViewModel());
+  final FirebaseAuthService _firebaseAuthService = FirebaseAuthService();
 
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
