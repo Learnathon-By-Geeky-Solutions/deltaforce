@@ -1,6 +1,13 @@
 
 class RoutesName {
-  static const String homeView = '/';
+
+  static const String splashScreen = '/';
+  static const String loginScreen = '/login';
+  static const String signupScreen = '/signup';
+
+  static const String baseView = '/base';
+  // static const String baseView = '/base';
+
   static const String learnScreen = '/learn';
   static const String practiceScreen = '/practice';
   static const String parentScreen = '/parent';

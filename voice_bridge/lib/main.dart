@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:voice_bridge/features/authentication/const/app_strings.dart';
-import 'package:voice_bridge/features/authentication/views/auth/splash_screen.dart';
 import 'package:voice_bridge/resources/colors/app_color.dart';
 import 'package:voice_bridge/resources/getx_localization/languages.dart';
 import 'package:voice_bridge/resources/routes/routes.dart';
@@ -30,8 +28,8 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
 
-      // getPages: AppRoutes.appRoutes(),
-      home: SplashScreen(),
+      getPages: AppRoutes.appRoutes(),
+      // base: SplashScreen(),
     );
   }
 }

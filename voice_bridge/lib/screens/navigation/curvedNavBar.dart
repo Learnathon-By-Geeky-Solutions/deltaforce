@@ -2,13 +2,11 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:voice_bridge/resources/colors/app_color.dart';
-
-import '../home/view_model/home_view_model.dart';
+import 'package:voice_bridge/screens/base/view_model/base_view_model.dart';
 
 class CurvedNavBar extends StatelessWidget {
-  // final RxInt selectedIndex;
-  // final Function(int) onItemTapped;
-  final HomeViewModel controller;
+
+  final BaseViewModel controller;
 
 
   const CurvedNavBar({super.key, required this.controller});

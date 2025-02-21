@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:voice_bridge/resources/colors/app_color.dart';
-import '../home/view_model/home_view_model.dart';
+import 'package:voice_bridge/screens/base/view_model/base_view_model.dart';
 
 class BottomNavBar extends StatelessWidget {
-  final HomeViewModel controller;
+  final BaseViewModel controller;
 
   const BottomNavBar({super.key, required this.controller});
 

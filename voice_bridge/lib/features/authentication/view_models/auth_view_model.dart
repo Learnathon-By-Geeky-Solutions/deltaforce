@@ -1,10 +1,8 @@
 import 'package:get/get.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:voice_bridge/features/authentication/const/app_strings.dart';
 import 'package:voice_bridge/features/authentication/services/firebase_auth_service.dart';
-import 'package:voice_bridge/features/authentication/views/auth/login_screen.dart';
-import 'package:voice_bridge/features/authentication/views/home/home_screen.dart';
+import 'package:voice_bridge/resources/routes/routes_name.dart';
 
 class AuthViewModel extends GetxController {
   final FirebaseAuthService _firebaseAuthService = FirebaseAuthService();
@@ -38,7 +36,8 @@ class AuthViewModel extends GetxController {
       _isLoading.value = true;
       await _firebaseAuthService.signUpWithEmailAndPassword(email, password);
       Get.snackbar(AppStrings.successful, AppStrings.signupSuccess);
-      Get.to(() => HomeScreen());
+      // Get.to(() => HomeScreen());
+      Get.toNamed(RoutesName.baseView);
     } catch (e) {
       _error.value = e.toString();
       Get.snackbar(AppStrings.error, AppStrings.signupError);
@@ -58,7 +57,9 @@ class AuthViewModel extends GetxController {
         return;
       }
       Get.snackbar(AppStrings.successful, AppStrings.loginSuccess);
-      Get.to(() => HomeScreen());
+      // Get.to(() => HomeScreen());
+      Get.toNamed(RoutesName.baseView);
+
     } catch (e) {
       _error.value = e.toString();
       Get.snackbar(AppStrings.error, AppStrings.signinError);
@@ -80,7 +81,9 @@ Future<void> signInWithGoogle() async {
 
     _user.value = user;
     Get.snackbar(AppStrings.successful, AppStrings.googleSignInSuccess);
-    Get.to(() => HomeScreen());
+    // Get.to(() => HomeScreen());
+    Get.toNamed(RoutesName.baseView);
+
   } catch (e) {
     _error.value = e.toString();
     Get.snackbar(AppStrings.error, AppStrings.googleSignInFailed);
