@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:voice_bridge/features/authentication/const/app_strings.dart';
 import 'package:voice_bridge/features/authentication/view_models/auth_view_model.dart';
@@ -20,6 +21,24 @@ class LoginScreen extends StatelessWidget {
         padding: EdgeInsets.all(20),
         child: Column(
           children: [
+            TextButton(
+              onPressed: () {
+                _authController.signInWithGoogle();
+              },
+              style: TextButton.styleFrom(
+                minimumSize: Size(1000.0, 50.0),
+                backgroundColor: Colors.blue,
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  FaIcon(FontAwesomeIcons.google, color: Colors.white),
+                  SizedBox(width: 10),
+                  Text(AppStrings.signUpWithGoogle, style: TextStyle(color: Colors.white)),
+                ],
+              ),
+            ),
+            SizedBox(height: 20),
             TextField(
               controller: emailController,
               decoration: InputDecoration(labelText: AppStrings.email),

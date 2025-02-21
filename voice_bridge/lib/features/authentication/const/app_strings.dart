@@ -19,5 +19,10 @@ class AppStrings {
   static const String createAccount = 'Create your account';
   static const String signUpWithGoogle = 'Sign up with Google';
   static const String signInWithFacebook = 'Sign in with Facebook';
-  static const String GoogleSignInAborted = 'Sign in with Google';
+  static const String googleSignInAborted = 'Google Sign In aborted';
+  static const String googleSignInFailed = 'Google Sign In failed';
+  static const String googleSignInSuccess = "Google Sign In successful";
+  static const String successful = "Successful";
+  static const String error = "Error";
+  static const String emailVerification = "Email Verification";
 }

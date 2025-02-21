@@ -19,6 +19,16 @@ class _HomeScreenState extends State<HomeScreen> {
           "Home Screen",
           style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
         ),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.logout),
+            onPressed: () {
+              auth.signOut();
+              Navigator.pop(context);
+            },
+          ),
+        ],
+        
       ),
       body: Center(
         child: Column(

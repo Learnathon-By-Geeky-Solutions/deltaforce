@@ -10,8 +10,7 @@ class SignupScreen extends StatelessWidget {
 
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  final TextEditingController confirmPasswordController =
-      TextEditingController();
+  final TextEditingController confirmPasswordController = TextEditingController();
   final TextEditingController nameController = TextEditingController();
 
   @override
@@ -22,13 +21,12 @@ class SignupScreen extends StatelessWidget {
         padding: EdgeInsets.all(20),
         child: Column(
           children: [
-            Text(
-              AppStrings.createAccount,
-              style: TextStyle(fontSize: 30),
-            ),
+            Text(AppStrings.createAccount, style: TextStyle(fontSize: 30)),
             SizedBox(height: 20),
             TextButton(
-              onPressed: () {},
+              onPressed: () {
+                _authController.signInWithGoogle();
+              },
               style: TextButton.styleFrom(
                 minimumSize: Size(1000.0, 50.0),
                 backgroundColor: Colors.blue,
@@ -38,29 +36,7 @@ class SignupScreen extends StatelessWidget {
                 children: [
                   FaIcon(FontAwesomeIcons.google, color: Colors.white),
                   SizedBox(width: 10),
-                  Text(
-                    AppStrings.signUpWithGoogle,
-                    style: TextStyle(color: Colors.white),
-                  ),
-                ],
-              ),
-            ),
-            SizedBox(height: 20),
-            TextButton(
-              onPressed: () {},
-              style: TextButton.styleFrom(
-                minimumSize: Size(1000.0, 50.0),
-                backgroundColor: Colors.blue,
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  FaIcon(FontAwesomeIcons.facebook, color: Colors.white),
-                  SizedBox(width: 10),
-                  Text(
-                    AppStrings.signInWithFacebook,
-                    style: TextStyle(color: Colors.white),
-                  ),
+                  Text(AppStrings.signUpWithGoogle, style: TextStyle(color: Colors.white)),
                 ],
               ),
             ),
@@ -69,8 +45,7 @@ class SignupScreen extends StatelessWidget {
               controller: nameController,
               decoration: InputDecoration(
                 labelText: AppStrings.userName,
-                border:
-                    OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+                border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
               ),
             ),
             SizedBox(height: 20),
@@ -78,9 +53,7 @@ class SignupScreen extends StatelessWidget {
               controller: emailController,
               decoration: InputDecoration(
                 labelText: AppStrings.email,
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10),
-                ),
+                border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
               ),
             ),
             SizedBox(height: 10),
@@ -88,9 +61,7 @@ class SignupScreen extends StatelessWidget {
               controller: passwordController,
               decoration: InputDecoration(
                 labelText: AppStrings.password,
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10),
-                ),
+                border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
               ),
               obscureText: true,
             ),
@@ -99,9 +70,7 @@ class SignupScreen extends StatelessWidget {
               controller: confirmPasswordController,
               decoration: InputDecoration(
                 labelText: AppStrings.confirmPassword,
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10),
-                ),
+                border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
               ),
               obscureText: true,
             ),
@@ -110,12 +79,9 @@ class SignupScreen extends StatelessWidget {
               text: AppStrings.signUp,
               onPressed: () {
                 if (passwordController.text == confirmPasswordController.text) {
-                  _authController.signUp(
-                    emailController.text,
-                    passwordController.text,
-                  );
+                  _authController.signUp(emailController.text, passwordController.text);
                 } else {
-                  Get.snackbar("Error", AppStrings.passwordMismatch);
+                  Get.snackbar(AppStrings.error, AppStrings.passwordMismatch);
                 }
               },
             ),

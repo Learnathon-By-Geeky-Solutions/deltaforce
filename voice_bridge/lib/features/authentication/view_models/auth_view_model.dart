@@ -1,16 +1,15 @@
-
-
 import 'package:get/get.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:voice_bridge/features/authentication/const/app_strings.dart';
-import 'package:voice_bridge/features/authentication/models/user.dart';
 import 'package:voice_bridge/features/authentication/services/firebase_auth_service.dart';
 import 'package:voice_bridge/features/authentication/views/auth/login_screen.dart';
 import 'package:voice_bridge/features/authentication/views/home/home_screen.dart';
 
 class AuthViewModel extends GetxController {
   final FirebaseAuthService _firebaseAuthService = FirebaseAuthService();
-  final Rx<UserModel?> _user = Rx<UserModel?>(null);
-  UserModel? get user => _user.value;
+  final Rx<User?> _user = Rx<User?>(null);
+  User? get user => _user.value;
 
   final RxBool _isLoading = false.obs;
   bool get isLoading => _isLoading.value;
@@ -22,9 +21,7 @@ class AuthViewModel extends GetxController {
   void onInit() {
     super.onInit();
     _firebaseAuthService.authStateChanges.listen((firebaseUser) {
-      _user.value = firebaseUser != null
-          ? UserModel(uid: firebaseUser.uid, email: firebaseUser.email)
-          : null;
+      _user.value = firebaseUser;
     });
   }
 
@@ -40,11 +37,11 @@ class AuthViewModel extends GetxController {
     try {
       _isLoading.value = true;
       await _firebaseAuthService.signUpWithEmailAndPassword(email, password);
-      Get.snackbar("Success", AppStrings.signupSuccess);
-      Get.to(() => LoginScreen());
+      Get.snackbar(AppStrings.successful, AppStrings.signupSuccess);
+      Get.to(() => HomeScreen());
     } catch (e) {
       _error.value = e.toString();
-      Get.snackbar("Error", AppStrings.signupError);
+      Get.snackbar(AppStrings.error, AppStrings.signupError);
     } finally {
       _isLoading.value = false;
     }
@@ -56,39 +53,32 @@ class AuthViewModel extends GetxController {
       final userCredential = await _firebaseAuthService.signInWithEmailAndPassword(email, password);
       await _firebaseAuthService.reloadUser();
       if (!userCredential.user!.emailVerified) {
-        Get.snackbar("Verify Email", AppStrings.emailVerificationError);
+        Get.snackbar(AppStrings.emailVerification, AppStrings.emailVerificationError);
         await _firebaseAuthService.signOut();
         return;
       }
-      Get.snackbar("Success", AppStrings.loginSuccess);
+      Get.snackbar(AppStrings.successful, AppStrings.loginSuccess);
       Get.to(() => HomeScreen());
     } catch (e) {
       _error.value = e.toString();
-      Get.snackbar("Error", AppStrings.signinError);
+      Get.snackbar(AppStrings.error, AppStrings.signinError);
     } finally {
       _isLoading.value = false;
     }
   }
 
-  Future<void> signOut() async {
+  Future<void> signInWithGoogle() async {
     try {
       _isLoading.value = true;
-      await _firebaseAuthService.signOut();
-      Get.snackbar("Success", AppStrings.signoutSuccess);
+      UserCredential userCredential = await _firebaseAuthService.signInWithGoogle();
+      _user.value = userCredential.user;
+      Get.snackbar(AppStrings.successful, AppStrings.googleSignInSuccess);
+      Get.to(() => HomeScreen());
     } catch (e) {
       _error.value = e.toString();
+      Get.snackbar(AppStrings.error, AppStrings.googleSignInFailed);
     } finally {
       _isLoading.value = false;
     }
   }
 }
-
-
-/*Rx (Reactive) variables in GetX allow
- real-time state management and automatic 
- UI updates without needing setState().
-
-Rx<T> is a reactive wrapper around a variable.
-When the value changes,
-all widgets listening to it update automatically.
- */
