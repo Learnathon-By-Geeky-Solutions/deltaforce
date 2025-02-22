@@ -4,9 +4,11 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:voice_bridge/resources/colors/app_color.dart';
 import 'package:voice_bridge/resources/getx_localization/languages.dart';
 import 'package:voice_bridge/resources/routes/routes.dart';
+import 'package:voice_bridge/features/authentication/view_models/auth_view_model.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(); // Ensure Firebase is initialized before running the app
+  Get.put(AuthViewModel());
   runApp(MyApp());
 }
 

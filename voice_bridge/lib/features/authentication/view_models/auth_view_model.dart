@@ -31,6 +31,17 @@ class AuthViewModel extends GetxController {
     super.onClose();
   }
 
+void checkUserLoggedIn() {
+  _firebaseAuthService.authStateChanges.listen((User? user) {
+    if (user != null) {
+      Get.offAll(() => HomeScreen());  // Use `Get.offAll` to clear splash screen from the stack
+    } else {
+      Get.offAll(() => LoginScreen());
+    }
+  });
+}
+
+
   Future<void> signUp(String email, String password) async {
     try {
       _isLoading.value = true;
