@@ -7,6 +7,10 @@ class FirebaseAuthService {
 
   Stream<User?> get authStateChanges => _firebaseAuth.authStateChanges();
 
+  User? geCurrentUser() {
+    return _firebaseAuth.currentUser;
+  }
+
   Future<UserCredential> signUpWithEmailAndPassword(
       String email, String password) async {
     UserCredential userCredential = await _firebaseAuth
