@@ -34,9 +34,12 @@ class AuthViewModel extends GetxController {
 void checkUserLoggedIn() {
   _firebaseAuthService.authStateChanges.listen((User? user) {
     if (user != null) {
-      Get.offAll(() => HomeScreen());  // Use `Get.offAll` to clear splash screen from the stack
+      // Get.offAll(() => HomeScreen());  // Use `Get.offAll` to clear splash screen from the stack
+      Get.offNamed(RoutesName.baseView);
     } else {
-      Get.offAll(() => LoginScreen());
+      // Get.offAll(() => LoginScreen());
+      Get.offNamed(RoutesName.loginScreen);
+
     }
   });
 }
