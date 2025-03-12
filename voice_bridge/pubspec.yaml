@@ -69,6 +69,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - lib/resources/assets/images/
+    - lib/screens/learn_item_screen/balloon_blast/images
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
