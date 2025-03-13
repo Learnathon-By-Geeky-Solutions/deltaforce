@@ -8,7 +8,7 @@ class HomePage extends Component with HasGameReference<Game> {
   RoundedButton? _button1;
 
   @override
-  void onLoad() async {
+  Future<void> onLoad() async {
     super.onLoad();
 
     // Initialize the button inside onLoad
@@ -22,8 +22,12 @@ class HomePage extends Component with HasGameReference<Game> {
       borderColor: Colors.white,
     );
 
-    // Add the button to the game
-    add(_button1!);  // Use the non-nullable value safely
+    // Ensure the button is initialized before adding
+    if (_button1 != null) {
+      add(_button1!);  // Use the non-nullable value safely
+    } else {
+      print("Button not initialized correctly");
+    }
   }
 
   @override
@@ -32,7 +36,10 @@ class HomePage extends Component with HasGameReference<Game> {
 
     // Ensure _button1 is not null before accessing it
     if (_button1 != null && _button1!.isMounted) {
-      _button1!.position = size / 2;  // Center the button in the game screen
+      // Ensure the button is positioned correctly at the center
+      _button1!.position = size / 2;
+    } else {
+      print("Button is not mounted or not initialized properly");
     }
   }
 }

@@ -51,9 +51,7 @@ class Game extends FlameGame{
 
     ]);
 
-    add(RectangleTest(
-        size/2,
-        pageSize: size, velocity: Vector2(0, maxVerticalVelocity), size: size));
+
   }
 
   // void onDragUpdate(DragUpdateEvent event) {
