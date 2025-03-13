@@ -1,6 +1,38 @@
 import 'package:flame/components.dart';
-import 'package:voice_bridge/screens/learn_item_screen/balloon_blast/views/balloon_blast_screen.dart';
+import 'package:flutter/material.dart';
+import 'package:voice_bridge/screens/learn_item_screen/balloon_blast/components/rounded_button.dart';
+import '../../fruit_slash/game_main.dart';
 
-class HomePage extends Component with HasGameReference<Game>{
-  late final btn;
+class HomePage extends Component with HasGameReference<Game> {
+  // Declare the button as nullable
+  RoundedButton? _button1;
+
+  @override
+  void onLoad() async {
+    super.onLoad();
+
+    // Initialize the button inside onLoad
+    _button1 = RoundedButton(
+      text: "Start",
+      onPressed: () {
+        // Navigate to the game page using the router
+        game.router.pushNamed('game-page');
+      },
+      color: Colors.blue,
+      borderColor: Colors.white,
+    );
+
+    // Add the button to the game
+    add(_button1!);  // Use the non-nullable value safely
+  }
+
+  @override
+  void onGameResize(Vector2 size) {
+    super.onGameResize(size);
+
+    // Ensure _button1 is not null before accessing it
+    if (_button1 != null && _button1!.isMounted) {
+      _button1!.position = size / 2;  // Center the button in the game screen
+    }
+  }
 }

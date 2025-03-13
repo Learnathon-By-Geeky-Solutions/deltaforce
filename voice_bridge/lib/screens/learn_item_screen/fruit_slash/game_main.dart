@@ -22,6 +22,10 @@ class _GameMainState extends State<GameMain> {
 
 // Extending FlameGame instead of the abstract Game class
 class Game extends FlameGame {
+  get router => null;
+
+
+
   @override
   Future<void> onLoad() async {
     super.onLoad();

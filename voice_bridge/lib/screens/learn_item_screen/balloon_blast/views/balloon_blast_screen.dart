@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'dart:math';
-
+import 'package:flame/src/components/router/route.dart' as FlameRoute;
 import 'package:flame/events.dart';
 import 'package:flame/flame.dart';
 import 'package:flame/game.dart';
@@ -9,6 +9,8 @@ import 'package:flame/parallax.dart';
 import 'package:flutter/material.dart';
 import 'package:voice_bridge/screens/learn_item_screen/balloon_blast/components/rectangle_test.dart';
 import 'package:voice_bridge/screens/learn_item_screen/balloon_blast/config/app_config.dart';
+import 'package:voice_bridge/screens/learn_item_screen/balloon_blast/routes/game_page.dart';
+import 'package:voice_bridge/screens/learn_item_screen/balloon_blast/routes/home_page.dart';
 
 class BalloonBlastScreen extends StatelessWidget {
   const BalloonBlastScreen({super.key});
@@ -27,22 +29,30 @@ class BalloonBlastScreen extends StatelessWidget {
 
 //Extending FlameGame instead of the abstract Game class
 class Game extends FlameGame{
-  late RouterComponent router;
+   late RouterComponent router;
 
   @override
   void onLoad() async{
-    super.onLoad();
+   await super.onLoad();
+
     addAll([ParallaxComponent(
-      parallax: Parallax([await ParallaxLayer.load(ParallaxImageData('bg.png'))])
+       parallax: Parallax([await ParallaxLayer.load(ParallaxImageData('bg.png'))])
     ),
-    router = RouterComponent(initialRoute: 'home', routes: {
-    'home': Route(()=>null),
-    })
+      router = RouterComponent(
+        initialRoute: 'home',
+        routes: {
+
+          'home' : FlameRoute.Route(HomePage.new),
+          'game-page': FlameRoute.Route(GamePage.new),
+          // 'home': flame.ComponentRoute(()=>HomePage.new),
+        }
+      )
+
+
     ]);
 
     add(RectangleTest(
         size/2,
-        //Vector2(size.x / 2, size.y),
         pageSize: size, velocity: Vector2(0, maxVerticalVelocity), size: size));
   }
 
@@ -56,6 +66,8 @@ class Game extends FlameGame{
   // }
 
   late double maxVerticalVelocity;
+
+  get flame => null;
 
   @override
   void onGameResize(Vector2 size) {
