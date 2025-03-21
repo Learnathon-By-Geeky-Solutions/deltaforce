@@ -18,6 +18,8 @@ import 'package:voice_bridge/screens/parentScreen/views/parentScreenView.dart';
 import 'package:voice_bridge/screens/practiceScreen/views/practiceScreenView.dart';
 
 import '../../screens/base/views/base_view.dart';
+import '../../screens/sessionScreen/views/sessionCompletionView.dart';
+import '../../screens/sessionScreen/views/sessionView.dart';
 
 class AppRoutes {
 
@@ -109,6 +111,16 @@ class AppRoutes {
     GetPage(
         name: RoutesName.socialAndCommunicationSkill,
         page: () => SocialSkillScreen(),
+    ),
+
+    GetPage(
+      name: RoutesName.sessionView,
+      page: () => SessionView(),
+    ),
+
+    GetPage(
+      name: RoutesName.sessionCompletion,
+      page: () => SessionCompletionView(),
     ),
   ];
 }

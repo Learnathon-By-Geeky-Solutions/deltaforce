@@ -3,10 +3,14 @@ import 'package:get/get.dart';
 import 'package:voice_bridge/resources/routes/routes_name.dart';
 
 import '../../../resources/colors/app_color.dart';
+import '../../sessionScreen/controllers/session_controller.dart';
 import '../widgets/learn_card.dart';
 
 class LearnScreenView extends StatelessWidget {
   LearnScreenView({super.key});
+
+  final SessionController controller = Get.put(SessionController());
+
 
   final List<Map<String, dynamic>> learnItems = [
     {"name": "Shape Matching", "image": "lib/resources/assets/images/shape.jpg", "color": AppColor.cardGreenColor, "route": RoutesName.shapeMatching},
@@ -41,7 +45,7 @@ class LearnScreenView extends StatelessWidget {
             name: item['name'],
             image: item['image'],
             color: item['color'],
-            onTap: () => Get.toNamed(item['route']),
+            onTap: () => controller.startSession(item['name']),
           );
         },
       ),
