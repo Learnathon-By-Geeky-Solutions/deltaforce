@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../../resources/routes/routes_name.dart';
+import '../../../resources/routes/routesName.dart';
 import '../view_model/session_model.dart';
 // import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -12,7 +12,7 @@ class SessionController extends GetxController {
   var currentSessionLevel = <String, int>{}.obs;
   var totalSession =  <String, int>{}.obs;
   var currentLessonIndex = 0.obs;
-  var currentCategory = 'Study';
+  var currentCategory = '';
   int lessonLength = 0;
 
   // final FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -31,7 +31,9 @@ class SessionController extends GetxController {
 
       return jsonData["total_session"];
     } catch (e) {
-      print("Error loading session index: $e");
+      if (kDebugMode) {
+        print("Error loading session index: $e");
+      }
       return 0;
     }
   }
@@ -40,7 +42,7 @@ class SessionController extends GetxController {
   /// Load session progress from SharedPreferences
   Future<void> loadAllSessionLevel() async {
     final prefs = await SharedPreferences.getInstance();
-    List<String> categories = ["Study"]; // Add all categories
+    List<String> categories = ["Emotion","Family","Living Skill","Music","Profession","Psychological","Social Skill","Study"]; // Add all categories
 
     for (var category in categories) {
       int sessionLevel = prefs.getInt('session_$category') ?? 1;// Default sessionLevel is 1
@@ -165,13 +167,13 @@ class SessionController extends GetxController {
         }
         // startSession(category);
 
-        print('session change lesson index = $currentLessonIndex lessonLength = $lessonLength');
+        // print('session change lesson index = $currentLessonIndex lessonLength = $lessonLength');
         // print('category = $category session level = $sessionLevel total session = $totalSessions');
 
     }
     else if (currentLessonIndex.value < lessonLength - 1) {
       currentLessonIndex.value++;
-      print('lesson index = $currentLessonIndex lessonLength = $lessonLength');
+      // print('lesson index = $currentLessonIndex lessonLength = $lessonLength');
     }
   }
 

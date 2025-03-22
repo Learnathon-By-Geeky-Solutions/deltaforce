@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:voice_bridge/resources/routes/routes_name.dart';
+import 'package:voice_bridge/resources/routes/routesName.dart';
 
 import '../../../resources/colors/app_color.dart';
-import '../../sessionScreen/controllers/session_controller.dart';
+import '../../sessionScreen/controllers/sessionController.dart';
 import '../widgets/learn_card.dart';
 
 class LearnScreenView extends StatelessWidget {
