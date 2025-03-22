@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import '../../../resources/routes/routesName.dart';
+import '../../base/controllers/baseController.dart';
 import '../controllers/sessionController.dart';
 
 class SessionView extends StatelessWidget {
   final SessionController controller = Get.find();
+  final BaseController baseController = Get.find();
   final String category = Get.arguments['category'];
   // final int sessionLevel = Get.arguments['sessionLevel'];
   final currentSession = Get.arguments['currentSession'];
@@ -34,7 +36,9 @@ class SessionView extends StatelessWidget {
                       icon: Icon(Icons.arrow_back, size: 30),
                       onPressed: () {
                         // Navigator.pop(context);
-                        Get.offAllNamed(RoutesName.learnScreen);
+                        // Get.offNamed(RoutesName.learnScreen);
+                        baseController.selectedIndex.value = 1;
+                        Get.offNamed(RoutesName.baseView);// go to learn page
                       },
                     ),
                     SizedBox(width: 8), // Space between the icon and text
