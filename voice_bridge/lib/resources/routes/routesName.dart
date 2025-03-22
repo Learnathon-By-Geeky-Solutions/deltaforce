@@ -23,5 +23,7 @@ class RoutesName {
   static const String psychologicalEducation = '/psychological_education';
   static const String socialAndCommunicationSkill = '/social_&_communication_skill';
 
+  static const String sessionView = '/session_page';
+  static const String sessionCompletion = '/session_completion';
 
 }

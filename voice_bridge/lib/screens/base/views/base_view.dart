@@ -7,13 +7,13 @@ import 'package:voice_bridge/screens/parentScreen/views/parentScreenView.dart';
 import 'package:voice_bridge/screens/practiceScreen/views/practiceScreenView.dart';
 
 import '../../end_drawer/views/appDrawer.dart';
-import '../view_model/base_view_model.dart';
+import '../controllers/baseController.dart';
 
 
 class BaseView extends StatelessWidget {
   // HomeView({super.key});
   BaseView({super.key});
-  final BaseViewModel controller = Get.put(BaseViewModel());
+  final BaseController controller = Get.put(BaseController());
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   final List<Widget> pages = [

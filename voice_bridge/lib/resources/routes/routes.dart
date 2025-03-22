@@ -2,7 +2,7 @@ import 'package:get/get.dart';
 import 'package:voice_bridge/features/authentication/views/auth/login_screen.dart';
 import 'package:voice_bridge/features/authentication/views/auth/signup_screen.dart';
 import 'package:voice_bridge/features/authentication/views/auth/splash_screen.dart';
-import 'package:voice_bridge/resources/routes/routes_name.dart';
+import 'package:voice_bridge/resources/routes/routesName.dart';
 import 'package:voice_bridge/screens/learnScreen/views/learnScreenView.dart';
 import 'package:voice_bridge/screens/learn_item_screen/balloon_blast/views/balloon_blast_screen.dart';
 import 'package:voice_bridge/screens/learn_item_screen/emotion/views/emotion_screen.dart';
@@ -18,6 +18,8 @@ import 'package:voice_bridge/screens/parentScreen/views/parentScreenView.dart';
 import 'package:voice_bridge/screens/practiceScreen/views/practiceScreenView.dart';
 
 import '../../screens/base/views/base_view.dart';
+import '../../screens/sessionScreen/views/sessionCompletionView.dart';
+import '../../screens/sessionScreen/views/sessionView.dart';
 
 class AppRoutes {
 
@@ -109,6 +111,16 @@ class AppRoutes {
     GetPage(
         name: RoutesName.socialAndCommunicationSkill,
         page: () => SocialSkillScreen(),
+    ),
+
+    GetPage(
+      name: RoutesName.sessionView,
+      page: () => SessionView(),
+    ),
+
+    GetPage(
+      name: RoutesName.sessionCompletion,
+      page: () => SessionCompletionView(),
     ),
   ];
 }

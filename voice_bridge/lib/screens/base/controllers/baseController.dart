@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 
-class BaseViewModel extends GetxController {
+class BaseController extends GetxController {
   RxInt selectedIndex = 1.obs;
 
   void changeTab(int index) {

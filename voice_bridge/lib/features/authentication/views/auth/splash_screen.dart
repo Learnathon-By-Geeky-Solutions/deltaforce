@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:voice_bridge/features/authentication/const/app_strings.dart';
 // import 'package:voice_bridge/resources/routes/routes_name.dart';
 import 'package:voice_bridge/features/authentication/view_models/auth_view_model.dart';
+import 'package:voice_bridge/resources/routes/routesName.dart';
 
 class SplashScreen extends StatelessWidget {
   // const SplashScreen({super.key});
