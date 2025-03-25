@@ -8,8 +8,8 @@ class RoundedButton extends PositionComponent with TapCallbacks {
   late final Offset _textOffSet;
   late TextPainter _textDrawable;
   late RRect _rRect;
-  late Paint _bgPaint;  // Changed to Paint
-  late Paint _borderPaint; // Changed to Paint
+  late Paint _bgPaint;
+  late Paint _borderPaint;
 
   RoundedButton({
     required this.text,
@@ -18,18 +18,17 @@ class RoundedButton extends PositionComponent with TapCallbacks {
     required Color borderColor,
     super.anchor = Anchor.center,
   }) : _textDrawable = TextPaint(
-    style: TextStyle(
-      fontSize: 20,
-      fontWeight: FontWeight.w800,
-      color: Color(0xFF000000),
-    ),
-  ).toTextPainter(text) {
+          style: TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.w800,
+            color: Color(0xFF000000),
+          ),
+        ).toTextPainter(text) {
     size = Vector2(150, 40);
     _textOffSet = Offset((size.x - _textDrawable.width) / 2,
         (size.y - _textDrawable.height) / 2);
     _rRect = RRect.fromLTRBR(0, 0, size.x, size.y, Radius.circular(size.y / 2));
 
-    // Create Paint for background and border
     _bgPaint = Paint()..color = color;
     _borderPaint = Paint()
       ..style = PaintingStyle.stroke

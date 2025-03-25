@@ -17,55 +17,50 @@ class BalloonBlastScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Flame.device.fullScreen();
-    //Flame.device.setLandscape();
-    return Scaffold(
-      body: GameWidget(
-        game: Game(), // Create an instance of your game
-      ),
+    return FutureBuilder(
+      future: Flame.device.fullScreen(),
+      builder: (context, snapshot) {
+        return Scaffold(
+          body: GameWidget(
+            game: BalloonBlastGame(), // Create an instance of your game
+          ),
+        );
+      },
     );
   }
 }
 
 //Extending FlameGame instead of the abstract Game class
-class Game extends FlameGame{
-   late RouterComponent router;
-
-  @override
-  void onLoad() async{
-   await super.onLoad();
-
-    addAll([ParallaxComponent(
-       parallax: Parallax([await ParallaxLayer.load(ParallaxImageData('bg.png'))])
-    ),
-      router = RouterComponent(
-        initialRoute: 'home',
-        routes: {
-
-          'home' : FlameRoute.Route(HomePage.new),
-          'game-page': FlameRoute.Route(GamePage.new),
-          // 'home': flame.ComponentRoute(()=>HomePage.new),
-        }
-      )
-
-
-    ]);
-
-
-  }
-
-  // void onDragUpdate(DragUpdateEvent event) {
-  //  super.onDragUpdate(event);
-  //  componentsAtPoint(event.canvasPosition).forEach((element){
-  //    if(element is RectangleTest){
-  //      element.touchOnPoint(event.canvasPosition);
-  //    }
-  //  });
-  // }
-
+class BalloonBlastGame extends FlameGame {
+  late RouterComponent router;
   late double maxVerticalVelocity;
 
-  get flame => null;
+  @override
+  Future<void> onLoad() async {
+    await super.onLoad();
+
+    // Initialize router
+    router = RouterComponent(
+      initialRoute: 'home',
+      routes: {
+        'home': FlameRoute.Route(HomePage.new),
+        'game-page': FlameRoute.Route(GamePage.new),
+      },
+    );
+
+    // Load background parallax
+    final parallax = await ParallaxComponent.load(
+      [
+        ParallaxImageData('bg.png'),
+      ],
+      baseVelocity: Vector2(0, 0),
+    );
+
+    addAll([
+      parallax,
+      router,
+    ]);
+  }
 
   @override
   void onGameResize(Vector2 size) {
@@ -74,8 +69,9 @@ class Game extends FlameGame{
   }
 
   void getMaxVerticalVelocity(Vector2 size) {
-    maxVerticalVelocity = sqrt(2 *
-        (AppConfig.gravity.abs() + AppConfig.acceleration.abs()) *
-        (size.y - AppConfig.objSize * 2));
+    maxVerticalVelocity = sqrt(
+      2 * (AppConfig.gravity.abs() + AppConfig.acceleration.abs()) *
+          (size.y - AppConfig.objSize * 2),
+    );
   }
 }

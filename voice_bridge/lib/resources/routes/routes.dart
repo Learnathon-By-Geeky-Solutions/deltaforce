@@ -18,7 +18,7 @@ import 'package:voice_bridge/screens/parentScreen/views/parentScreenView.dart';
 import 'package:voice_bridge/screens/practiceScreen/views/practiceScreenView.dart';
 
 import '../../screens/base/views/base_view.dart';
-import '../../screens/learn_item_screen/fruit_slash/game_main.dart';
+import '../../screens/learn_item_screen/balloon_blast/game_main.dart';
 
 class AppRoutes {
 
