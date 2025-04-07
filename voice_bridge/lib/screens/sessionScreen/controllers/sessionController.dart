@@ -42,7 +42,7 @@ class SessionController extends GetxController {
   /// Load session progress from SharedPreferences
   Future<void> loadAllSessionLevel() async {
     final prefs = await SharedPreferences.getInstance();
-    List<String> categories = ["Emotion","Family","Living Skill","Music","Profession","Psychological","Social Skill","Study"]; // Add all categories
+    List<String> categories = ["Emotion","Family","Living Skill","Music","Profession","Psychological","Study","Social Skill"]; // Add all categories
 
     for (var category in categories) {
       int sessionLevel = prefs.getInt('session_$category') ?? 1;// Default sessionLevel is 1
