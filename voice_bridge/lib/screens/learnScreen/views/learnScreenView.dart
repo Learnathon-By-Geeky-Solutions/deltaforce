@@ -13,16 +13,16 @@ class LearnScreenView extends StatelessWidget {
 
 
   final List<Map<String, dynamic>> learnItems = [
-    {"name": "Shape Matching", "image": "lib/resources/assets/images/shape.jpg", "color": AppColor.cardGreenColor, "route": RoutesName.shapeMatching},
-    {"name": "Balloon Blast", "image": "lib/resources/assets/images/balloonBlast.jpg", "color": AppColor.cardOrangeColor, "route": RoutesName.balloonBlast},
-    {"name": "Living Skill", "image": "lib/resources/assets/images/living.jpg", "color": AppColor.cardRedColor, "route": RoutesName.livingSkill},
-    {"name": "Family", "image": "lib/resources/assets/images/family.jpg", "color": AppColor.cardPurpleColor, "route": RoutesName.family},
-    {"name": "Study", "image": "lib/resources/assets/images/study.jpg", "color": AppColor.cardYellowColor, "route": RoutesName.study},
-    {"name": "Emotion", "image": "lib/resources/assets/images/emotion.jpg", "color": AppColor.cardGreenColor, "route": RoutesName.emotion},
-    {"name": "Profession", "image": "lib/resources/assets/images/profession.jpg", "color": AppColor.cardOrangeColor, "route": RoutesName.profession},
-    {"name": "Music", "image": "lib/resources/assets/images/music.jpg", "color": AppColor.cardRedColor, "route": RoutesName.music},
-    {"name": "Psychological", "image": "lib/resources/assets/images/psychological.jpg", "color": AppColor.cardPurpleColor, "route": RoutesName.psychologicalEducation},
-    {"name": "Social Skill", "image": "lib/resources/assets/images/communication.jpg", "color": AppColor.cardYellowColor, "route": RoutesName.socialAndCommunicationSkill},
+    {"category": "Shape Matching", "image": "lib/resources/assets/Others/images/shape.jpg", "color": AppColor.cardGreenColor, "route": RoutesName.shapeMatching},
+    {"category": "Balloon Blast", "image": "lib/resources/assets/Others/images/balloonBlast.jpg", "color": AppColor.cardOrangeColor, "route": RoutesName.balloonBlast},
+    {"category": "Living Skill", "image": "lib/resources/assets/Others/images/living.jpg", "color": AppColor.cardRedColor, "route": RoutesName.livingSkill},
+    {"category": "Family", "image": "lib/resources/assets/Others/images/family.jpg", "color": AppColor.cardPurpleColor, "route": RoutesName.family},
+    {"category": "Study", "image": "lib/resources/assets/Others/images/study.jpg", "color": AppColor.cardYellowColor, "route": RoutesName.study},
+    {"category": "Emotion", "image": "lib/resources/assets/Others/images/emotion.jpg", "color": AppColor.cardGreenColor, "route": RoutesName.emotion},
+    {"category": "Profession", "image": "lib/resources/assets/Others/images/profession.jpg", "color": AppColor.cardOrangeColor, "route": RoutesName.profession},
+    {"category": "Music", "image": "lib/resources/assets/Others/images/music.jpg", "color": AppColor.cardRedColor, "route": RoutesName.music},
+    {"category": "Psychological", "image": "lib/resources/assets/Others/images/psychological.jpg", "color": AppColor.cardPurpleColor, "route": RoutesName.psychologicalEducation},
+    {"category": "Social Skill", "image": "lib/resources/assets/Others/images/communication.jpg", "color": AppColor.cardYellowColor, "route": RoutesName.socialAndCommunicationSkill},
 
   ];
 
@@ -42,10 +42,10 @@ class LearnScreenView extends StatelessWidget {
         itemBuilder: (context, index) {
           final item = learnItems[index];
           return LearnCard(
-            name: item['name'],
+            name: item['category'],
             image: item['image'],
             color: item['color'],
-            onTap: () => controller.startSession(item['name']),
+            onTap: () => controller.startSession(item['category']),
           );
         },
       ),
