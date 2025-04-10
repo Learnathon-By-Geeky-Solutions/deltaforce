@@ -2,40 +2,16 @@
   "sessionName": "Session 2",
   "lessons": [
     {
-      "lessonName": "Plumber",
-      "imageAsset": "lib/resources/assets/Profession/images/plumber.jpg",
-      "animationAsset": "lib/resources/assets/Profession/animations/plumber.lottie",
-      "audioAsset": "lib/resources/assets/Profession/audio/plumber.mp3"
+      "lessonName": "Football",
+      "imageAsset": "lib/resources/assets/Study/images/football.jpg",
+      "animationAsset": "lib/resources/assets/Study/animations/football.lottie",
+      "audioAsset": "lib/resources/assets/Study/audio/football.mp3"
     },
     {
-      "lessonName": "Electrician",
-      "imageAsset": "lib/resources/assets/Profession/images/electrician.jpg",
-      "animationAsset": "lib/resources/assets/Profession/animations/electrician.lottie",
-      "audioAsset": "lib/resources/assets/Profession/audio/electrician.mp3"
-    },
-    {
-      "lessonName": "Architect",
-      "imageAsset": "lib/resources/assets/Profession/images/architect.jpg",
-      "animationAsset": "lib/resources/assets/Profession/animations/architect.lottie",
-      "audioAsset": "lib/resources/assets/Profession/audio/architect.mp3"
-    },
-    {
-      "lessonName": "Dentist",
-      "imageAsset": "lib/resources/assets/Profession/images/dentist.jpg",
-      "animationAsset": "lib/resources/assets/Profession/animations/dentist.lottie",
-      "audioAsset": "lib/resources/assets/Profession/audio/dentist.mp3"
-    },
-    {
-      "lessonName": "Chef",
-      "imageAsset": "lib/resources/assets/Profession/images/chef.jpg",
-      "animationAsset": "lib/resources/assets/Profession/animations/chef.lottie",
-      "audioAsset": "lib/resources/assets/Profession/audio/chef.mp3"
-    },
-    {
-      "lessonName": "Engineer",
-      "imageAsset": "lib/resources/assets/Profession/images/engineer.jpg",
-      "animationAsset": "lib/resources/assets/Profession/animations/engineer.lottie",
-      "audioAsset": "lib/resources/assets/Profession/audio/engineer.mp3"
+      "lessonName": "Dog",
+      "imageAsset": "lib/resources/assets/Study/images/dj.jpg",
+      "animationAsset": "lib/resources/assets/Study/animations/dog.lottie",
+      "audioAsset": "lib/resources/assets/Study/audio/dog.mp3"
     }
   ]
 }

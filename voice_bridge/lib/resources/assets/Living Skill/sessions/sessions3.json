@@ -1,41 +1,24 @@
 {
-  "sessionName": "Session 3",
+  "sessionName": "Session 1",
   "lessons": [
     {
-      "lessonName": "Cleaning Tooth",
-      "imageAsset": "lib/resources/assets/Living Skill/images/girl-cleaning-tooth.jpg",
-      "animationAsset": "lib/resources/assets/Living Skill/animations/girl-cleaning-tooth.lottie",
-      "audioAsset": "lib/resources/assets/Living Skill/audio/girl-cleaning-tooth.mp3"
+      "lessonName": "Dog",
+      "imageAsset": "lib/resources/assets/Study/images/dj.jpg",
+      "animationAsset": "lib/resources/assets/Study/animations/dog.lottie",
+      "audioAsset": "lib/resources/assets/Study/audio/dog.mp3"
     },
     {
-      "lessonName": "Ironing Clothes",
-      "imageAsset": "lib/resources/assets/Living Skill/images/ironing-clothes.jpg",
-      "animationAsset": "lib/resources/assets/Living Skill/animations/ironing-clothes.lottie",
-      "audioAsset": "lib/resources/assets/Living Skill/audio/ironing-clothes.mp3"
+      "lessonName": "Football",
+      "imageAsset": "lib/resources/assets/Study/images/emotion.jpg",
+      "animationAsset": "lib/resources/assets/Study/animations/football.lottie",
+      "audioAsset": "lib/resources/assets/Study/audio/football.mp3"
     },
     {
-      "lessonName": "Drinking Water",
-      "imageAsset": "lib/resources/assets/Living Skill/images/drinking-water.jpg",
-      "animationAsset": "lib/resources/assets/Living Skill/animations/drinking-water.lottie",
-      "audioAsset": "lib/resources/assets/Living Skill/audio/drinking-water.mp3"
-    },
-    {
-      "lessonName": "Eating Bread",
-      "imageAsset": "lib/resources/assets/Living Skill/images/eating-bread.jpg",
-      "animationAsset": "lib/resources/assets/Living Skill/animations/eating-bread.lottie",
-      "audioAsset": "lib/resources/assets/Living Skill/audio/eating-bread.mp3"
-    },
-    {
-      "lessonName": "Cooking",
-      "imageAsset": "lib/resources/assets/Living Skill/images/cooking.jpg",
-      "animationAsset": "lib/resources/assets/Living Skill/animations/cooking.lottie",
-      "audioAsset": "lib/resources/assets/Living Skill/audio/cooking.mp3"
-    },
-    {
-      "lessonName": "Cooking Food",
-      "imageAsset": "lib/resources/assets/Living Skill/images/cooking-food.jpg",
-      "animationAsset": "lib/resources/assets/Living Skill/animations/cooking-food.lottie",
-      "audioAsset": "lib/resources/assets/Living Skill/audio/cooking-food.mp3"
+      "lessonName": "Dog",
+      "imageAsset": "lib/resources/assets/Study/images/family.jpg",
+      "animationAsset": "lib/resources/assets/Study/animations/dog.lottie",
+      "audioAsset": "lib/resources/assets/Study/audio/dog.mp3"
     }
+
   ]
 }

@@ -1,41 +1,24 @@
 {
-  "sessionName": "Session 3",
+  "sessionName": "Session 1",
   "lessons": [
     {
-      "lessonName": "Brother Sister",
-      "imageAsset": "lib/resources/assets/Family/images/brother-sister.jpg",
-      "animationAsset": "lib/resources/assets/Family/animations/brother-sister.lottie",
-      "audioAsset": "lib/resources/assets/Family/audio/brother-sister.mp3"
+      "lessonName": "Dog",
+      "imageAsset": "lib/resources/assets/Study/images/dj.jpg",
+      "animationAsset": "lib/resources/assets/Study/animations/dog.lottie",
+      "audioAsset": "lib/resources/assets/Study/audio/dog.mp3"
     },
     {
-      "lessonName": "Father Daughter",
-      "imageAsset": "lib/resources/assets/Family/images/father-carry-daughter.jpg",
-      "animationAsset": "lib/resources/assets/Family/animations/father-carry-daughter.lottie",
-      "audioAsset": "lib/resources/assets/Family/audio/father-carry-daughter.mp3"
+      "lessonName": "Football",
+      "imageAsset": "lib/resources/assets/Study/images/emotion.jpg",
+      "animationAsset": "lib/resources/assets/Study/animations/football.lottie",
+      "audioAsset": "lib/resources/assets/Study/audio/football.mp3"
     },
     {
-      "lessonName": "Brother",
-      "imageAsset": "lib/resources/assets/Family/images/brother.jpg",
-      "animationAsset": "lib/resources/assets/Family/animations/brother.lottie",
-      "audioAsset": "lib/resources/assets/Family/audio/brother.mp3"
-    },
-    {
-      "lessonName": "Mother",
-      "imageAsset": "lib/resources/assets/Family/images/mother.jpg",
-      "animationAsset": "lib/resources/assets/Family/animations/mother.lottie",
-      "audioAsset": "lib/resources/assets/Family/audio/mother.mp3"
-    },
-    {
-      "lessonName": "Grand Father",
-      "imageAsset": "lib/resources/assets/Family/images/grandfather.jpg",
-      "animationAsset": "lib/resources/assets/Family/animations/grandfather.lottie",
-      "audioAsset": "lib/resources/assets/Family/audio/grandfather.mp3"
-    },
-    {
-      "lessonName": "Grand Mother",
-      "imageAsset": "lib/resources/assets/Family/images/grandmother.jpg",
-      "animationAsset": "lib/resources/assets/Family/animations/grandmother.lottie",
-      "audioAsset": "lib/resources/assets/Family/audio/grandmother.mp3"
+      "lessonName": "Dog",
+      "imageAsset": "lib/resources/assets/Study/images/family.jpg",
+      "animationAsset": "lib/resources/assets/Study/animations/dog.lottie",
+      "audioAsset": "lib/resources/assets/Study/audio/dog.mp3"
     }
+
   ]
 }
