@@ -1,25 +1,48 @@
 import 'dart:math';
+import 'dart:ui';
 
 import 'package:flame/components.dart';
 import 'package:flutter/material.dart';
-import 'package:voice_bridge/screens/learn_item_screen/balloon_blast/config/app_config.dart';
-import 'package:voice_bridge/screens/learn_item_screen/balloon_blast/config/utils.dart';
+import 'package:voice_bridge/screens/learn_item_screen/balloon_blast/routes/game_page.dart';
+import 'package:flame/image_composition.dart' as composition;
 
-class RectangleTest extends RectangleComponent {
-  final Vector2 pageSize;
+import '../config/app_config.dart';
+import '../config/utils.dart';
+import '../models/fruit_model.dart';
+class FruitComponent extends SpriteComponent{
   Vector2 velocity;
-  Vector2? touchPoint1, touchPoint2;
+  final Vector2 pageSize;
+  final double acceleration;
+  final FruitModel fruit;
+  final composition.Image image;
+  late Vector2 _initPosition;
+  bool _canDragOnShape = false;
+  GamePage parentComponent;
+  bool divided;
 
-  RectangleTest(
-    Vector2 position, {
-  //  required Vector2 size,
-    required this.velocity,
-    required this.pageSize,
-  }) : super(
-            size: AppConfig.shapeSize, // Rectangle size
-            position: position, // Position at the center
-            paint: Paint()..color = Colors.white,
-            anchor: Anchor.center);
+  FruitComponent(
+      this.parentComponent,
+      Vector2 p,{
+        Vector2? size,
+        required this.velocity,
+        required this.acceleration,
+        required this.pageSize,
+        required this.image,
+        required this.fruit,
+        double? angle,
+        Anchor? anchor,
+        this.divided = false,
+  }): super(
+    sprite: Sprite(image),
+    position: p,
+    size: size,
+    anchor: anchor ?? Anchor.center,
+    angle: angle,
+  ){
+    _initPosition = p;
+    _canDragOnShape = false;
+
+  }
   @override
   void update(double dt) {
     super.update(dt);
@@ -31,10 +54,9 @@ class RectangleTest extends RectangleComponent {
 
     velocity.y += (AppConfig.acceleration + AppConfig.gravity)*dt;
     if((position.y - AppConfig.objSize)>pageSize.y){
-        removeFromParent();
+      removeFromParent();
     }
   }
-
   void touchAtPoint(Vector2 vector2) {
     final a = Utils.getAngleOfTouchPont(
         center: position, initAngle: angle, touch: vector2);
@@ -78,4 +100,5 @@ class RectangleTest extends RectangleComponent {
     }
     removeFromParent();
   }
+
 }

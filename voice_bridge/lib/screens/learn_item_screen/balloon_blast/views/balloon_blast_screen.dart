@@ -9,6 +9,7 @@ import 'package:flame/parallax.dart';
 import 'package:flutter/material.dart';
 import 'package:voice_bridge/screens/learn_item_screen/balloon_blast/components/rectangle_test.dart';
 import 'package:voice_bridge/screens/learn_item_screen/balloon_blast/config/app_config.dart';
+import 'package:voice_bridge/screens/learn_item_screen/balloon_blast/models/fruit_model.dart';
 import 'package:voice_bridge/screens/learn_item_screen/balloon_blast/routes/game_over_page.dart';
 import 'package:voice_bridge/screens/learn_item_screen/balloon_blast/routes/game_page.dart';
 import 'package:voice_bridge/screens/learn_item_screen/balloon_blast/routes/home_page.dart';
@@ -37,14 +38,14 @@ class BalloonBlastGame extends FlameGame {
   late RouterComponent router;
   late double maxVerticalVelocity;
 
-  final List<String> fruits = [
-    "apple.png",
-    "banna.png",
-    "bomb.png",
-    "orange.png",
-    "peach.png",
-    "pipeapple.png",
-    "strawberry.png",
+  final List<FruitModel> fruits = [
+    FruitModel(image:"apple.png"),
+    FruitModel(image:"banna.png"),
+    FruitModel(image:"bomb.png", isBomb: true),
+    FruitModel(image:"orange.png"),
+    FruitModel(image:"peach.png"),
+    FruitModel(image:"pipeapple.png"),
+    FruitModel(image:"strawberry.png"),
   ];
 
 
@@ -55,7 +56,7 @@ class BalloonBlastGame extends FlameGame {
     await super.onLoad();
 
     for (final fruit in fruits) {
-      await images.load(fruit);
+      await images.load(fruit.image);
     }
 
     // Initialize router
