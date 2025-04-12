@@ -39,7 +39,7 @@ class BalloonBlastGame extends FlameGame {
 
   final List<String> fruits = [
     "apple.png",
-    "banana.png",
+    "banna.png",
     "bomb.png",
     "orange.png",
     "peach.png",
