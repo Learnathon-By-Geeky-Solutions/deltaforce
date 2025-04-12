@@ -15,21 +15,23 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
-      debugShowCheckedModeBanner: false,
-      // title: AppStrings.appName,
-      // theme: ThemeData(primarySwatch: Colors.blue),
-      title: 'Flutter Demo',
-      translations: Languages(),
-      locale: Locale('en' , 'US'),
-      fallbackLocale: Locale('en' , 'US'),// if locale language is not supported for the device
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: AppColor.appBarColor),
-        useMaterial3: true,
+    return SafeArea(
+      child: GetMaterialApp(
+        debugShowCheckedModeBanner: false,
+        // title: AppStrings.appName,
+        // theme: ThemeData(primarySwatch: Colors.blue),
+        title: 'Flutter Demo',
+        translations: Languages(),
+        locale: Locale('en' , 'US'),
+        fallbackLocale: Locale('en' , 'US'),// if locale language is not supported for the device
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(seedColor: AppColor.appBarColor),
+          useMaterial3: true,
+        ),
+      
+        getPages: AppRoutes.appRoutes(),
+        // base: SplashScreen(),
       ),
-
-      getPages: AppRoutes.appRoutes(),
-      // base: SplashScreen(),
     );
   }
 }

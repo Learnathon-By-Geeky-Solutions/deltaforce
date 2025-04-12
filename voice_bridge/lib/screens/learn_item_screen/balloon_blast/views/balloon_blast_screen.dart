@@ -9,8 +9,10 @@ import 'package:flame/parallax.dart';
 import 'package:flutter/material.dart';
 import 'package:voice_bridge/screens/learn_item_screen/balloon_blast/components/rectangle_test.dart';
 import 'package:voice_bridge/screens/learn_item_screen/balloon_blast/config/app_config.dart';
+import 'package:voice_bridge/screens/learn_item_screen/balloon_blast/routes/game_over_page.dart';
 import 'package:voice_bridge/screens/learn_item_screen/balloon_blast/routes/game_page.dart';
 import 'package:voice_bridge/screens/learn_item_screen/balloon_blast/routes/home_page.dart';
+import 'package:voice_bridge/screens/learn_item_screen/balloon_blast/routes/pause_game.dart';
 
 class BalloonBlastScreen extends StatelessWidget {
   const BalloonBlastScreen({super.key});
@@ -35,9 +37,26 @@ class BalloonBlastGame extends FlameGame {
   late RouterComponent router;
   late double maxVerticalVelocity;
 
+  final List<String> fruits = [
+    "apple.png",
+    "banana.png",
+    "bomb.png",
+    "orange.png",
+    "peach.png",
+    "pipeapple.png",
+    "strawberry.png",
+  ];
+
+
+
+
   @override
   Future<void> onLoad() async {
     await super.onLoad();
+
+    for (final fruit in fruits) {
+      await images.load(fruit);
+    }
 
     // Initialize router
     router = RouterComponent(
@@ -45,6 +64,8 @@ class BalloonBlastGame extends FlameGame {
       routes: {
         'home': FlameRoute.Route(HomePage.new),
         'game-page': FlameRoute.Route(GamePage.new),
+        'pause': PauseRoute(),
+        'game-over':GameOverRoute(),
       },
     );
 

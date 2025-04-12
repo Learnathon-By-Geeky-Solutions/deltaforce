@@ -12,7 +12,7 @@ class RectangleTest extends RectangleComponent {
 
   RectangleTest(
     Vector2 position, {
-    required Vector2 size,
+  //  required Vector2 size,
     required this.velocity,
     required this.pageSize,
   }) : super(

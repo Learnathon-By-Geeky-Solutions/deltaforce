@@ -1,11 +1,14 @@
 import 'package:flame/components.dart';
+import 'package:flame/game.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:voice_bridge/screens/learn_item_screen/balloon_blast/components/simple_button.dart';
 import 'package:voice_bridge/screens/learn_item_screen/balloon_blast/game_main.dart';
-import 'package:voice_bridge/screens/learn_item_screen/balloon_blast/views/balloon_blast_screen.dart';
+import 'package:voice_bridge/screens/learn_item_screen/balloon_blast/routes/game_page.dart';
 
-class BackButton extends SimpleButton with HasGameReference<MyGame> {
-  BackButton({VoidCallback? onPressed})
+import '../views/balloon_blast_screen.dart';
+
+class GameBackButton extends SimpleButton with HasGameReference<BalloonBlastGame> {
+  GameBackButton({VoidCallback? onPressed})
       : super(
     Path()
       ..moveTo(22, 8)
@@ -15,6 +18,6 @@ class BackButton extends SimpleButton with HasGameReference<MyGame> {
       ..lineTo(34, 20),
     position: Vector2.all(10),
   ) {
-    action = onPressed ?? () => BalloonBlastGame().router.pop();
+    action = onPressed ?? () => game.router.pop();
   }
 }
