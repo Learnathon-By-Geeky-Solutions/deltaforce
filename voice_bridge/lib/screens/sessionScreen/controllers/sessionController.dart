@@ -102,10 +102,14 @@ class SessionController extends GetxController {
 
   /// Load a session from assets
   Future<void> startSession(String category) async {
-    currentLessonIndex.value = 0;
+    if(category == "Balloon Blast"){
+      Get.toNamed(RoutesName.gameMain);
+    }else{
+
+
+     currentLessonIndex.value = 0;
     currentCategory = category;
     int sessionLevel = currentSessionLevel[category] ?? 1;
-
     try {
       // Load JSON file
       String jsonString = await rootBundle.loadString("lib/resources/assets/$category/sessions/sessions$sessionLevel.json");
@@ -120,6 +124,8 @@ class SessionController extends GetxController {
       if (kDebugMode) {
         print("Error loading session: $e");
       }
+
+    }
     }
   }
 

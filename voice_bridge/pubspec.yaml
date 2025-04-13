@@ -73,7 +73,44 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
+    - lib/resources/assets/Emotion/animations/
+    - lib/resources/assets/Emotion/audio/
+    - lib/resources/assets/Emotion/images/
+    - lib/resources/assets/Emotion/sessions/
+    - lib/resources/assets/Family/animations/
+    - lib/resources/assets/Family/audio/
+    - lib/resources/assets/Family/images/
+    - lib/resources/assets/Family/sessions/
+    - lib/resources/assets/Living Skill/animations/
+    - lib/resources/assets/Living Skill/audio/
+    - lib/resources/assets/Living Skill/images/
+    - lib/resources/assets/Living Skill/sessions/
+    - lib/resources/assets/Music/animations/
+    - lib/resources/assets/Music/audio/
+    - lib/resources/assets/Music/images/
+    - lib/resources/assets/Music/sessions/
+    - lib/resources/assets/Profession/animations/
+    - lib/resources/assets/Profession/audio/
+    - lib/resources/assets/Profession/images/
+    - lib/resources/assets/Profession/sessions/
+    - lib/resources/assets/Psychological/animations/
+    - lib/resources/assets/Psychological/audio/
+    - lib/resources/assets/Psychological/images/
+    - lib/resources/assets/Psychological/sessions/
+    - lib/resources/assets/Social Skill/animations/
+    - lib/resources/assets/Social Skill/audio/
+    - lib/resources/assets/Social Skill/images/
+    - lib/resources/assets/Social Skill/sessions/
+    - lib/resources/assets/Study/animations/
+    - lib/resources/assets/Study/audio/
+    - lib/resources/assets/Study/images/
+    - lib/resources/assets/Study/sessions/
+    - lib/resources/assets/Others/animations/
+    - lib/resources/assets/Others/audio/
+    - lib/resources/assets/Others/images/
     - lib/resources/assets/images/
+    - lib/screens/learn_item_screen/balloon_blast/images/
+    - assets/images/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
