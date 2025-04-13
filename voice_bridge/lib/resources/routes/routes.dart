@@ -18,12 +18,6 @@ import 'package:voice_bridge/screens/parentScreen/views/parentScreenView.dart';
 import 'package:voice_bridge/screens/practiceScreen/views/practiceScreenView.dart';
 
 import '../../screens/base/views/base_view.dart';
-import '../../screens/sessionScreen/views/sessionCompletionView.dart';
-import '../../screens/sessionScreen/views/sessionView.dart';
-import '../../screens/testScreen/views/testCompletionView.dart';
-import '../../screens/testScreen/views/testLearningView.dart';
-import '../../screens/testScreen/views/testQuestionView.dart';
-import '../../screens/testScreen/views/testScreen.dart';
 
 class AppRoutes {
 
@@ -75,6 +69,10 @@ class AppRoutes {
     GetPage(
         name: RoutesName.balloonBlast,
         page: () => BalloonBlastScreen(),
+    ),
+    GetPage(
+      name: RoutesName.gameMain,
+      page: () => GameMain(),
     ),
 
     GetPage(

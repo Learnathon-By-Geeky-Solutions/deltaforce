@@ -14,6 +14,7 @@ class RoutesName {
 
   static const String shapeMatching = '/shape_matching';
   static const String balloonBlast = '/balloon_blast';
+  static const String gameMain = '/game_main';
   static const String livingSkill = '/living_skill';
   static const String family = '/family';
   static const String study = '/study';
