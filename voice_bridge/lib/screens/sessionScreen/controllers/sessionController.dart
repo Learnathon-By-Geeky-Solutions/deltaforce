@@ -103,8 +103,11 @@ class SessionController extends GetxController {
   /// Load a session from assets
   Future<void> startSession(String category) async {
     if(category == "Balloon Blast"){
-      Get.toNamed(RoutesName.gameMain);
-    }else{
+      Get.toNamed(RoutesName.balloonBlast);
+    }else if(category == "Shape Matching"){
+      Get.toNamed(RoutesName.shapeMatching);
+    }
+    else{
 
 
      currentLessonIndex.value = 0;
