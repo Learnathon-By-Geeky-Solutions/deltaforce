@@ -8,6 +8,7 @@ import 'package:voice_bridge/screens/learn_item_screen/balloon_blast/views/ballo
 import 'package:voice_bridge/screens/learn_item_screen/shape_matching/views/shape_matching_screen.dart';
 import 'package:voice_bridge/screens/parentScreen/views/parentScreenView.dart';
 import 'package:voice_bridge/screens/practiceScreen/views/practiceScreenView.dart';
+import 'package:voice_bridge/screens/testScreen/views/testDashboardScreen.dart';
 
 import '../../screens/base/views/base_view.dart';
 import '../../screens/learn_item_screen/balloon_blast/game_main.dart';
@@ -102,6 +103,11 @@ class AppRoutes {
     GetPage(
       name: RoutesName.testCompletion,
       page: () => TestCompletionView(),
+    ),
+
+    GetPage(
+      name: RoutesName.testDashboardScreen,
+      page: () => TestDashboardScreen(),
     ),
   ];
 }

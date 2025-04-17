@@ -46,7 +46,8 @@ class PracticeScreenView extends StatelessWidget {
             color: item['color'],
 
             // onTap: () => Get.toNamed(item['route']),
-            onTap: () => controller.testStartSession(item['category']),
+            // onTap: () => controller.testStartSession(item['category']),
+            onTap: () => controller.gotoDashboard(item['category']),
 
             // onTap: () => Get.to(StudyScreen()),
           );

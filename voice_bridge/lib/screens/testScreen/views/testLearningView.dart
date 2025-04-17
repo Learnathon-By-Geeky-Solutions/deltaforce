@@ -4,22 +4,20 @@ import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 
 import '../../../resources/routes/routesName.dart';
-import '../../base/controllers/baseController.dart';
 import '../controllers/testController.dart';
 
 
 class TestLearningView extends StatelessWidget {
   TestLearningView({super.key});
   final TestController controller = Get.find();
-  final BaseController baseController = Get.find();
+  // final BaseController baseController = Get.find();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Obx( () {
-        final String category = controller.testCurrentCategory;
         final testCurrentSession = controller.testCurrentSession;
-        int sessionLevel = controller.testCurrentSessionLevel[category] as int;
+        int sessionLevel = controller.startedSessionLevel.value;
 
         int testCurrentLessonIndex = controller.testCurrentLessonIndex.value;
         var lesson = testCurrentSession.value!.lessons[testCurrentLessonIndex];
@@ -36,8 +34,9 @@ class TestLearningView extends StatelessWidget {
                   IconButton(
                     icon: Icon(Icons.arrow_back, size: 30),
                     onPressed: () {
-                      baseController.selectedIndex.value = 0;
-                      Get.offNamed(RoutesName.baseView);// go to learn page
+                      // baseController.selectedIndex.value = 0;
+                      // Get.offNamed(RoutesName.baseView);// go to learn page
+                      Get.offNamed(RoutesName.testDashboardScreen);
                     },
                   ),
                   SizedBox(width: 8), // Space between the icon and text

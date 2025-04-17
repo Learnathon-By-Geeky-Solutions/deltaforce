@@ -9,7 +9,8 @@ import '../../sessionScreen/controllers/sessionController.dart';
 import '../../sessionScreen/view_model/sessionModel.dart';
 
 class TestController extends SessionController {
-  var testCurrentSessionLevel = <String, int>{}.obs;
+  var testTopSessionLevel = <String, int>{}.obs;
+  var testScore = <String, int>{}.obs;
   var testCurrentLessonIndex = 0.obs;
   var testCurrentCategory = '';
   var testCurrentSession = Rxn<Session>(); // Holds the current session data
@@ -27,6 +28,9 @@ class TestController extends SessionController {
   RxList<int> options = <int>[].obs;
 
   var isCheckButtonDisabled = false.obs;
+  var score = 0.obs;
+  var startedSessionLevel = 0.obs;
+
 
   @override
   void onInit() {
@@ -50,21 +54,25 @@ class TestController extends SessionController {
     for (var category in categories) {
       int testSessionLevel = prefs.getInt('testSession_$category') ??
           1; // Default sessionLevel is 1
-      testCurrentSessionLevel[category] = testSessionLevel;
+      testTopSessionLevel[category] = testSessionLevel;
     }
   }
 
   Future<void> testSaveSession(String category, int testSessionNumber) async {
     final prefs = await SharedPreferences.getInstance();
     prefs.setInt('testSession_$category', testSessionNumber);
-    testCurrentSessionLevel[category] = testSessionNumber;
+    testTopSessionLevel[category] = testSessionNumber;
+
   }
 
   /// Load a session from assets
-  Future<void> testStartSession(String category) async {
+  Future<void> testStartSession(String category, int testSessionLevel) async {
+    isCheckButtonDisabled.value = false;
+    startedSessionLevel.value = testSessionLevel;
+    score.value = 0;
     testCurrentLessonIndex.value = 0;
     testCurrentCategory = category;
-    int testSessionLevel = testCurrentSessionLevel[category] ?? 1;
+    // int testSessionLevel = testCurrentSessionLevel[category] ?? 1;
     selectedIndex.value = -1;
     try {
       // Load JSON file
@@ -81,6 +89,7 @@ class TestController extends SessionController {
         generateOptions(); // So UI gets data before building
       }
       Get.toNamed(RoutesName.testScreen);
+
     } catch (e) {
       if (kDebugMode) {
         print("Error loading session: $e");
@@ -101,6 +110,8 @@ class TestController extends SessionController {
         } else {
           showFeedbackAnimation.value = true;
           isAnswerCorrect.value = (selectedIndex.value == correctIndex);
+          isAnswerCorrect.value? score.value ++ : score.value; //count mark
+
           Future.delayed(const Duration(seconds: 2), () {
             showFeedbackAnimation.value = false;
             showTestCompletionScreen.value = true;
@@ -109,21 +120,43 @@ class TestController extends SessionController {
               Get.toNamed(RoutesName.testCompletion);
             });
           });
+
         }
       } else {
         showTestCompletionScreen.value = false;
         String category = testCurrentCategory;
-        var testSessionLevel = testCurrentSessionLevel[category];
+        var topSessionLevel = testTopSessionLevel[category];
+        var currentSessionLevel = startedSessionLevel.value;
         var totalSessions = totalSession[category];
         showLesson.value = true; //for next lesson showing
 
-        if (totalSessions! > testSessionLevel!) {
-          await testSaveSession(category, testSessionLevel + 1);
-          testStartSession(category);
-        } else {
-          testCurrentSessionLevel[category] = 1;
-          testStartSession(category);
+        int result = ((score*100)/lessonLength).toInt();
+        if(topSessionLevel == currentSessionLevel){
+
+          if(result >= 80 ) {
+            if ( topSessionLevel! < totalSessions! ) {
+              await testSaveSession(category, topSessionLevel + 1);
+              testTopSessionLevel[category] = topSessionLevel + 1;// this line change  only// already change in savesession
+            }
+          }
         }
+
+        //fetch score
+        final prefs = await SharedPreferences.getInstance();
+        int savedResult =prefs.getInt('testScore_${category}_$currentSessionLevel') ?? 0; // Default sessionLevel is 1
+        testScore[category] = savedResult;
+
+        print("saved score = $savedResult");
+
+        if(result >  savedResult){
+          testScore[category] = result;
+          print("score >  savedScore = $result");
+          await prefs.setInt('testScore_${category}_$currentSessionLevel', result);//write in share pref
+          print("written score ${prefs.getInt('testScore_${category}_$currentSessionLevel')}");
+        }
+        Get.toNamed(RoutesName.testDashboardScreen);
+        // Get.back(result: result);
+
       }
       if (kDebugMode) {
         print(
@@ -138,6 +171,8 @@ class TestController extends SessionController {
       } else {
         showFeedbackAnimation.value = true;
         isAnswerCorrect.value = (selectedIndex.value == correctIndex);
+        isAnswerCorrect.value? score.value ++ : score.value; //count mark
+
         Future.delayed(const Duration(seconds: 2), () {
           showFeedbackAnimation.value = false;
 
@@ -181,4 +216,19 @@ class TestController extends SessionController {
     options.value = selectedOptionsIndex.toList();
     options.shuffle(); // Shuffle for random order
   }
+
+
+  void gotoDashboard(String category){
+    testCurrentCategory = category;
+    Get.toNamed(RoutesName.testDashboardScreen);
+    print("goto dashboard");
+
+  }
+
+  Future<int> testScores(category,currentSessionLevel) async {
+    final prefs = await SharedPreferences.getInstance();
+    int testScores = prefs.getInt('testScore_${category}_$currentSessionLevel') ?? 0; // Default sessionLevel is 1
+    return testScores;
+  }
+
 }
