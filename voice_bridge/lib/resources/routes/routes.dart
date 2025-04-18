@@ -6,6 +6,7 @@ import 'package:voice_bridge/resources/routes/routesName.dart';
 import 'package:voice_bridge/screens/learnScreen/views/learnScreenView.dart';
 import 'package:voice_bridge/screens/learn_item_screen/balloon_blast/views/balloon_blast_screen.dart';
 import 'package:voice_bridge/screens/learn_item_screen/shape_matching/views/shape_matching_screen.dart';
+import 'package:voice_bridge/screens/parentScreen/views/autismTest.dart';
 import 'package:voice_bridge/screens/parentScreen/views/parentScreenView.dart';
 import 'package:voice_bridge/screens/practiceScreen/views/practiceScreenView.dart';
 import 'package:voice_bridge/screens/testScreen/views/testDashboardScreen.dart';
@@ -108,6 +109,11 @@ class AppRoutes {
     GetPage(
       name: RoutesName.testDashboardScreen,
       page: () => TestDashboardScreen(),
+    ),
+
+    GetPage(
+      name: RoutesName.autismTestScreen,
+      page: () => AutismTest(),
     ),
   ];
 }

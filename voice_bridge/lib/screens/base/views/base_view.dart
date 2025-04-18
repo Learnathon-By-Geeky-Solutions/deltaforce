@@ -19,7 +19,7 @@ class BaseView extends StatelessWidget {
   final List<Widget> pages = [
     PracticeScreenView(),
     LearnScreenView(),
-    const ParentScreenView(),
+    ParentScreenView(),
   ];
 
 

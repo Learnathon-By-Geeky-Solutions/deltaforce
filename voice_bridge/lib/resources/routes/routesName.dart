@@ -35,6 +35,8 @@ class RoutesName {
   static const String testDashboardView = '/test_dashboard_view';
   static const String testDashboardScreen = '/test_dashboard_screen';
 
+  static const String autismTestScreen = '/autism_test_screen';
+
 
 
 }
