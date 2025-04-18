@@ -14,10 +14,6 @@ class SessionController extends GetxController {
   var currentLessonIndex = 0.obs;
   var currentCategory = '';
   int lessonLength = 0;
-
-  // final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-  // final String userId = "user_id"; // Replace with actual user ID from FirebaseAuth
-
   @override
   void onInit() {
     super.onInit();
@@ -60,44 +56,7 @@ class SessionController extends GetxController {
     prefs.setInt('session_$category', sessionNumber);
     currentSessionLevel[category] = sessionNumber;
 
-    // if (sessionNumber % 5 == 0) {
-    //   updateSessionInFirebase(category, sessionNumber); // Sync every 5 sessions
-    // }
   }
-
-  /// Fetch session progress from Firebase when logging in on a new device
-  // Future<void> fetchSessionsFromFirebase() async {
-  //   var doc = await _firestore.collection('userProgress').doc(userId).get();
-  //
-  //   if (doc.exists) {
-  //     Map<String, dynamic> data = doc.data()!;
-  //     data.forEach((category, session) {
-  //       currentSessions[category] = session; // Update local session values
-  //     });
-  //
-  //     // Save fetched sessions to SharedPreferences
-  //     final prefs = await SharedPreferences.getInstance();
-  //     data.forEach((category, session) {
-  //       prefs.setInt('session_$category', session);
-  //     });
-  //   }
-  // }
-
-  /// Update Firebase with the latest session progress
-  // Future<void> updateSessionInFirebase(String category, int sessionNumber) async {
-  //   await _firestore.collection('userProgress').doc(userId).set(
-  //     {category: sessionNumber}, SetOptions(merge: true),
-  //   );
-  // }
-
-  /// Start the session for the selected category
-  // void startSession(String category) {
-  //   int session = currentSessionLevel[category] ?? 1;
-  //
-  //
-  //   Get.toNamed(RoutesName.sessionPage, arguments: {'category': category, 'session': sessionLevel});
-  // }
-
   var currentSession = Rxn<Session>(); // Holds the current session data
 
   /// Load a session from assets
@@ -132,25 +91,6 @@ class SessionController extends GetxController {
     }
   }
 
-
-
-  // var currentLessonIndex = 0.obs;
-
-  // Move to next lesson in the session
-  // void goToNextSesson() {
-  //   if (currentSessionLevel.value != null && currentLessonIndex.value < lessonLength - 1) {
-  //     currentLessonIndex.value++;
-  //   }
-  // }
-  //
-  // // Move to previous lesson in the session
-  // void goToPreviousSession() {
-  //   if (currentLessonIndex.value > 0) {
-  //     currentLessonIndex.value--;
-  //   }
-  // }
-
-
   var showCompletionScreen = false.obs;
   Future<void> goToNextLesson() async {
     if(currentLessonIndex.value == lessonLength - 1){
@@ -174,23 +114,10 @@ class SessionController extends GetxController {
             startSession(category);
           }
         }
-        // startSession(category);
-
-        // print('session change lesson index = $currentLessonIndex lessonLength = $lessonLength');
-        // print('category = $category session level = $sessionLevel total session = $totalSessions');
 
     }
     else if (currentLessonIndex.value < lessonLength - 1) {
       currentLessonIndex.value++;
-      // print('lesson index = $currentLessonIndex lessonLength = $lessonLength');
     }
   }
-
-  // Move to previous lesson in the session
-  // void goToPreviousLesson() {
-  //   if (currentLessonIndex.value > 0) {
-  //     currentLessonIndex.value--;
-  //     print('lesson index = $currentLessonIndex lessonLength = $lessonLength');
-  //   }
-  // }
 }

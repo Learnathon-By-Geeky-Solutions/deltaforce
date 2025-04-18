@@ -35,8 +35,6 @@ class SessionView extends StatelessWidget {
                     IconButton(
                       icon: Icon(Icons.arrow_back, size: 30),
                       onPressed: () {
-                        // Navigator.pop(context);
-                        // Get.offNamed(RoutesName.learnScreen);
                         baseController.selectedIndex.value = 1;
                         Get.offNamed(RoutesName.baseView);// go to learn page
                       },
@@ -74,9 +72,6 @@ class SessionView extends StatelessWidget {
                                   return Container();
                                 }
                               }),
-                          // child: Center(
-                          //   child: Image.asset(lesson!.imageAsset),
-                          // )
                       ),
 
                       // 2️⃣ Second Column - Text
@@ -128,55 +123,5 @@ class SessionView extends StatelessWidget {
 
       }),
     );
-
-
-
-    // return Scaffold(
-    //   appBar: AppBar(title: Text('Learning Session')),
-    //   body: Obx(() {
-    //     int currentLessonIndex = controller.currentLessonIndex.value;
-    //     var lesson = currentSession.value!.lessons[currentLessonIndex];
-    //
-    //     return Column(
-    //       mainAxisAlignment: MainAxisAlignment.center,
-    //       crossAxisAlignment: CrossAxisAlignment.center,
-    //       children: [
-    //         // Display the image
-    //         Image.asset(lesson!.imageAsset),
-    //
-    //         // Display the animation (using lottie package)
-    //         // You can use a package like "lottie" to show animations
-    //         // Lottie.asset(currentLesson.animationAsset),  // Uncomment and use Lottie package
-    //
-    //         // Play the audio (use the audio player package to play audio)
-    //         ElevatedButton(
-    //           onPressed: () {
-    //             // Play the audio (use an audio player like "audioplayers")
-    //             // AudioPlayer().play(currentLesson.audioAsset);  // Uncomment and use audio player package
-    //           },
-    //           child: Text('Play Sound'),
-    //         ),
-    //
-    //         SizedBox(height: 20),
-    //
-    //         // Display Next/Previous buttons
-    //         Row(
-    //           mainAxisAlignment: MainAxisAlignment.center,
-    //           children: [
-    //             ElevatedButton(
-    //               onPressed: controller.goToPreviousLesson,
-    //               child: Text('Previous'),
-    //             ),
-    //             SizedBox(width: 20),
-    //             ElevatedButton(
-    //               onPressed: controller.goToNextLesson,
-    //               child: Text('Next'),
-    //             ),
-    //           ],
-    //         ),
-    //       ],
-    //     );
-    //   }),
-    // );
   }
 }

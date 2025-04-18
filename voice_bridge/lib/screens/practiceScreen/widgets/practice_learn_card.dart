@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:percent_indicator/linear_percent_indicator.dart';
 import '../../../resources/colors/app_color.dart';
 
-class LearnCard extends StatelessWidget {
+class PracticeLearnCard extends StatelessWidget {
   final String name;
   final String image;
   final Color color;
   final VoidCallback onTap;
-
-  const LearnCard({
+  final double percentage;
+  const PracticeLearnCard({
     super.key,
     required this.name,
     required this.image,
     required this.color,
     required this.onTap,
+    required this.percentage,
   });
 
   @override
@@ -27,21 +29,13 @@ class LearnCard extends StatelessWidget {
             color: color.withOpacity(AppColor.cardBorderOpacity),
             width: 2,
           ),
-          boxShadow: [
-            // BoxShadow(
-            //   color: Colors.white,
-            //   blurRadius: 4,
-            //   offset: Offset(0, 5),
-            //   spreadRadius: 2,
-            // ),
-          ],
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Image.asset(
                 image,
-                height: 150,
+                height: 130,
                 // width: 80,
                 fit: BoxFit.cover
             ),
@@ -53,6 +47,15 @@ class LearnCard extends StatelessWidget {
                 fontWeight: FontWeight.bold,
                 color: AppColor.cardTextColor,
               ),
+            ),
+            LinearPercentIndicator(
+              animation: true,
+              animationDuration: 1000,
+              lineHeight: 20,
+              percent: percentage,
+              progressColor: Colors.deepPurple,
+              backgroundColor: Colors.deepPurple.shade200,
+              barRadius: Radius.circular(10),
             ),
           ],
         ),

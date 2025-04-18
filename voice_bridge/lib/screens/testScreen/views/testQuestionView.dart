@@ -3,12 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import '../../../resources/routes/routesName.dart';
-import '../../base/controllers/baseController.dart';
 import '../controllers/testController.dart';
 
 class TestQuestionView extends StatelessWidget {
   final TestController controller = Get.find();
-  final BaseController baseController = Get.find();
+  // final BaseController baseController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +15,7 @@ class TestQuestionView extends StatelessWidget {
       body: Obx(() {
         var lesson = controller.testCurrentSession.value!;
         final selected = controller.selectedIndex.value;
-        var testCurrentSessionLevel = controller.testCurrentSessionLevel[controller.testCurrentCategory];
+        var testCurrentSessionLevel = controller.startedSessionLevel.value;
         return Stack(
           children: [
             Column(
@@ -29,8 +28,9 @@ class TestQuestionView extends StatelessWidget {
                       IconButton(
                         icon: Icon(Icons.arrow_back, size: 30),
                         onPressed: () {
-                          baseController.selectedIndex.value = 0;
-                          Get.offNamed(RoutesName.baseView);// go to learn page
+                          // baseController.selectedIndex.value = 0;
+                          // Get.offNamed(RoutesName.baseView);// go to learn page
+                          Get.offNamed(RoutesName.testDashboardScreen);
                         },
                       ),
                       Text(
