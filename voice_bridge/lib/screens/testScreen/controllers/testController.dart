@@ -73,7 +73,6 @@ class TestController extends SessionController {
     score.value = 0;
     testCurrentLessonIndex.value = 0;
     testCurrentCategory = category;
-    // int testSessionLevel = testCurrentSessionLevel[category] ?? 1;
     selectedIndex.value = -1;
     try {
       // Load JSON file
@@ -220,8 +219,9 @@ class TestController extends SessionController {
   void gotoDashboard(String category){
     testCurrentCategory = category;
     Get.toNamed(RoutesName.testDashboardScreen);
-    print("goto dashboard");
-
+    if (kDebugMode) {
+      print("goto dashboard");
+    }
   }
 
   Future<int> testScores(category,currentSessionLevel) async {

@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../resources/colors/app_color.dart';
 import '../../../resources/routes/routesName.dart';
-import '../../learnScreen/widgets/learn_card.dart';
 import '../../testScreen/controllers/testController.dart';
+import '../widgets/practice_learn_card.dart';
 
 class PracticeScreenView extends StatelessWidget {
   PracticeScreenView({super.key});
@@ -40,14 +40,16 @@ class PracticeScreenView extends StatelessWidget {
         itemCount: learnItems.length,
         itemBuilder: (context, index) {
           final item = learnItems[index];
-          return LearnCard(
+          return PracticeLearnCard(
             name: item['category'],
             image: item['image'],
             color: item['color'],
+            percentage: (controller.testTopSessionLevel[item['category']]!/20),
 
             // onTap: () => Get.toNamed(item['route']),
             // onTap: () => controller.testStartSession(item['category']),
             onTap: () => controller.gotoDashboard(item['category']),
+
 
             // onTap: () => Get.to(StudyScreen()),
           );
