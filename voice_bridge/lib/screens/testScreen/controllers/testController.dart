@@ -29,6 +29,7 @@ class TestController extends SessionController {
 
   var isCheckButtonDisabled = false.obs;
   var score = 0.obs;
+  var result = 0.obs;
   var startedSessionLevel = 0.obs;
 
 
@@ -117,6 +118,10 @@ class TestController extends SessionController {
             showTestCompletionScreen.value = true;
             Future.delayed(const Duration(milliseconds: 500), () {
               isCheckButtonDisabled.value = false; // Enable button again
+
+              result.value = ((score*100)/lessonLength).toInt();
+
+
               Get.toNamed(RoutesName.testCompletion);
             });
           });
@@ -130,9 +135,7 @@ class TestController extends SessionController {
         var totalSessions = totalSession[category];
         showLesson.value = true; //for next lesson showing
 
-        int result = ((score*100)/lessonLength).toInt();
         if(topSessionLevel == currentSessionLevel){
-
           if(result >= 80 ) {
             if ( topSessionLevel! < totalSessions! ) {
               await testSaveSession(category, topSessionLevel + 1);
@@ -144,20 +147,16 @@ class TestController extends SessionController {
         //fetch score
         final prefs = await SharedPreferences.getInstance();
         int savedResult =prefs.getInt('testScore_${category}_$currentSessionLevel') ?? 0; // Default sessionLevel is 1
-        testScore[category] = savedResult;
-
-        print("saved score = $savedResult");
+        // testScore[category] = savedResult;
 
         if(result >  savedResult){
-          testScore[category] = result;
-          print("score >  savedScore = $result");
-          await prefs.setInt('testScore_${category}_$currentSessionLevel', result);//write in share pref
-          print("written score ${prefs.getInt('testScore_${category}_$currentSessionLevel')}");
+          // testScore[category] = result;
+          await prefs.setInt('testScore_${category}_$currentSessionLevel', result.value);//write in share pref
         }
         Get.toNamed(RoutesName.testDashboardScreen);
-        // Get.back(result: result);
 
       }
+      print("con result $result");
       if (kDebugMode) {
         print(
             'session change lesson index = $testCurrentLessonIndex lessonLength = $lessonLength');
