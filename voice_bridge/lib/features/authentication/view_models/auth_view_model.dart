@@ -1,11 +1,12 @@
 import 'package:get/get.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:voice_bridge/features/authentication/services/firebase_auth_service.dart';
 import 'package:voice_bridge/features/authentication/const/app_strings.dart';
 import 'package:voice_bridge/resources/routes/routesName.dart';
 
 class AuthViewModel extends GetxController {
-  final FirebaseAuthService _authService = FirebaseAuthService();
+  final FirebaseAuthService _firebaseAuthService = FirebaseAuthService();
   final Rx<User?> _user = Rx<User?>(null);
   final RxBool _isLoading = false.obs;
   final RxString _error = ''.obs;
@@ -17,36 +18,45 @@ class AuthViewModel extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    print('AuthViewModel initialized');
-    _authService.authStateChanges.listen(_handleAuthChange);
+    _firebaseAuthService.authStateChanges.listen(_handleAuthChange);
   }
 
   void _handleAuthChange(User? firebaseUser) {
-    print('Auth state changed. Current user: ${firebaseUser?.email}');
     _user.value = firebaseUser;
     if (firebaseUser != null) {
-      Get.offAllNamed(RoutesName.baseView);
+      if (Get.currentRoute != RoutesName.baseView) {
+        Get.offAllNamed(RoutesName.baseView);
+      }
     } else {
-      Get.offAllNamed(RoutesName.loginScreen);
+      if (Get.currentRoute != RoutesName.loginScreen) {
+        Get.offAllNamed(RoutesName.loginScreen);
+      }
     }
   }
 
   void checkUserLoggedIn() {
-    print('Checking if user is logged in...');
-    _handleAuthChange(_authService.getCurrentUser());
+    _handleAuthChange(_firebaseAuthService.getCurrentUser());
   }
 
   Future<void> signUp(String email, String password) async {
     try {
       _isLoading.value = true;
-      print('Signing up...');
-      await _authService.signUpWithEmailAndPassword(email, password);
-      print('Signup successful');
-      Get.snackbar(AppStrings.successful, AppStrings.signupSuccess);
+      final userCredential = await _firebaseAuthService.signUpWithEmailAndPassword(email, password);
+      _user.value = userCredential.user;
+      Get.snackbar(
+        AppStrings.successful,
+        AppStrings.signupSuccess,
+        backgroundColor: Colors.green,
+        colorText: Colors.white,
+      );
     } catch (e) {
-      print('Signup error: $e');
       _error.value = e.toString();
-      Get.snackbar(AppStrings.error, AppStrings.signupError);
+      Get.snackbar(
+        AppStrings.error,
+        AppStrings.signupError,
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
+      );
     } finally {
       _isLoading.value = false;
     }
@@ -55,23 +65,35 @@ class AuthViewModel extends GetxController {
   Future<void> signIn(String email, String password) async {
     try {
       _isLoading.value = true;
-      print('Signing in...');
-      final userCredential = await _authService.signInWithEmailAndPassword(email, password);
-      await _authService.reloadUser();
+      final userCredential = await _firebaseAuthService.signInWithEmailAndPassword(email, password);
+      await _firebaseAuthService.reloadUser();
 
       if (!userCredential.user!.emailVerified) {
-        print('Email not verified');
-        Get.snackbar(AppStrings.emailVerification, AppStrings.emailVerificationError);
-        await _authService.signOut();
+        Get.snackbar(
+          AppStrings.emailVerification,
+          AppStrings.emailVerificationError,
+          backgroundColor: Colors.orange,
+          colorText: Colors.white,
+        );
+        await _firebaseAuthService.signOut();
         return;
       }
 
-      print('Sign-in successful');
-      Get.snackbar(AppStrings.successful, AppStrings.loginSuccess);
+      _user.value = userCredential.user;
+      Get.snackbar(
+        AppStrings.successful,
+        AppStrings.loginSuccess,
+        backgroundColor: Colors.green,
+        colorText: Colors.white,
+      );
     } catch (e) {
-      print('Sign-in error: $e');
       _error.value = e.toString();
-      Get.snackbar(AppStrings.error, AppStrings.signinError);
+      Get.snackbar(
+        AppStrings.error,
+        AppStrings.signinError,
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
+      );
     } finally {
       _isLoading.value = false;
     }
@@ -80,15 +102,23 @@ class AuthViewModel extends GetxController {
   Future<void> signInWithGoogle() async {
     try {
       _isLoading.value = true;
-      print('Attempting Google sign-in...');
-      final user = await _authService.signInWithGoogle();
-      if (user == null) throw Exception(AppStrings.googleSignInFailed);
-      print('Google sign-in successful');
-      Get.snackbar(AppStrings.successful, AppStrings.googleSignInSuccess);
+      final user = await _firebaseAuthService.signInWithGoogle();
+      if (user == null) throw Exception('Google Sign-In returned null user');
+      _user.value = user;
+      Get.snackbar(
+        AppStrings.successful,
+        AppStrings.googleSignInSuccess,
+        backgroundColor: Colors.green,
+        colorText: Colors.white,
+      );
     } catch (e) {
-      print('Google sign-in error: $e');
       _error.value = e.toString();
-      Get.snackbar(AppStrings.error, AppStrings.googleSignInFailed);
+      Get.snackbar(
+        AppStrings.error,
+        AppStrings.googleSignInFailed,
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
+      );
     } finally {
       _isLoading.value = false;
     }
