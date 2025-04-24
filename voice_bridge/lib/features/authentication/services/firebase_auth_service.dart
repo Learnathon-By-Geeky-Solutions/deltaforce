@@ -3,74 +3,69 @@ import 'package:google_sign_in/google_sign_in.dart';
 
 class FirebaseAuthService {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
-  final GoogleSignIn _googleSignIn = GoogleSignIn(
-    scopes: [
-      'email',
-      'https://www.googleapis.com/auth/userinfo.profile',
-    ],
-  );
+  final GoogleSignIn _googleSignIn = GoogleSignIn();
 
   Stream<User?> get authStateChanges => _firebaseAuth.authStateChanges();
+  User? getCurrentUser() => _firebaseAuth.currentUser;
 
-  User? getCurrentUser() {
-    return _firebaseAuth.currentUser;
-  }
-
-  Future<UserCredential> signUpWithEmailAndPassword(
-      String email, String password) async {
-    UserCredential userCredential = await _firebaseAuth
-        .createUserWithEmailAndPassword(email: email, password: password);
+  Future<UserCredential> signUpWithEmailAndPassword(String email, String password) async {
+    print('Attempting to sign up with email: $email');
+    final userCredential = await _firebaseAuth.createUserWithEmailAndPassword(
+      email: email,
+      password: password,
+    );
+    print('User signed up: ${userCredential.user?.uid}');
     await userCredential.user?.sendEmailVerification();
+    print('Email verification sent');
     return userCredential;
   }
 
-  Future<UserCredential> signInWithEmailAndPassword(
-      String email, String password) async {
-    return _firebaseAuth.signInWithEmailAndPassword(
-        email: email, password: password);
+  Future<UserCredential> signInWithEmailAndPassword(String email, String password) async {
+    print('Attempting to sign in with email: $email');
+    final userCredential = await _firebaseAuth.signInWithEmailAndPassword(
+      email: email,
+      password: password,
+    );
+    print('User signed in: ${userCredential.user?.uid}');
+    return userCredential;
   }
 
   Future<User?> signInWithGoogle() async {
     try {
-      // Step 1: Sign out from any previous sessions
-      await _googleSignIn.signOut();
-
-      // Step 2: Trigger Google Sign-In flow
-      final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
+      print('Starting Google sign-in...');
+      final googleUser = await _googleSignIn.signIn();
       if (googleUser == null) {
-        // User canceled the sign-in
+        print('Google sign-in aborted by user.');
         return null;
       }
 
-      // Step 3: Obtain auth details from the request
-      final GoogleSignInAuthentication googleAuth =
-      await googleUser.authentication;
+      print('Google user signed in: ${googleUser.email}');
+      final googleAuth = await googleUser.authentication;
 
-      // Step 4: Create a new credential
-      final OAuthCredential credential = GoogleAuthProvider.credential(
+      final credential = GoogleAuthProvider.credential(
         accessToken: googleAuth.accessToken,
         idToken: googleAuth.idToken,
       );
 
-      // Step 5: Sign in to Firebase with the Google credential
-      final UserCredential userCredential =
-      await _firebaseAuth.signInWithCredential(credential);
-
+      final userCredential = await _firebaseAuth.signInWithCredential(credential);
+      print('Firebase user after Google sign-in: ${userCredential.user?.uid}');
       return userCredential.user;
-    } on FirebaseAuthException catch (e) {
-      print("🔥 Firebase Auth Error: ${e.code} - ${e.message}");
-      return null;
     } catch (e) {
-      return null;
+      print('Error during Google sign-in: $e');
+      rethrow;
     }
   }
 
-  Future<void> signOut() async {
-    await _firebaseAuth.signOut();
-    await _googleSignIn.signOut();
+  Future<void> reloadUser() async {
+    print('Reloading user info...');
+    await _firebaseAuth.currentUser?.reload();
+    print('User info reloaded.');
   }
 
-  Future<void> reloadUser() async {
-    await _firebaseAuth.currentUser?.reload();
+  Future<void> signOut() async {
+    print('Signing out...');
+    await _googleSignIn.signOut();
+    await _firebaseAuth.signOut();
+    print('User signed out.');
   }
 }

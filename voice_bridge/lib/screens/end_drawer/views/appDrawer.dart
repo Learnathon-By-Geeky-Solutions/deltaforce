@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:voice_bridge/features/authentication/services/firebase_auth_service.dart';
+import 'package:voice_bridge/resources/colors/app_color.dart';
 
 class AppDrawer extends StatelessWidget {
   AppDrawer({super.key});
@@ -16,7 +17,7 @@ class AppDrawer extends StatelessWidget {
         children: [
           const DrawerHeader(
             decoration: BoxDecoration(
-              color: Colors.blue,
+              color: AppColor.appBarColor,
               image: DecorationImage(
                 image: AssetImage('assets/images/drawer_header.jpg'),
                 fit: BoxFit.cover,
