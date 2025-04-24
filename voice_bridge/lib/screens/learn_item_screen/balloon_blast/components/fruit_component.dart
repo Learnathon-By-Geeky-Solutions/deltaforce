@@ -61,20 +61,43 @@ class FruitComponent extends SpriteComponent{
     final a = Utils.getAngleOfTouchPont(
         center: position, initAngle: angle, touch: vector2);
     if (a < 45 || (a > 135 && a < 225) || a > 315) {
+      final dividedImage1 = composition.ImageComposition()
+      ..add(image, Vector2(0,0),
+          source: Rect.fromLTWH(0, 0, image.width.toDouble(), image.height/2)
+      ),
+          dividedImage2 = composition.ImageComposition()
+            ..add(image, Vector2(0,0),
+                source: Rect.fromLTWH(0, image.height/2, image.width.toDouble(), image.height/2)
+            );
+
       findGame()?.addAll([
-        RectangleComponent(
+        FruitComponent(
+          parentComponent,
+        center - Vector2(size.x / 2 * cos(angle), size.x / 2 * sin(angle)),
+          fruit: fruit,
+          image: dividedImage1.composeSync(),
+          acceleration: acceleration,
+          velocity: velocity,
+          pageSize: pageSize,
+          divided: true,
           size: Vector2(size.x, size.y / 2),
-          position: center - Vector2(size.x / 2 * cos(angle), size.x / 2 * sin(angle)),
           angle: angle,
           anchor: Anchor.topLeft,
-          paint: Paint()..color = Colors.red,
+
         ),
-        RectangleComponent(
+        FruitComponent(
+          parentComponent,
+          center +
+                Vector2(size.x/4 * cos(angle + 3 * pi / 2), size.x / 4 * sin(angle + 3* pi /2)),
           size: Vector2(size.x, size.y / 2),
-          position: center + Vector2(size.x / 4 * cos(angle+3*pi/2) , size.x / 4 * sin(angle+3*pi/2)),
           angle: angle,
           anchor: Anchor.center,
-          paint: Paint()..color = Colors.blue,
+          fruit: fruit,
+          image: dividedImage1.composeSync(),
+          acceleration: acceleration,
+          velocity: velocity,
+          pageSize: pageSize,
+          divided: true,
         ),
       ]);
     } else {
