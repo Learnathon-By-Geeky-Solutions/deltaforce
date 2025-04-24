@@ -3,11 +3,16 @@ import 'package:google_sign_in/google_sign_in.dart';
 
 class FirebaseAuthService {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
-  final GoogleSignIn _googleSignIn = GoogleSignIn();
+  final GoogleSignIn _googleSignIn = GoogleSignIn(
+    scopes: [
+      'email',
+      'https://www.googleapis.com/auth/userinfo.profile',
+    ],
+  );
 
   Stream<User?> get authStateChanges => _firebaseAuth.authStateChanges();
 
-  User? geCurrentUser() {
+  User? getCurrentUser() {
     return _firebaseAuth.currentUser;
   }
 
@@ -27,33 +32,35 @@ class FirebaseAuthService {
 
   Future<User?> signInWithGoogle() async {
     try {
-      // Ensure user is signed out before sign-in
+      // Step 1: Sign out from any previous sessions
       await _googleSignIn.signOut();
 
-      // Start Google Sign-In process
+      // Step 2: Trigger Google Sign-In flow
       final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
-
       if (googleUser == null) {
-        return null; // User canceled the login
+        // User canceled the sign-in
+        return null;
       }
 
-      // Retrieve authentication details
+      // Step 3: Obtain auth details from the request
       final GoogleSignInAuthentication googleAuth =
-          await googleUser.authentication;
+      await googleUser.authentication;
 
-      // Create Firebase credential
-      final AuthCredential credential = GoogleAuthProvider.credential(
+      // Step 4: Create a new credential
+      final OAuthCredential credential = GoogleAuthProvider.credential(
         accessToken: googleAuth.accessToken,
         idToken: googleAuth.idToken,
       );
 
-      // Sign in to Firebase
-      UserCredential userCredential =
-          await _firebaseAuth.signInWithCredential(credential);
+      // Step 5: Sign in to Firebase with the Google credential
+      final UserCredential userCredential =
+      await _firebaseAuth.signInWithCredential(credential);
 
       return userCredential.user;
+    } on FirebaseAuthException catch (e) {
+      print("🔥 Firebase Auth Error: ${e.code} - ${e.message}");
+      return null;
     } catch (e) {
-      print("❌ Google Sign-In Error: $e");
       return null;
     }
   }
