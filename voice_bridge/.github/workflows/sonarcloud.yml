@@ -3,34 +3,27 @@ name: Flutter SonarCloud Analysis
 on:
   push:
     branches:
-      - main
-      - master
-      - dev
       - fix_sonar_cloud
-  pull_request:
-    branches: [ "main" ]
 
 jobs:
-  sonarcloud-analysis:
+  analyze:
+    name: SonarCloud Scan
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-      - name: Set up Java 17
+      - name: Set up Java
         uses: actions/setup-java@v3
         with:
-          distribution: 'temurin'
           java-version: '17'
+          distribution: 'temurin'
 
-      - name: Set up Flutter
+      - name: Install Flutter
         uses: subosito/flutter-action@v2
         with:
-          channel: stable
-          cache: true
+          flutter-version: '3.19.0' # or your Flutter version
 
       - name: Install dependencies
         run: flutter pub get
@@ -38,21 +31,10 @@ jobs:
       - name: Run tests with coverage
         run: flutter test --coverage
 
-      - name: SonarCloud Scan
-        uses: SonarSource/sonarqube-scan-action@v5
+      - name: Install Sonar Dart Plugin
+        run: flutter pub global activate sonar
+
+      - name: Run SonarCloud Scanner
         env:
           SONAR_TOKEN: ${{ secrets.TOKEN }}
-        with:
-          args: >
-            -Dsonar.host.url=https://sonarcloud.io
-            -Dsonar.projectKey=Learnathon-By-Geeky-Solutions_ode-to-code
-            -Dsonar.organization=learnathon-by-geeky-solutions
-            -Dsonar.java.version=17
-            -Dsonar.verbose=true
-            -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
-            -Dsonar.sources=lib
-            -Dsonar.tests=test
-            -Dsonar.test.inclusions=test/features/**/*_test.dart
-            -Dsonar.exclusions=**/*.g.dart,**/*.freezed.dart,**/generated/**,**/__generated__/**,**/mocks.dart,**/*.css,lib/core/localization/**/*app_translations.dart
-
-        
+        run: flutter pub global run sonar
