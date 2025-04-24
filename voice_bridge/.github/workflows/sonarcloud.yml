@@ -1,82 +1,50 @@
-name: Flutter SonarCloud Analysis
-
 on:
+  pull_request:
+    branches:
+      - main
+      - master
   push:
     branches:
       - main
       - master
-      - dev
+      - develop
       - fix_sonar_cloud
-  pull_request:
-    branches: [ "main" ]
-
+name: "Build & Release"
 jobs:
-  sonarcloud-analysis:
-    runs-on: ubuntu-latest
-
+  build:
+    name: Build & Release
+    runs-on: macos-latest
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v3
+      - uses: actions/setup-java@v3
         with:
-          fetch-depth: 0
-
-      - name: Set up Java 17
-        uses: actions/setup-java@v3
+          distribution: 'zulu'
+          java-version: '12'
+      - uses: subosito/flutter-action@v2
         with:
-          distribution: 'temurin'
-          java-version: '17'
+          channel: 'stable'
+          architecture: x64
 
-      - name: Set up Flutter
-        uses: subosito/flutter-action@v2
+      - run: flutter build apk --release --split-per-abi
+      - run: |
+          flutter build ios --no-codesign
+          cd build/ios/iphoneos
+          mkdir Payload
+          cd Payload
+          ln -s ../Runner.app
+          cd ..
+          zip -r app.ipa Payload
+      - name: Push to Releases
+        uses: ncipollo/release-action@v1
         with:
-          channel: stable
-          cache: true
+          artifacts: "build/app/outputs/apk/release/*,build/ios/iphoneos/app.ipa"
+          tag: v1.0.${{ github.run_number }}
+#          token: ${{ secrets.TOKEN }}
 
-      - name: Install dependencies
-        run: flutter pub get
 
-      - name: Create .env file for SonarCloud
-        run: |
-          echo "ANDROID_API_KEY=${{ secrets.ANDROID_API_KEY }}" > .env
-          echo "ANDROID_APP_ID=${{ secrets.ANDROID_APP_ID }}" >> .env
-          echo "ANDROID_MESSAGING_SENDER_ID=${{ secrets.ANDROID_MESSAGING_SENDER_ID }}" >> .env
-          echo "ANDROID_PROJECT_ID=${{ secrets.ANDROID_PROJECT_ID }}" >> .env
-          echo "ANDROID_STORAGE_BUCKET=${{ secrets.ANDROID_STORAGE_BUCKET }}" >> .env
-          echo "IOS_API_KEY=${{ secrets.IOS_API_KEY }}" >> .env
-          echo "IOS_APP_ID=${{ secrets.IOS_APP_ID }}" >> .env
-          echo "IOS_MESSAGING_SENDER_ID=${{ secrets.IOS_MESSAGING_SENDER_ID }}" >> .env
-          echo "IOS_PROJECT_ID=${{ secrets.IOS_PROJECT_ID }}" >> .env
-          echo "IOS_STORAGE_BUCKET=${{ secrets.IOS_STORAGE_BUCKET }}" >> .env
-          echo "IOS_BUNDLE_ID=${{ secrets.IOS_BUNDLE_ID }}" >> .env
 
-      - name: Debug .env File
-        run: |
-          echo "Checking .env file:"
-          ls -la
-          cat .env
 
-      - name: Run tests with coverage
-        run: flutter test --coverage
 
-      - name: Verify coverage file
-        run: |
-          echo "Coverage file contents:"
-          head -n 20 coverage/lcov.info
-          echo "Checking paths:"
-          grep "SF:" coverage/lcov.info || echo "No source files found in coverage"
 
-      - name: SonarCloud Scan
-        uses: SonarSource/sonarqube-scan-action@v5.0.0
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        with:
-          args: >
-            -Dsonar.host.url=https://sonarcloud.io
-            -Dsonar.projectKey=Learnathon-By-Geeky-Solutions_triangle
-            -Dsonar.organization=learnathon-by-geeky-solutions
-            -Dsonar.sources=lib/
-            -Dsonar.tests=test
-            -Dsonar.java.version=17
-            -Dsonar.verbose=true
-            -Dsonar.dart.lcov.reportPaths=coverage/lcov.info
+# push to master, main, develop
+# pull request on main master
