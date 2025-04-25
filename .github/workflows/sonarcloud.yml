@@ -26,15 +26,15 @@ jobs:
 
       - name: Install dependencies
         run: flutter pub get
-        working-directory: ./deltaforce
+        working-directory: ./voice_bridge
 
       - name: Build APK
         run: flutter build apk --release --split-per-abi
-        working-directory: ./deltaforce
+        working-directory: ./voice_bridge
 
       - name: Push to Releases
         uses: ncipollo/release-action@v1
         with:
-          artifacts: "deltaforce/build/app/outputs/apk/release/*.apk"
+          artifacts: "voice_bridge/build/app/outputs/apk/release/*.apk"
           tag: v1.0.${{ github.run_number }}
           token: ${{ secrets.TOKEN }}
