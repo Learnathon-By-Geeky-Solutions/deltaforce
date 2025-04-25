@@ -49,7 +49,7 @@ class BaseView extends StatelessWidget {
           borderRadius: BorderRadius.vertical(bottom: Radius.circular(20))
         ),
       ),
-      endDrawer: const AppDrawer(),
+      endDrawer: AppDrawer(),
       body: Obx(() => pages[controller.selectedIndex.value]),
       bottomNavigationBar: CurvedNavBar(controller: controller),
     );
