@@ -24,12 +24,17 @@ jobs:
           channel: 'stable'
           architecture: x64
 
-      - run: flutter pub get
-      - run: flutter build apk --release --split-per-abi
+      - name: Install dependencies
+        run: flutter pub get
+        working-directory: ./deltaforce
+
+      - name: Build APK
+        run: flutter build apk --release --split-per-abi
+        working-directory: ./deltaforce
 
       - name: Push to Releases
         uses: ncipollo/release-action@v1
         with:
-          artifacts: "build/app/outputs/apk/release/*.apk"
+          artifacts: "deltaforce/build/app/outputs/apk/release/*.apk"
           tag: v1.0.${{ github.run_number }}
           token: ${{ secrets.TOKEN }}
