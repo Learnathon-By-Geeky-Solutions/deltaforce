@@ -21,14 +21,17 @@ class GameOverRoute extends Route {
       );
   }
 }
-// @override
-//   void onPop(Route nextRoute){
-//   final routeChildren = nextRoute.children.whereType<GamePage>();
-//
-//   nextRoute
-//   ..resumeTime()
-//   ..removeRenderEffect();
-// }
+@override
+  void onPop(Route nextRoute){
+  final routeChildren = nextRoute.children.whereType<GamePage>();
+  if(routeChildren.isNotEmpty){
+    final gamePage = routeChildren.first;
+    gamePage.removeAll(gamePage.children);
+  }
+  nextRoute
+  ..resumeTime()
+  ..removeRenderEffect();
+}
 
 class GameOverPage extends Component
     with TapCallbacks, HasGameReference<MyGame> {
