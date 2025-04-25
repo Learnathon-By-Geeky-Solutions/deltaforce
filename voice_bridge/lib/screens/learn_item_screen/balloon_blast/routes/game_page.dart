@@ -35,7 +35,7 @@ class GamePage extends Component
 
     double initTime = 0;
 
-    for (int i = 0; i < 200; i++) {
+    for (var i = 0;i<1000000000 ; i++) {
       if (i != 0) {
         initTime = fruitsTime.last;
       }
@@ -56,11 +56,11 @@ class GamePage extends Component
         position: game.size / 2,
         anchor: Anchor.center,
       ),
-      // _mistakeTextComponent = TextComponent(
-      //   text: 'Mistake: $mistakeCount',
-      //   position: Vector2(game.size.x - 10, 10),
-      //   anchor: Anchor.topRight,
-      // ),
+      _mistakeTextComponent = TextComponent(
+        text: 'Mistake: $mistakeCount',
+        position: Vector2(game.size.x - 10, 10),
+        anchor: Anchor.topRight,
+      ),
       _scoreTextComponent = TextComponent(
         text: 'Score: $score',
         position: Vector2(game.size.x - 10 , 50),
