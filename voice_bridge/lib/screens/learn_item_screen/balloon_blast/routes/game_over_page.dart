@@ -4,6 +4,7 @@ import 'package:flame/events.dart';
 import 'package:flame/game.dart';
 import 'package:flame/rendering.dart';
 import 'package:voice_bridge/screens/learn_item_screen/balloon_blast/game_main.dart';
+import 'package:voice_bridge/screens/learn_item_screen/balloon_blast/routes/game_page.dart';
 
 import '../views/balloon_blast_screen.dart';
 
@@ -20,6 +21,14 @@ class GameOverRoute extends Route {
       );
   }
 }
+// @override
+//   void onPop(Route nextRoute){
+//   final routeChildren = nextRoute.children.whereType<GamePage>();
+//
+//   nextRoute
+//   ..resumeTime()
+//   ..removeRenderEffect();
+// }
 
 class GameOverPage extends Component
     with TapCallbacks, HasGameReference<MyGame> {

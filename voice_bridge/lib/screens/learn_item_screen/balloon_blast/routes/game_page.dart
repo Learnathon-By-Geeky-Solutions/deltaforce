@@ -100,4 +100,5 @@ class GamePage extends Component
       }
     });
   }
+
 }
