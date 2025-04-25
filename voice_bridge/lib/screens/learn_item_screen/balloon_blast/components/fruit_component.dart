@@ -64,7 +64,10 @@ class FruitComponent extends SpriteComponent{
     if(divided && !_canDragOnShape){
       return ;
     }
-
+    if(fruit.isBomb){
+      parentComponent.gameOver();
+      return;
+    }
     //Angle of Touch Point
     final a = Utils.getAngleOfTouchPont(
         center: position, initAngle: angle, touch: vector2);
