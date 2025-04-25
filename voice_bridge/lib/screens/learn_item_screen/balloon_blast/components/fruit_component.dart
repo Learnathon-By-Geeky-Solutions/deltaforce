@@ -57,7 +57,11 @@ class FruitComponent extends SpriteComponent{
     velocity.y += (AppConfig.acceleration + AppConfig.gravity)*dt;
     if((position.y - AppConfig.objSize)>pageSize.y){
       removeFromParent();
+      // if(!divided && !fruit.isBomb){
+      //   parentComponent.addMistake();
+      // }
     }
+
   }
   void touchAtPoint(Vector2 vector2) {
 
@@ -111,7 +115,8 @@ class FruitComponent extends SpriteComponent{
           divided: true,
         ),
       ]);
-    } else {
+    }
+    else {
       final dividedImage1 = composition.ImageComposition()
       ..add(image, Vector2(0, 0), source: Rect.fromLTWH(0, 0, image.width/2, image.height.toDouble())),
 
@@ -151,6 +156,7 @@ class FruitComponent extends SpriteComponent{
         ),
       ]);
     }
+    parentComponent.addScore();
     removeFromParent();
   }
 

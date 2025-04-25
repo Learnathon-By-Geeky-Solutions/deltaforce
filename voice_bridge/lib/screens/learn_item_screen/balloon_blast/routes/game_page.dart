@@ -5,30 +5,37 @@ import 'package:flame/events.dart';
 import 'package:flame/extensions.dart';
 import 'package:voice_bridge/screens/learn_item_screen/balloon_blast/components/fruit_component.dart';
 import 'package:voice_bridge/screens/learn_item_screen/balloon_blast/components/pause_button.dart';
-import 'package:voice_bridge/screens/learn_item_screen/balloon_blast/components/back_button.dart'; // ✅ Added import
+import 'package:voice_bridge/screens/learn_item_screen/balloon_blast/components/back_button.dart';
 import 'package:voice_bridge/screens/learn_item_screen/balloon_blast/config/app_config.dart';
 import 'package:voice_bridge/screens/learn_item_screen/balloon_blast/views/balloon_blast_screen.dart';
+
+import '../config/score_manager.dart';
+
 
 class GamePage extends Component
     with DragCallbacks, HasGameReference<BalloonBlastGame> {
   final Random random = Random();
   late List<double> fruitsTime;
   late double time, countDown;
-  TextComponent? _countdownTextComponent;
+  TextComponent? _countdownTextComponent, _mistakeTextComponent, _scoreTextComponent, _topScoreTextComponent;
   bool _countdownFinished = false;
+  late int mistakeCount, score, topScore;
 
   @override
-  void onMount() {
-    // TODO: implement onMount
+  void onMount() async {
     super.onMount();
     fruitsTime = [];
     countDown = 3;
+    mistakeCount = 0;
+    score = 0;
     time = 0;
     _countdownFinished = false;
 
+    topScore = await ScoreManager.getTopScore();
+
     double initTime = 0;
 
-    for (int i = 0; i < 40; i++) {
+    for (int i = 0; i < 200; i++) {
       if (i != 0) {
         initTime = fruitsTime.last;
       }
@@ -36,7 +43,6 @@ class GamePage extends Component
       final componentTime = random.nextInt(1) + millySecondTime + initTime;
       fruitsTime.add(componentTime);
     }
-    print("The fruits time is initiated ${fruitsTime}");
 
     addAll([
       GameBackButton(onPressed: () {
@@ -50,12 +56,28 @@ class GamePage extends Component
         position: game.size / 2,
         anchor: Anchor.center,
       ),
+      // _mistakeTextComponent = TextComponent(
+      //   text: 'Mistake: $mistakeCount',
+      //   position: Vector2(game.size.x - 10, 10),
+      //   anchor: Anchor.topRight,
+      // ),
+      _scoreTextComponent = TextComponent(
+        text: 'Score: $score',
+        position: Vector2(game.size.x - 10 , 50),
+        anchor: Anchor.topRight,
+      ),
+      _topScoreTextComponent = TextComponent(
+        text: 'Top Score: $topScore',
+        position: Vector2(game.size.x - 10, 10),
+        anchor: Anchor.topRight,
+      )
+
+
     ]);
   }
 
   @override
   void update(double dt) {
-    // TODO: implement update
     super.update(dt);
 
     if (!_countdownFinished) {
@@ -76,12 +98,12 @@ class GamePage extends Component
 
         final randFruit = game.fruits.random();
         add(FruitComponent(this, fruitPosition,
-            acceleration: AppConfig.acceleration,
-            fruit: randFruit,
-            size: AppConfig.shapeSize,
-            image: game.images.fromCache(randFruit.image),
-            pageSize: gameSize,
-            velocity: velocity,
+          acceleration: AppConfig.acceleration,
+          fruit: randFruit,
+          size: AppConfig.shapeSize,
+          image: game.images.fromCache(randFruit.image),
+          pageSize: gameSize,
+          velocity: velocity,
         ));
         fruitsTime.remove(element);
       });
@@ -101,7 +123,26 @@ class GamePage extends Component
     });
   }
 
-  void gameOver() {
+  void gameOver() async {
+    await ScoreManager.saveTopScore(score);
     game.router.pushNamed('game-over');
   }
+
+  void addScore(){
+    score++;
+    _scoreTextComponent?.text = 'Score: $score';
+
+    if (score > topScore) {
+      topScore = score;
+      _topScoreTextComponent?.text = 'Top Score: $topScore';
+    }
+  }
+
+  // void addMistake(){
+  //   mistakeCount++;
+  //   _mistakeTextComponent?.text = 'Mistake: $mistakeCount';
+  //   if(mistakeCount >= 3){
+  //     gameOver();
+  //   }
+  // }
 }
