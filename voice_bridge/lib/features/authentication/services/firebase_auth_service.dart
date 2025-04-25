@@ -18,14 +18,14 @@ class FirebaseAuthService extends GetxController {
   Future<User?> signInWithGoogle() async {
     try {
       final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
-
       if (googleUser == null) {
-        Get.snackbar(Message.googleSignInFailed, Message.cancelled, backgroundColor: AppColor.buttonColor);
+        Get.snackbar(Message.googleSignInFailed, Message.cancelled,
+            backgroundColor: AppColor.buttonColor);
         return null;
       }
 
       final GoogleSignInAuthentication googleAuth =
-          await googleUser.authentication;
+      await googleUser.authentication;
 
       final credential = GoogleAuthProvider.credential(
         accessToken: googleAuth.accessToken,
@@ -33,9 +33,8 @@ class FirebaseAuthService extends GetxController {
       );
 
       final userCredential =
-          await _firebaseAuth.signInWithCredential(credential);
-      final user = userCredential.user;
-      return user;
+      await _firebaseAuth.signInWithCredential(credential);
+      return userCredential.user;
     } catch (e) {
       Get.snackbar(Message.signupError, "Error: $e",
           backgroundColor: AppColor.buttonColor);

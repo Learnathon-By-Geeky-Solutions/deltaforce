@@ -8,11 +8,9 @@ import 'package:voice_bridge/resources/routes/routesName.dart';
 class AuthViewModel extends GetxController {
   final FirebaseAuthService _firebaseAuthService = FirebaseAuthService();
   final Rx<User?> _user = Rx<User?>(null);
-  final RxBool _isLoading = false.obs;
   final RxString _error = ''.obs;
 
   User? get user => _user.value;
-  bool get isLoading => _isLoading.value;
   String get error => _error.value;
 
   @override
@@ -21,11 +19,22 @@ class AuthViewModel extends GetxController {
     _firebaseAuthService.authStateChanges.listen(_handleAuthChange);
   }
 
-  void _handleAuthChange(User? firebaseUser) {
+  void _handleAuthChange(User? firebaseUser) async {
     _user.value = firebaseUser;
+
     if (firebaseUser != null) {
-      if (Get.currentRoute != RoutesName.baseView) {
-        Get.offAllNamed(RoutesName.baseView);
+      await firebaseUser.reload();
+      final currentUser = _firebaseAuthService.getCurrentUser();
+
+      if (currentUser != null && currentUser.emailVerified) {
+        if (Get.currentRoute != RoutesName.baseView) {
+          Get.offAllNamed(RoutesName.baseView);
+        }
+      } else {
+        await _firebaseAuthService.signOut();
+        if (Get.currentRoute != RoutesName.loginScreen) {
+          Get.offAllNamed(RoutesName.loginScreen);
+        }
       }
     } else {
       if (Get.currentRoute != RoutesName.loginScreen) {
@@ -40,15 +49,19 @@ class AuthViewModel extends GetxController {
 
   Future<void> signUp(String email, String password) async {
     try {
-      _isLoading.value = true;
       final userCredential = await _firebaseAuthService.signUpWithEmailAndPassword(email, password);
       _user.value = userCredential.user;
-      Get.snackbar(
-        AppStrings.successful,
-        AppStrings.signupSuccess,
-        backgroundColor: Colors.green,
-        colorText: Colors.white,
-      );
+
+      if (_user.value != null && !_user.value!.emailVerified) {
+        await _user.value!.sendEmailVerification();
+        Get.snackbar(
+          AppStrings.emailVerification,
+          AppStrings.emailVerification,
+          backgroundColor: Colors.orange,
+          colorText: Colors.white,
+        );
+        await _waitForEmailVerification();
+      }
     } catch (e) {
       _error.value = e.toString();
       Get.snackbar(
@@ -57,14 +70,47 @@ class AuthViewModel extends GetxController {
         backgroundColor: Colors.red,
         colorText: Colors.white,
       );
-    } finally {
-      _isLoading.value = false;
+    }
+  }
+
+  Future<void> _waitForEmailVerification() async {
+    const int maxAttempts = 10;
+    const Duration checkInterval = Duration(seconds: 3);
+    int attempts = 0;
+
+    while (attempts < maxAttempts) {
+      await Future.delayed(checkInterval);
+      await _firebaseAuthService.reloadUser();
+      _user.value = _firebaseAuthService.getCurrentUser();
+
+      if (_user.value?.emailVerified ?? false) break;
+
+      attempts++;
+    }
+
+    if (_user.value?.emailVerified ?? false) {
+      Get.snackbar(
+        AppStrings.successful,
+        'Email verified successfully. Please log in.',
+        backgroundColor: Colors.green,
+        colorText: Colors.white,
+      );
+      await _firebaseAuthService.signOut();
+      Get.offAllNamed(RoutesName.loginScreen);
+    } else {
+      Get.snackbar(
+        AppStrings.emailVerification,
+        'Email not verified. Please check again later.',
+        backgroundColor: Colors.orange,
+        colorText: Colors.white,
+      );
+      await _firebaseAuthService.signOut();
+      Get.offAllNamed(RoutesName.loginScreen);
     }
   }
 
   Future<void> signIn(String email, String password) async {
     try {
-      _isLoading.value = true;
       final userCredential = await _firebaseAuthService.signInWithEmailAndPassword(email, password);
       await _firebaseAuthService.reloadUser();
 
@@ -94,16 +140,15 @@ class AuthViewModel extends GetxController {
         backgroundColor: Colors.red,
         colorText: Colors.white,
       );
-    } finally {
-      _isLoading.value = false;
     }
   }
 
   Future<void> signInWithGoogle() async {
     try {
-      _isLoading.value = true;
       final user = await _firebaseAuthService.signInWithGoogle();
-      if (user == null) throw Exception('Google Sign-In returned null user');
+      if (user == null || !(user.emailVerified)) {
+        throw Exception('Email is not verified');
+      }
       _user.value = user;
       Get.snackbar(
         AppStrings.successful,
@@ -119,8 +164,6 @@ class AuthViewModel extends GetxController {
         backgroundColor: Colors.red,
         colorText: Colors.white,
       );
-    } finally {
-      _isLoading.value = false;
     }
   }
 }

@@ -13,6 +13,8 @@ class SignupScreen extends StatelessWidget {
   final TextEditingController _confirmPasswordController =
       TextEditingController();
   final TextEditingController _nameController = TextEditingController();
+  final RxBool _obscurePassword = true.obs;
+  final RxBool _obscureConfirmPassword = true.obs;
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +23,7 @@ class SignupScreen extends StatelessWidget {
         title: Text(AppStrings.signUp,
             style: TextStyle(
                 fontWeight: FontWeight.bold, color: AppColor.whiteColor)),
-        backgroundColor: Colors.green,
+        backgroundColor: AppColor.appBarColor,
         centerTitle: true,
       ),
       body: SingleChildScrollView(
@@ -94,31 +96,49 @@ class SignupScreen extends StatelessWidget {
   }
 
   Widget _buildPasswordField() {
-    return TextField(
+    return Obx(() => TextField(
       controller: _passwordController,
+      obscureText: _obscurePassword.value,
       decoration: InputDecoration(
         labelText: AppStrings.password,
         prefixIcon: Icon(Icons.lock),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
         ),
+        suffixIcon: IconButton(
+          icon: Icon(
+            _obscurePassword.value ? Icons.visibility : Icons.visibility_off,
+            color: Colors.grey,
+          ),
+          onPressed: () {
+            _obscurePassword.toggle();
+          },
+        ),
       ),
-      obscureText: true,
-    );
+    ));
   }
 
   Widget _buildConfirmPasswordField() {
-    return TextField(
+    return Obx(() => TextField(
       controller: _confirmPasswordController,
+      obscureText: _obscureConfirmPassword.value,
       decoration: InputDecoration(
-        labelText: AppStrings.confirmPassword,
+        labelText: AppStrings.password,
         prefixIcon: Icon(Icons.lock),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
         ),
+        suffixIcon: IconButton(
+          icon: Icon(
+            _obscureConfirmPassword.value ? Icons.visibility : Icons.visibility_off,
+            color: Colors.grey,
+          ),
+          onPressed: () {
+            _obscureConfirmPassword.toggle();
+          },
+        ),
       ),
-      obscureText: true,
-    );
+    ));
   }
 
   Widget _buildGoogleSignInButton() {

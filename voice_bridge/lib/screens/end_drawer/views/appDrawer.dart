@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:voice_bridge/features/Settings/UI/settings_page_ui.dart';
 import 'package:voice_bridge/features/authentication/services/firebase_auth_service.dart';
 import 'package:voice_bridge/resources/colors/app_color.dart';
 
@@ -52,13 +53,22 @@ class AppDrawer extends StatelessWidget {
             leading: const Icon(Icons.settings),
             title: const Text('Settings'),
             onTap: () {
-              Navigator.pop(context);
+              Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => SettingsScreen()));
               // Navigate to settings screen
             },
           ),
           ListTile(
             leading: const Icon(Icons.notifications),
             title: const Text('Notifications'),
+            onTap: () {
+              Navigator.pop(context);
+              // Navigate to notifications screen
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.payment),
+            title: const Text('Make Payment'),
             onTap: () {
               Navigator.pop(context);
               // Navigate to notifications screen
