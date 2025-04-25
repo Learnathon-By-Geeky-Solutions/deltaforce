@@ -1,8 +1,8 @@
 on:
   push:
-    branches: [ "fix_sonar_cloud" ]
+    branches: [ "origin/fix_sonar_cloud" ]
   pull_request:
-    branches: [ "fix_sonar_cloud" ]
+    branches: [ "origin/fix_sonar_cloud" ]
 name: "Build & Release"
 jobs:
   build:
