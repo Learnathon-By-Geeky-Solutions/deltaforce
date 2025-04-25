@@ -44,6 +44,7 @@ dependencies:
   font_awesome_flutter: ^10.8.0
   flame: ^1.25.0
   percent_indicator: ^4.2.5
+  flutter_stripe: ^11.5.0
 
 
   shared_preferences: ^2.5.2
