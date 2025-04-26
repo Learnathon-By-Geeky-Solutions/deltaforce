@@ -5,7 +5,7 @@ on:
     branches:
       - main
       - dev
-      - sonar-cloud
+      - fix/sonar-cloud
   pull_request:
     branches: [ "main" ]
 
