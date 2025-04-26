@@ -46,58 +46,117 @@ class FruitComponent extends SpriteComponent{
   @override
   void update(double dt) {
     super.update(dt);
-
+    if(_initPosition.distanceTo(position)>60){
+      _canDragOnShape = true;
+    }
     angle += .5 * dt;
     angle %= 2 * pi;
 
-    position += Vector2(0, -(velocity.y * dt - 0.5*AppConfig.gravity * dt*dt));
+    position += Vector2(velocity.x, -(velocity.y * dt - 0.5*AppConfig.gravity * dt*dt));
 
     velocity.y += (AppConfig.acceleration + AppConfig.gravity)*dt;
     if((position.y - AppConfig.objSize)>pageSize.y){
       removeFromParent();
+      // if(!divided && !fruit.isBomb){
+      //   parentComponent.addMistake();
+      // }
     }
+
   }
   void touchAtPoint(Vector2 vector2) {
+
+    if(divided && !_canDragOnShape){
+      return ;
+    }
+    if(fruit.isBomb){
+      parentComponent.gameOver();
+      return;
+    }
+    //Angle of Touch Point
     final a = Utils.getAngleOfTouchPont(
         center: position, initAngle: angle, touch: vector2);
     if (a < 45 || (a > 135 && a < 225) || a > 315) {
-      findGame()?.addAll([
-        RectangleComponent(
+      final dividedImage1 = composition.ImageComposition()
+      ..add(image, Vector2(0,0),
+          source: Rect.fromLTWH(0, 0, image.width.toDouble(), image.height/2)
+      ),
+          dividedImage2 = composition.ImageComposition()
+            ..add(image, Vector2(0,0),
+                source: Rect.fromLTWH(0, image.height/2, image.width.toDouble(), image.height/2)
+            );
+
+      parentComponent.addAll([
+        FruitComponent(
+          parentComponent,
+        center - Vector2(size.x / 2 * cos(angle), size.x / 2 * sin(angle)),
+          fruit: fruit,
+          image: dividedImage2.composeSync(),
+          acceleration: acceleration,
+          velocity: Vector2(velocity.x-2, velocity.y),
+          pageSize: pageSize,
+          divided: true,
           size: Vector2(size.x, size.y / 2),
-          position: center - Vector2(size.x / 2 * cos(angle), size.x / 2 * sin(angle)),
           angle: angle,
           anchor: Anchor.topLeft,
-          paint: Paint()..color = Colors.red,
+
         ),
-        RectangleComponent(
+        FruitComponent(
+          parentComponent,
+          center +
+                Vector2(size.x/4 * cos(angle + 3 * pi / 2), size.x / 4 * sin(angle + 3* pi /2)),
           size: Vector2(size.x, size.y / 2),
-          position: center + Vector2(size.x / 4 * cos(angle+3*pi/2) , size.x / 4 * sin(angle+3*pi/2)),
           angle: angle,
           anchor: Anchor.center,
-          paint: Paint()..color = Colors.blue,
-        ),
-      ]);
-    } else {
-      findGame()?.addAll([
-        RectangleComponent(
-          size: Vector2(size.x/2, size.y),
-          position: center -
-              Vector2(size.x / 4 * cos(angle), size.x / 4 * sin(angle)),
-          angle: angle,
-          anchor: Anchor.center,
-          paint: Paint()..color = Colors.red,
-        ),
-        RectangleComponent(
-          size: Vector2(size.x / 2, size.y ),
-          position: center +
-              Vector2(size.x / 2 * cos(angle + 3 * pi / 2),
-                  size.x / 2 * sin(angle + 3 * pi / 2)),
-          angle: angle,
-          anchor: Anchor.topLeft,
-          paint: Paint()..color = Colors.blue,
+          fruit: fruit,
+          image: dividedImage1.composeSync(),
+          acceleration: acceleration,
+          velocity: Vector2(velocity.x+2, velocity.y),
+          pageSize: pageSize,
+          divided: true,
         ),
       ]);
     }
+    else {
+      final dividedImage1 = composition.ImageComposition()
+      ..add(image, Vector2(0, 0), source: Rect.fromLTWH(0, 0, image.width/2, image.height.toDouble())),
+
+          dividedImage2 = composition.ImageComposition()
+            ..add(image, Vector2(0, 0), source: Rect.fromLTWH(image.width/2, 0, image.width/2, image.height.toDouble()));
+
+      parentComponent.addAll([
+        FruitComponent(
+          parentComponent,
+          center -
+              Vector2(size.x / 4 * cos(angle), size.x / 4 * sin(angle)),
+          size: Vector2(size.x/2, size.y),
+          angle: angle,
+          anchor: Anchor.center,
+          fruit: fruit,
+          image: dividedImage1.composeSync(),
+          acceleration: acceleration,
+          velocity: Vector2(velocity.x-2, velocity.y),
+          pageSize: pageSize,
+          divided: true,
+        ),
+        FruitComponent(
+          parentComponent,
+          center +
+              Vector2(size.x / 2 * cos(angle + 3 * pi / 2),
+                  size.x / 2 * sin(angle + 3 * pi / 2)),
+          size: Vector2(size.x / 2, size.y ),
+
+          angle: angle,
+          anchor: Anchor.topLeft,
+          fruit: fruit,
+          image: dividedImage2.composeSync(),
+          acceleration: acceleration,
+          velocity: Vector2(velocity.x+2, velocity.y),
+          pageSize: pageSize,
+          divided: true,
+        ),
+      ]);
+    }
+    parentComponent.addScore();
     removeFromParent();
   }
 

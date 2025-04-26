@@ -1,0 +1,2 @@
+/home/rusho/deltaforce/voice_bridge/android/app/.cxx/Debug/3e1m3v24/armeabi-v7a/CMakeFiles/edit_cache.dir
+/home/rusho/deltaforce/voice_bridge/android/app/.cxx/Debug/3e1m3v24/armeabi-v7a/CMakeFiles/rebuild_cache.dir

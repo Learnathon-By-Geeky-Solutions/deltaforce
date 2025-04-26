@@ -1,69 +1,66 @@
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:google_sign_in/google_sign_in.dart';
+import 'dart:ui';
 
-class FirebaseAuthService {
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:get/get.dart';
+import 'package:voice_bridge/resources/colors/app_color.dart';
+import 'package:voice_bridge/utils/message.dart';
+
+class FirebaseAuthService extends GetxController {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   final GoogleSignIn _googleSignIn = GoogleSignIn();
+  final FacebookAuth _facebookAuth = FacebookAuth.instance;
 
   Stream<User?> get authStateChanges => _firebaseAuth.authStateChanges();
-
-  User? geCurrentUser() {
-    return _firebaseAuth.currentUser;
-  }
-
-  Future<UserCredential> signUpWithEmailAndPassword(
-      String email, String password) async {
-    UserCredential userCredential = await _firebaseAuth
-        .createUserWithEmailAndPassword(email: email, password: password);
-    await userCredential.user?.sendEmailVerification();
-    return userCredential;
-  }
-
-  Future<UserCredential> signInWithEmailAndPassword(
-      String email, String password) async {
-    return _firebaseAuth.signInWithEmailAndPassword(
-        email: email, password: password);
-  }
+  User? getCurrentUser() => _firebaseAuth.currentUser;
 
   Future<User?> signInWithGoogle() async {
     try {
-      // Ensure user is signed out before sign-in
-      await _googleSignIn.signOut();
-
-      // Start Google Sign-In process
       final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
-
       if (googleUser == null) {
-        return null; // User canceled the login
+        Get.snackbar(Message.googleSignInFailed, Message.cancelled,
+            backgroundColor: AppColor.buttonColor);
+        return null;
       }
 
-      // Retrieve authentication details
       final GoogleSignInAuthentication googleAuth =
-          await googleUser.authentication;
+      await googleUser.authentication;
 
-      // Create Firebase credential
-      final AuthCredential credential = GoogleAuthProvider.credential(
+      final credential = GoogleAuthProvider.credential(
         accessToken: googleAuth.accessToken,
         idToken: googleAuth.idToken,
       );
 
-      // Sign in to Firebase
-      UserCredential userCredential =
-          await _firebaseAuth.signInWithCredential(credential);
-
+      final userCredential =
+      await _firebaseAuth.signInWithCredential(credential);
       return userCredential.user;
     } catch (e) {
-      print("❌ Google Sign-In Error: $e");
+      Get.snackbar(Message.signupError, "Error: $e",
+          backgroundColor: AppColor.buttonColor);
       return null;
     }
   }
 
-  Future<void> signOut() async {
-    await _firebaseAuth.signOut();
-    await _googleSignIn.signOut();
+  Future<UserCredential> signUpWithEmailAndPassword(
+      String email, String password) async {
+    return await _firebaseAuth.createUserWithEmailAndPassword(
+        email: email, password: password);
+  }
+
+  Future<UserCredential> signInWithEmailAndPassword(
+      String email, String password) async {
+    return await _firebaseAuth.signInWithEmailAndPassword(
+        email: email, password: password);
   }
 
   Future<void> reloadUser() async {
     await _firebaseAuth.currentUser?.reload();
+  }
+
+  Future<void> signOut() async {
+    await _googleSignIn.signOut();
+    await _firebaseAuth.signOut();
+    await _facebookAuth.logOut();
   }
 }

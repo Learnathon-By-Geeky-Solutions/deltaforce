@@ -1,0 +1,2 @@
+/home/rusho/deltaforce/voice_bridge/android/app/.cxx/RelWithDebInfo/f4a176b3/arm64-v8a/CMakeFiles/edit_cache.dir
+/home/rusho/deltaforce/voice_bridge/android/app/.cxx/RelWithDebInfo/f4a176b3/arm64-v8a/CMakeFiles/rebuild_cache.dir

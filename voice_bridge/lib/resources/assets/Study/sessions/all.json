@@ -1,0 +1,251 @@
+{
+  "sessionName": "Session All",
+  "lessons": [
+    {
+      "lessonName": "A",
+      "imageAsset": "lib/resources/assets/Study/images/a.jpg",
+      "animationAsset": "lib/resources/assets/Study/animations/a.lottie",
+      "audioAsset": "lib/resources/assets/Study/audio/a.mp3"
+    },
+    {
+      "lessonName": "B",
+      "imageAsset": "lib/resources/assets/Study/images/b.jpg",
+      "animationAsset": "lib/resources/assets/Study/animations/b.lottie",
+      "audioAsset": "lib/resources/assets/Study/audio/b.mp3"
+    },
+    {
+      "lessonName": "C",
+      "imageAsset": "lib/resources/assets/Study/images/c.jpg",
+      "animationAsset": "lib/resources/assets/Study/animations/c.lottie",
+      "audioAsset": "lib/resources/assets/Study/audio/c.mp3"
+    },
+    {
+      "lessonName": "D",
+      "imageAsset": "lib/resources/assets/Study/images/d.jpg",
+      "animationAsset": "lib/resources/assets/Study/animations/d.lottie",
+      "audioAsset": "lib/resources/assets/Study/audio/d.mp3"
+    },
+    {
+      "lessonName": "E",
+      "imageAsset": "lib/resources/assets/Study/images/e.jpg",
+      "animationAsset": "lib/resources/assets/Study/animations/e.lottie",
+      "audioAsset": "lib/resources/assets/Study/audio/e.mp3"
+    },
+    {
+      "lessonName": "F",
+      "imageAsset": "lib/resources/assets/Study/images/f.jpg",
+      "animationAsset": "lib/resources/assets/Study/animations/f.lottie",
+      "audioAsset": "lib/resources/assets/Study/audio/f.mp3"
+    },
+    {
+      "lessonName": "G",
+      "imageAsset": "lib/resources/assets/Study/images/g.jpg",
+      "animationAsset": "lib/resources/assets/Study/animations/g.lottie",
+      "audioAsset": "lib/resources/assets/Study/audio/g.mp3"
+    },
+    {
+      "lessonName": "H",
+      "imageAsset": "lib/resources/assets/Study/images/h.jpg",
+      "animationAsset": "lib/resources/assets/Study/animations/h.lottie",
+      "audioAsset": "lib/resources/assets/Study/audio/h.mp3"
+    },
+    {
+      "lessonName": "I",
+      "imageAsset": "lib/resources/assets/Study/images/i.jpg",
+      "animationAsset": "lib/resources/assets/Study/animations/i.lottie",
+      "audioAsset": "lib/resources/assets/Study/audio/i.mp3"
+    },
+    {
+      "lessonName": "J",
+      "imageAsset": "lib/resources/assets/Study/images/j.jpg",
+      "animationAsset": "lib/resources/assets/Study/animations/j.lottie",
+      "audioAsset": "lib/resources/assets/Study/audio/j.mp3"
+    },
+    {
+      "lessonName": "K",
+      "imageAsset": "lib/resources/assets/Study/images/k.jpg",
+      "animationAsset": "lib/resources/assets/Study/animations/k.lottie",
+      "audioAsset": "lib/resources/assets/Study/audio/k.mp3"
+    },
+    {
+      "lessonName": "L",
+      "imageAsset": "lib/resources/assets/Study/images/l.jpg",
+      "animationAsset": "lib/resources/assets/Study/animations/l.lottie",
+      "audioAsset": "lib/resources/assets/Study/audio/l.mp3"
+    },
+    {
+      "lessonName": "M",
+      "imageAsset": "lib/resources/assets/Study/images/m.jpg",
+      "animationAsset": "lib/resources/assets/Study/animations/m.lottie",
+      "audioAsset": "lib/resources/assets/Study/audio/m.mp3"
+    },
+    {
+      "lessonName": "N",
+      "imageAsset": "lib/resources/assets/Study/images/n.jpg",
+      "animationAsset": "lib/resources/assets/Study/animations/n.lottie",
+      "audioAsset": "lib/resources/assets/Study/audio/n.mp3"
+    },
+    {
+      "lessonName": "O",
+      "imageAsset": "lib/resources/assets/Study/images/o.jpg",
+      "animationAsset": "lib/resources/assets/Study/animations/o.lottie",
+      "audioAsset": "lib/resources/assets/Study/audio/o.mp3"
+    },
+    {
+      "lessonName": "P",
+      "imageAsset": "lib/resources/assets/Study/images/p.jpg",
+      "animationAsset": "lib/resources/assets/Study/animations/p.lottie",
+      "audioAsset": "lib/resources/assets/Study/audio/p.mp3"
+    },
+    {
+      "lessonName": "Q",
+      "imageAsset": "lib/resources/assets/Study/images/q.jpg",
+      "animationAsset": "lib/resources/assets/Study/animations/q.lottie",
+      "audioAsset": "lib/resources/assets/Study/audio/q.mp3"
+    },
+    {
+      "lessonName": "R",
+      "imageAsset": "lib/resources/assets/Study/images/r.jpg",
+      "animationAsset": "lib/resources/assets/Study/animations/r.lottie",
+      "audioAsset": "lib/resources/assets/Study/audio/r.mp3"
+    },
+    {
+      "lessonName": "S",
+      "imageAsset": "lib/resources/assets/Study/images/s.jpg",
+      "animationAsset": "lib/resources/assets/Study/animations/s.lottie",
+      "audioAsset": "lib/resources/assets/Study/audio/s.mp3"
+    },
+    {
+      "lessonName": "T",
+      "imageAsset": "lib/resources/assets/Study/images/t.jpg",
+      "animationAsset": "lib/resources/assets/Study/animations/t.lottie",
+      "audioAsset": "lib/resources/assets/Study/audio/t.mp3"
+    },
+    {
+      "lessonName": "U",
+      "imageAsset": "lib/resources/assets/Study/images/u.jpg",
+      "animationAsset": "lib/resources/assets/Study/animations/u.lottie",
+      "audioAsset": "lib/resources/assets/Study/audio/u.mp3"
+    },
+    {
+      "lessonName": "V",
+      "imageAsset": "lib/resources/assets/Study/images/v.jpg",
+      "animationAsset": "lib/resources/assets/Study/animations/v.lottie",
+      "audioAsset": "lib/resources/assets/Study/audio/v.mp3"
+    },
+    {
+      "lessonName": "W",
+      "imageAsset": "lib/resources/assets/Study/images/w.jpg",
+      "animationAsset": "lib/resources/assets/Study/animations/w.lottie",
+      "audioAsset": "lib/resources/assets/Study/audio/w.mp3"
+    },
+    {
+      "lessonName": "X",
+      "imageAsset": "lib/resources/assets/Study/images/x.jpg",
+      "animationAsset": "lib/resources/assets/Study/animations/x.lottie",
+      "audioAsset": "lib/resources/assets/Study/audio/x.mp3"
+    },
+    {
+      "lessonName": "Y",
+      "imageAsset": "lib/resources/assets/Study/images/y.jpg",
+      "animationAsset": "lib/resources/assets/Study/animations/y.lottie",
+      "audioAsset": "lib/resources/assets/Study/audio/y.mp3"
+    },
+    {
+      "lessonName": "Z",
+      "imageAsset": "lib/resources/assets/Study/images/z.jpg",
+      "animationAsset": "lib/resources/assets/Study/animations/z.lottie",
+      "audioAsset": "lib/resources/assets/Study/audio/z.mp3"
+    },
+    {
+      "lessonName": "Pigeon",
+      "imageAsset": "lib/resources/assets/Study/images/pigeon.jpg",
+      "animationAsset": "lib/resources/assets/Study/animations/pigeon.lottie",
+      "audioAsset": "lib/resources/assets/Study/audio/pigeon.mp3"
+    },
+    {
+      "lessonName": "Peacock",
+      "imageAsset": "lib/resources/assets/Study/images/peacock.jpg",
+      "animationAsset": "lib/resources/assets/Study/animations/peacock.lottie",
+      "audioAsset": "lib/resources/assets/Study/audio/peacock.mp3"
+    },
+    {
+      "lessonName": "Penguin",
+      "imageAsset": "lib/resources/assets/Study/images/penguin.jpg",
+      "animationAsset": "lib/resources/assets/Study/animations/penguin.lottie",
+      "audioAsset": "lib/resources/assets/Study/audio/penguin.mp3"
+    },
+    {
+      "lessonName": "Humming-bird",
+      "imageAsset": "lib/resources/assets/Study/images/hummingbird.jpg",
+      "animationAsset": "lib/resources/assets/Study/animations/hummingbird.lottie",
+      "audioAsset": "lib/resources/assets/Study/audio/hummingbird.mp3"
+    },
+    {
+      "lessonName": "Parrot",
+      "imageAsset": "lib/resources/assets/Study/images/parrot.jpg",
+      "animationAsset": "lib/resources/assets/Study/animations/parrot.lottie",
+      "audioAsset": "lib/resources/assets/Study/audio/parrot.mp3"
+    },
+    {
+      "lessonName": "White Pigeon",
+      "imageAsset": "lib/resources/assets/Study/images/white-pigeon.jpg",
+      "animationAsset": "lib/resources/assets/Study/animations/white-pigeon.lottie",
+      "audioAsset": "lib/resources/assets/Study/audio/white-pigeon.mp3"
+    },
+    {
+      "lessonName": "Teacher",
+      "imageAsset": "lib/resources/assets/Study/images/teacher.jpg",
+      "animationAsset": "lib/resources/assets/Study/animations/teacher.lottie",
+      "audioAsset": "lib/resources/assets/Study/audio/teacher.mp3"
+    },
+    {
+      "lessonName": "Dentist",
+      "imageAsset": "lib/resources/assets/Study/images/dentist.jpg",
+      "animationAsset": "lib/resources/assets/Study/animations/dentist.lottie",
+      "audioAsset": "lib/resources/assets/Study/audio/dentist.mp3"
+    },
+    {
+      "lessonName": "Chef",
+      "imageAsset": "lib/resources/assets/Study/images/chef.jpg",
+      "animationAsset": "lib/resources/assets/Study/animations/chef.lottie",
+      "audioAsset": "lib/resources/assets/Study/audio/chef.mp3"
+    },
+    {
+      "lessonName": "Lawyer",
+      "imageAsset": "lib/resources/assets/Study/images/lawyer.jpg",
+      "animationAsset": "lib/resources/assets/Study/animations/lawyer.lottie",
+      "audioAsset": "lib/resources/assets/Study/audio/lawyer.mp3"
+    },
+    {
+      "lessonName": "Engineer",
+      "imageAsset": "lib/resources/assets/Study/images/engineer.jpg",
+      "animationAsset": "lib/resources/assets/Study/animations/engineer.lottie",
+      "audioAsset": "lib/resources/assets/Study/audio/engineer.mp3"
+    },
+    {
+      "lessonName": "Doctor",
+      "imageAsset": "lib/resources/assets/Study/images/doctor.jpg",
+      "animationAsset": "lib/resources/assets/Study/animations/doctor.lottie",
+      "audioAsset": "lib/resources/assets/Study/audio/doctor.mp3"
+    },
+    {
+      "lessonName": "Plumber",
+      "imageAsset": "lib/resources/assets/Study/images/plumber.jpg",
+      "animationAsset": "lib/resources/assets/Study/animations/plumber.lottie",
+      "audioAsset": "lib/resources/assets/Study/audio/plumber.mp3"
+    },
+    {
+      "lessonName": "Electrician",
+      "imageAsset": "lib/resources/assets/Study/images/electrician.jpg",
+      "animationAsset": "lib/resources/assets/Study/animations/electrician.lottie",
+      "audioAsset": "lib/resources/assets/Study/audio/electrician.mp3"
+    },
+    {
+      "lessonName": "Architect",
+      "imageAsset": "lib/resources/assets/Study/images/architect.jpg",
+      "animationAsset": "lib/resources/assets/Study/animations/architect.lottie",
+      "audioAsset": "lib/resources/assets/Study/audio/architect.mp3"
+    }
+  ]
+}

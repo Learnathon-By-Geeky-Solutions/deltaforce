@@ -1,101 +1,175 @@
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:voice_bridge/features/authentication/const/app_strings.dart';
-import 'package:voice_bridge/features/authentication/services/firebase_auth_service.dart';
 import 'package:voice_bridge/features/authentication/view_models/auth_view_model.dart';
+import 'package:voice_bridge/resources/colors/app_color.dart';
 import 'package:voice_bridge/widgets/custom_button.dart';
 
 class SignupScreen extends StatelessWidget {
-  final AuthViewModel _authController = Get.put(AuthViewModel());
-  final FirebaseAuthService _authService = Get.put(FirebaseAuthService());
-
-  final TextEditingController emailController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
-  final TextEditingController confirmPasswordController = TextEditingController();
-  final TextEditingController nameController = TextEditingController();
+  final AuthViewModel _authController = Get.find();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _confirmPasswordController =
+      TextEditingController();
+  final TextEditingController _nameController = TextEditingController();
+  final RxBool _obscurePassword = true.obs;
+  final RxBool _obscureConfirmPassword = true.obs;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(AppStrings.signUp)),
-      body: Padding(
+      appBar: AppBar(
+        title: Text(AppStrings.signUp,
+            style: TextStyle(
+                fontWeight: FontWeight.bold, color: AppColor.whiteColor)),
+        backgroundColor: AppColor.appBarColor,
+        centerTitle: true,
+      ),
+      body: SingleChildScrollView(
         padding: EdgeInsets.all(20),
         child: Column(
           children: [
-            Text(AppStrings.createAccount, style: TextStyle(fontSize: 30)),
             SizedBox(height: 20),
-            TextButton(
-              onPressed: () {
-                _authController.signInWithGoogle();
-              },
-              style: TextButton.styleFrom(
-                minimumSize: Size(1000.0, 50.0),
-                backgroundColor: Colors.blue,
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  FaIcon(FontAwesomeIcons.google, color: Colors.white),
-                  SizedBox(width: 10),
-                  Text(AppStrings.signUpWithGoogle, style: TextStyle(color: Colors.white)),
-                ],
-              ),
+            Text(
+              AppStrings.createAccount,
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
+            SizedBox(height: 30),
+            _buildNameField(),
             SizedBox(height: 20),
-            TextField(
-              controller: nameController,
-              decoration: InputDecoration(
-                labelText: AppStrings.userName,
-                border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
-              ),
-            ),
+            _buildEmailField(),
             SizedBox(height: 20),
-            TextField(
-              controller: emailController,
-              decoration: InputDecoration(
-                labelText: AppStrings.email,
-                border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
-              ),
-            ),
-            SizedBox(height: 10),
-            TextField(
-              controller: passwordController,
-              decoration: InputDecoration(
-                labelText: AppStrings.password,
-                border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
-              ),
-              obscureText: true,
-            ),
-            SizedBox(height: 10),
-            TextField(
-              controller: confirmPasswordController,
-              decoration: InputDecoration(
-                labelText: AppStrings.confirmPassword,
-                border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
-              ),
-              obscureText: true,
-            ),
+            _buildPasswordField(),
             SizedBox(height: 20),
+            _buildConfirmPasswordField(),
+            SizedBox(height: 30),
             CustomButton(
               text: AppStrings.signUp,
-              onPressed: () {
-                if (passwordController.text == confirmPasswordController.text) {
-                  _authController.signUp(emailController.text, passwordController.text);
-                } else {
-                  Get.snackbar(AppStrings.error, AppStrings.passwordMismatch);
-                }
-              },
+              onPressed: _handleSignUp,
             ),
+            SizedBox(height: 20),
+            Text(
+              "Or continue with",
+              style: TextStyle(color: Colors.grey),
+            ),
+            SizedBox(height: 20),
+            _buildGoogleSignInButton(),
+            SizedBox(height: 15),
             TextButton(
               onPressed: () => Get.back(),
-              child: Text(AppStrings.alreadyHaveAccount),
+              child: Text(
+                AppStrings.alreadyHaveAccount,
+                style: TextStyle(color: Colors.blue),
+              ),
             ),
           ],
         ),
       ),
+    );
+  }
+
+  Widget _buildNameField() {
+    return TextField(
+      controller: _nameController,
+      decoration: InputDecoration(
+        labelText: AppStrings.userName,
+        prefixIcon: Icon(Icons.person),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildEmailField() {
+    return TextField(
+      controller: _emailController,
+      decoration: InputDecoration(
+        labelText: AppStrings.email,
+        prefixIcon: Icon(Icons.email),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildPasswordField() {
+    return Obx(() => TextField(
+      controller: _passwordController,
+      obscureText: _obscurePassword.value,
+      decoration: InputDecoration(
+        labelText: AppStrings.password,
+        prefixIcon: Icon(Icons.lock),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+        ),
+        suffixIcon: IconButton(
+          icon: Icon(
+            _obscurePassword.value ? Icons.visibility : Icons.visibility_off,
+            color: Colors.grey,
+          ),
+          onPressed: () {
+            _obscurePassword.toggle();
+          },
+        ),
+      ),
+    ));
+  }
+
+  Widget _buildConfirmPasswordField() {
+    return Obx(() => TextField(
+      controller: _confirmPasswordController,
+      obscureText: _obscureConfirmPassword.value,
+      decoration: InputDecoration(
+        labelText: AppStrings.password,
+        prefixIcon: Icon(Icons.lock),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+        ),
+        suffixIcon: IconButton(
+          icon: Icon(
+            _obscureConfirmPassword.value ? Icons.visibility : Icons.visibility_off,
+            color: Colors.grey,
+          ),
+          onPressed: () {
+            _obscureConfirmPassword.toggle();
+          },
+        ),
+      ),
+    ));
+  }
+
+  Widget _buildGoogleSignInButton() {
+    return OutlinedButton(
+      style: OutlinedButton.styleFrom(
+        minimumSize: Size(double.infinity, 50),
+        side: BorderSide(color: Colors.grey),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10),
+        ),
+      ),
+      onPressed: () => _authController.signInWithGoogle(),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          FaIcon(FontAwesomeIcons.google, color: Colors.red),
+          SizedBox(width: 10),
+          Text(AppStrings.signUpWithGoogle),
+        ],
+      ),
+    );
+  }
+
+  void _handleSignUp() {
+    if (_passwordController.text != _confirmPasswordController.text) {
+      Get.snackbar(AppStrings.error, AppStrings.passwordMismatch);
+      return;
+    }
+    _authController.signUp(
+      _emailController.text.trim(),
+      _passwordController.text.trim(),
     );
   }
 }
