@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:voice_bridge/features/authentication/const/app_strings.dart';
 import 'package:voice_bridge/features/authentication/view_models/auth_view_model.dart';
+import 'package:voice_bridge/features/authentication/views/auth/forgot_password_screen.dart';
 import 'package:voice_bridge/features/authentication/views/auth/signup_screen.dart';
 import 'package:voice_bridge/resources/colors/app_color.dart';
 import 'package:voice_bridge/widgets/custom_button.dart';
@@ -34,6 +35,13 @@ class LoginScreen extends StatelessWidget {
             _buildEmailField(),
             SizedBox(height: 20),
             _buildPasswordField(),
+            Align(
+              alignment: Alignment.centerRight,
+              child: TextButton(
+                onPressed: () => Get.to(ForgotPasswordScreen()) ,
+                child: const Text('Forgot Password?'),
+              ),
+            ),
             SizedBox(height: 30),
             CustomButton(
               text: AppStrings.login,
@@ -105,7 +113,6 @@ class LoginScreen extends StatelessWidget {
   }
 
   void _handleLogin() async {
-    // _showLoadingDialog();
     await _authController.signIn(
       _emailController.text.trim(),
       _passwordController.text.trim(),
@@ -114,35 +121,9 @@ class LoginScreen extends StatelessWidget {
   }
 
   void _handleGoogleLogin() async {
-    // _showLoadingDialog();
     await _authController.signInWithGoogle();
     _hideLoadingDialog();
   }
-
-  // void _showLoadingDialog() {
-  //   showDialog(
-  //     context: Get.context!,
-  //     barrierDismissible: false,
-  //     builder: (_) => Container(
-  //       color: Colors.black.withOpacity(0.2),
-  //       child: Center(
-  //         child: Container(
-  //           padding: EdgeInsets.symmetric(horizontal: 30, vertical: 24),
-  //           decoration: BoxDecoration(
-  //             color: Colors.white,
-  //             borderRadius: BorderRadius.circular(20),
-  //           ),
-  //           child: IntrinsicWidth(
-  //             child: Text(
-  //               "Signing you in...",
-  //               style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
-  //             ),
-  //           ),
-  //         ),
-  //       ),
-  //     ),
-  //   );
-  // }
 
   void _hideLoadingDialog() {
     if (Get.isDialogOpen ?? false) Get.back();

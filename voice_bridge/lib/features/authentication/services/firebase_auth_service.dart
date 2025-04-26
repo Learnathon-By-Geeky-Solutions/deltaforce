@@ -24,16 +24,13 @@ class FirebaseAuthService extends GetxController {
         return null;
       }
 
-      final GoogleSignInAuthentication googleAuth =
-      await googleUser.authentication;
-
+      final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
       final credential = GoogleAuthProvider.credential(
         accessToken: googleAuth.accessToken,
         idToken: googleAuth.idToken,
       );
 
-      final userCredential =
-      await _firebaseAuth.signInWithCredential(credential);
+      final userCredential = await _firebaseAuth.signInWithCredential(credential);
       return userCredential.user;
     } catch (e) {
       Get.snackbar(Message.signupError, "Error: $e",
@@ -42,16 +39,34 @@ class FirebaseAuthService extends GetxController {
     }
   }
 
-  Future<UserCredential> signUpWithEmailAndPassword(
-      String email, String password) async {
+  Future<UserCredential> signUpWithEmailAndPassword(String email, String password) async {
     return await _firebaseAuth.createUserWithEmailAndPassword(
-        email: email, password: password);
+      email: email,
+      password: password,
+    );
   }
 
-  Future<UserCredential> signInWithEmailAndPassword(
-      String email, String password) async {
+  Future<UserCredential> signInWithEmailAndPassword(String email, String password) async {
     return await _firebaseAuth.signInWithEmailAndPassword(
-        email: email, password: password);
+      email: email,
+      password: password,
+    );
+  }
+
+  Future<void> sendPasswordResetEmail(String email) async {
+    await _firebaseAuth.sendPasswordResetEmail(email: email);
+  }
+
+  Future<void> updatePassword(String currentPassword, String newPassword) async {
+    final user = _firebaseAuth.currentUser;
+    if (user != null && user.email != null) {
+      final credential = EmailAuthProvider.credential(
+        email: user.email!,
+        password: currentPassword,
+      );
+      await user.reauthenticateWithCredential(credential);
+      await user.updatePassword(newPassword);
+    }
   }
 
   Future<void> reloadUser() async {

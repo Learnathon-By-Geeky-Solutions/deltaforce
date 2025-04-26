@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:voice_bridge/features/Settings/UI/settings_page_ui.dart';
 import 'package:voice_bridge/features/authentication/services/firebase_auth_service.dart';
+import 'package:voice_bridge/features/Settings/UI/help_feedback.dart';
 import 'package:voice_bridge/resources/colors/app_color.dart';
 
 class AppDrawer extends StatelessWidget {
@@ -19,18 +20,23 @@ class AppDrawer extends StatelessWidget {
           const DrawerHeader(
             decoration: BoxDecoration(
               color: AppColor.appBarColor,
-              image: DecorationImage(
-                image: AssetImage('assets/images/drawer_header.jpg'),
-                fit: BoxFit.cover,
-              ),
             ),
-            child: Text(
-              "My App",
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-              ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "Voice Bridge",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Text(
+                  "Version 1.0.0",
+                  style: TextStyle(color: Colors.grey, fontSize: 16),
+                ),
+              ],
             ),
           ),
           ListTile(
@@ -79,7 +85,11 @@ class AppDrawer extends StatelessWidget {
             leading: const Icon(Icons.help),
             title: const Text('Help & Feedback'),
             onTap: () {
-              Navigator.pop(context);
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => const HelpAndFeedbackScreen(),
+                ),
+              );
               // Navigate to help screen
             },
           ),

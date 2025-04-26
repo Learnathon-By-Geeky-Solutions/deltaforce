@@ -31,12 +31,12 @@ class BaseView extends StatelessWidget {
       key: _scaffoldKey,
       appBar: AppBar(
         backgroundColor: AppColor.appBarColor,
-        title: const Text("Voice Bridge",style: TextStyle(color: AppColor.primaryTextColor),),
+        title: const Text("Voice Bridge",style: TextStyle(color: AppColor.whiteColor, fontWeight: FontWeight.bold),),
 
           leading: Container(),
           actions: [
             IconButton(
-              color: AppColor.primaryTextColor,
+              color: AppColor.whiteColor,
               icon: const Icon(Icons.menu),
               onPressed: () {
                 _scaffoldKey.currentState?.openEndDrawer();

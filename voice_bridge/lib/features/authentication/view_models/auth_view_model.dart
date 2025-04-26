@@ -1,14 +1,18 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
 import 'package:voice_bridge/features/authentication/services/firebase_auth_service.dart';
 import 'package:voice_bridge/features/authentication/const/app_strings.dart';
 import 'package:voice_bridge/resources/routes/routesName.dart';
+import 'package:voice_bridge/resources/colors/app_color.dart';
 
 class AuthViewModel extends GetxController {
   final FirebaseAuthService _firebaseAuthService = FirebaseAuthService();
   final Rx<User?> _user = Rx<User?>(null);
   final RxString _error = ''.obs;
+
+  final TextEditingController currentPasswordController = TextEditingController();
+  final TextEditingController newPasswordController = TextEditingController();
 
   User? get user => _user.value;
   String get error => _error.value;
@@ -166,4 +170,52 @@ class AuthViewModel extends GetxController {
       );
     }
   }
+
+  Future<void> resetPassword(String email) async {
+    try {
+      await _firebaseAuthService.sendPasswordResetEmail(email);
+      Get.snackbar(
+        AppStrings.successful,
+        'Password reset email sent successfully!',
+        backgroundColor: Colors.green,
+        colorText: Colors.white,
+      );
+    } catch (e) {
+      _error.value = e.toString();
+      Get.snackbar(
+        AppStrings.error,
+        'Failed to send password reset email.',
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
+      );
+    }
+  }
+
+  Future<void> updatePassword(String currentPassword, String newPassword) async {
+    try {
+      await _firebaseAuthService.updatePassword(currentPassword, newPassword);
+      Get.snackbar(
+        AppStrings.successful,
+        'Password updated successfully!',
+        backgroundColor: Colors.green,
+        colorText: Colors.white,
+      );
+      Get.back();
+
+      // Clear the fields after successful update
+      Future.delayed(Duration(milliseconds: 300), () {
+        currentPasswordController.clear();
+        newPasswordController.clear();
+      });
+    } catch (e) {
+      _error.value = e.toString();
+      Get.snackbar(
+        AppStrings.error,
+        'Failed to update password.',
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
+      );
+    }
+  }
+
 }
