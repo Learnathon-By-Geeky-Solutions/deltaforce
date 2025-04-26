@@ -102,7 +102,7 @@ class TestController extends SessionController {
     isCheckButtonDisabled.value = true; // Disable button during processing
 
     if (testCurrentLessonIndex.value == lessonLength - 1) {
-      if (showTestCompletionScreen == false) {
+      if (showTestCompletionScreen.value == false) {
         if (selectedIndex.value < 0) {
           isCheckButtonDisabled.value = false;
           Get.snackbar("👆 👆 👆", "Select Correct Option",
@@ -146,10 +146,8 @@ class TestController extends SessionController {
         //fetch score
         final prefs = await SharedPreferences.getInstance();
         int savedResult =prefs.getInt('testScore_${category}_$currentSessionLevel') ?? 0; // Default sessionLevel is 1
-        // testScore[category] = savedResult;
 
         if(result >  savedResult){
-          // testScore[category] = result;
           await prefs.setInt('testScore_${category}_$currentSessionLevel', result.value);//write in share pref
         }
         Get.toNamed(RoutesName.testDashboardScreen);

@@ -3,10 +3,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import '../../../resources/routes/routesName.dart';
 import '../view_model/sessionModel.dart';
-// import 'package:cloud_firestore/cloud_firestore.dart';
 
 class SessionController extends GetxController {
   var currentSessionLevel = <String, int>{}.obs;
@@ -95,7 +93,7 @@ class SessionController extends GetxController {
   Future<void> goToNextLesson() async {
     if(currentLessonIndex.value == lessonLength - 1){
 
-        if(showCompletionScreen == false){
+        if(showCompletionScreen.value == false){
           showCompletionScreen.value = true;
           Get.toNamed(RoutesName.sessionCompletion);
 
