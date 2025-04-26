@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../controllers/testController.dart';
+import '../controllers/test_controller.dart';
 
 class NextButton extends StatelessWidget {
   final TestController controller = Get.find();
+
+  NextButton({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +22,7 @@ class NextButton extends StatelessWidget {
               borderRadius: BorderRadius.circular(12),
             ),
           ),
-          child: Text('Next',
+          child: const Text('Next',
             style: TextStyle(fontSize: 30, color: Colors.white),
           ),
 

@@ -13,11 +13,13 @@ class LoginScreen extends StatelessWidget {
   final TextEditingController _passwordController = TextEditingController();
   final RxBool _obscurePassword = true.obs;
 
+  LoginScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           AppStrings.login,
           style: TextStyle(color: AppColor.whiteColor, fontWeight: FontWeight.bold),
         ),
@@ -28,25 +30,25 @@ class LoginScreen extends StatelessWidget {
         padding: EdgeInsets.all(20),
         child: Column(
           children: [
-            SizedBox(height: 40),
-            Text("Welcome Back", style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
-            SizedBox(height: 30),
+            const SizedBox(height: 40),
+            const Text("Welcome Back", style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
+            const SizedBox(height: 30),
             _buildEmailField(),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             _buildPasswordField(),
-            SizedBox(height: 30),
+            const SizedBox(height: 30),
             CustomButton(
               text: AppStrings.login,
               onPressed: _handleLogin,
             ),
-            SizedBox(height: 15),
+            const SizedBox(height: 15),
             TextButton(
               onPressed: () => Get.to(() => SignupScreen()),
-              child: Text(AppStrings.dontHaveAccount, style: TextStyle(color: Colors.blue)),
+              child: const Text(AppStrings.dontHaveAccount, style: TextStyle(color: Colors.blue)),
             ),
-            SizedBox(height: 20),
-            Text("or continue with", style: TextStyle(color: Colors.grey)),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
+            const Text("or continue with", style: TextStyle(color: Colors.grey)),
+            const SizedBox(height: 20),
             _buildGoogleSignInButton(),
           ],
         ),
@@ -59,7 +61,7 @@ class LoginScreen extends StatelessWidget {
       controller: _emailController,
       decoration: InputDecoration(
         labelText: AppStrings.email,
-        prefixIcon: Icon(Icons.email),
+        prefixIcon: const Icon(Icons.email),
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
       ),
       keyboardType: TextInputType.emailAddress,
@@ -72,7 +74,7 @@ class LoginScreen extends StatelessWidget {
       obscureText: _obscurePassword.value,
       decoration: InputDecoration(
         labelText: AppStrings.password,
-        prefixIcon: Icon(Icons.lock),
+        prefixIcon: const Icon(Icons.lock),
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
         suffixIcon: IconButton(
           icon: Icon(
@@ -88,12 +90,12 @@ class LoginScreen extends StatelessWidget {
   Widget _buildGoogleSignInButton() {
     return OutlinedButton(
       style: OutlinedButton.styleFrom(
-        minimumSize: Size(double.infinity, 50),
-        side: BorderSide(color: Colors.grey),
+        minimumSize: const Size(double.infinity, 50),
+        side: const BorderSide(color: Colors.grey),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       ),
       onPressed: _handleGoogleLogin,
-      child: Row(
+      child: const Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           FaIcon(FontAwesomeIcons.google, color: Colors.red),

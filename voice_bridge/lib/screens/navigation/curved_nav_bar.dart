@@ -2,7 +2,7 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:voice_bridge/resources/colors/app_color.dart';
-import 'package:voice_bridge/screens/base/controllers/baseController.dart';
+import 'package:voice_bridge/screens/base/controllers/base_controller.dart';
 
 class CurvedNavBar extends StatelessWidget {
 
@@ -19,7 +19,7 @@ class CurvedNavBar extends StatelessWidget {
       buttonBackgroundColor: AppColor.navigationColor, // Background of the selected item
       height: 60,
 
-      animationDuration: Duration(milliseconds: 300),
+      animationDuration: const Duration(milliseconds: 300),
       animationCurve: Curves.easeInOut,
       index: controller.selectedIndex.value,
       onTap: (index) => controller.selectedIndex.value = index,

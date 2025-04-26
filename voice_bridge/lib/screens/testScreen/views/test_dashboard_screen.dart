@@ -1,15 +1,17 @@
 import 'package:dotlottie_loader/dotlottie_loader.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-import 'package:voice_bridge/screens/testScreen/controllers/testController.dart';
-import '../../../resources/routes/routesName.dart';
-import '../../base/controllers/baseController.dart';
-import '../widgets/TestSessionCard.dart';
+import 'package:voice_bridge/screens/testScreen/controllers/test_controller.dart';
+import '../../../resources/routes/routes_name.dart';
+import '../../base/controllers/base_controller.dart';
+import '../widgets/test_session_card.dart';
 import 'package:get/get.dart';
 
 class TestDashboardScreen extends StatelessWidget {
   final TestController controller = Get.find();
   final BaseController baseController = Get.find();
+
+  TestDashboardScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -18,15 +20,15 @@ class TestDashboardScreen extends StatelessWidget {
           elevation: 0,
           backgroundColor: Colors.white,
           leading: IconButton(
-            icon: Icon(Icons.arrow_back, color: Colors.black, size: 30),
+            icon: const Icon(Icons.arrow_back, color: Colors.black, size: 30),
             onPressed: () {
               baseController.selectedIndex.value = 0;
               Get.offNamed(RoutesName.baseView);
             },
           ),
-          title:Text(
+          title: Text(
             controller.testCurrentCategory,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.bold,
               color: Colors.black,
@@ -64,23 +66,23 @@ class TestDashboardScreen extends StatelessWidget {
             var topUnlockSession = controller.testTopSessionLevel[category]!;
 
             return ListView.builder(
-              padding: EdgeInsets.symmetric(vertical: 1),
+              padding: const EdgeInsets.symmetric(vertical: 1),
               itemCount: totalSessions,
               itemBuilder: (context, index) {
                 int pos = index % 6;
                 bool isUnlocked = index < controller.testTopSessionLevel[category]!;
                 return Align(
                   alignment: (pos == 5)
-                      ? Alignment(-0.8, 0)
+                      ? const Alignment(-0.8, 0)
                       : (pos == 0)
-                          ? Alignment(-0.27, 0)
+                          ? const Alignment(-0.27, 0)
                           : (pos == 1)
-                              ? Alignment(0.27, 0)
+                              ? const Alignment(0.27, 0)
                               : (pos == 2)
-                                  ? Alignment(0.8, 0)
+                                  ? const Alignment(0.8, 0)
                                   : (pos == 3)
-                                      ? Alignment(0.27, 0)
-                                      : Alignment(-0.27, 0),
+                                      ? const Alignment(0.27, 0)
+                                      : const Alignment(-0.27, 0),
                   child: Padding(
                     padding:
                         const EdgeInsets.symmetric(vertical: 5, horizontal: 16),

@@ -6,7 +6,7 @@ class RoundedButton extends PositionComponent with TapCallbacks {
   final String text;
   final VoidCallback onPressed;
   late final Offset _textOffSet;
-  late TextPainter _textDrawable;
+  late final TextPainter _textDrawable;
   late RRect _rRect;
   late Paint _bgPaint;
   late Paint _borderPaint;
@@ -18,7 +18,7 @@ class RoundedButton extends PositionComponent with TapCallbacks {
     required Color borderColor,
     super.anchor = Anchor.center,
   }) : _textDrawable = TextPaint(
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 20,
             fontWeight: FontWeight.w800,
             color: Color(0xFF000000),

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../resources/colors/app_color.dart';
-import '../../../resources/routes/routesName.dart';
-import '../../testScreen/controllers/testController.dart';
+import '../../../resources/routes/routes_name.dart';
+import '../../testScreen/controllers/test_controller.dart';
 import '../widgets/practice_learn_card.dart';
 
 class PracticeScreenView extends StatelessWidget {
@@ -22,7 +22,7 @@ class PracticeScreenView extends StatelessWidget {
     return Scaffold(
       body: GridView.builder(
 
-        padding: EdgeInsets.fromLTRB(12,12,12,100),
+        padding: const EdgeInsets.fromLTRB(12,12,12,100),
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
           crossAxisSpacing: 16,

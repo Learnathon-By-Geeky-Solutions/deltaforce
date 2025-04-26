@@ -1,7 +1,6 @@
 import 'package:flame/components.dart';
 import 'package:flutter/material.dart';
 import 'package:voice_bridge/screens/learn_item_screen/balloon_blast/components/rounded_button.dart';
-import '../game_main.dart';
 import '../views/balloon_blast_screen.dart';
 
 class HomePage extends PositionComponent with HasGameReference<BalloonBlastGame> {

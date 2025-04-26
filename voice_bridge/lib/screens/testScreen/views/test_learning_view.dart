@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 
-import '../../../resources/routes/routesName.dart';
-import '../controllers/testController.dart';
+import '../../../resources/routes/routes_name.dart';
+import '../controllers/test_controller.dart';
 
 
 class TestLearningView extends StatelessWidget {

@@ -3,7 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:voice_bridge/features/authentication/services/firebase_auth_service.dart';
 import 'package:voice_bridge/features/authentication/const/app_strings.dart';
-import 'package:voice_bridge/resources/routes/routesName.dart';
+import 'package:voice_bridge/resources/routes/routes_name.dart';
 
 class AuthViewModel extends GetxController {
   final FirebaseAuthService _firebaseAuthService = FirebaseAuthService();

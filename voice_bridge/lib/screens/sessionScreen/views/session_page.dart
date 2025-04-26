@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../controllers/sessionController.dart';
+import '../controllers/session_controller.dart';
 
 class SessionPage extends StatelessWidget {
   final SessionController controller = Get.find();
-  // final SessionController controller = Get.put(SessionController());
   final String category = Get.arguments['category'];
   final int sessionLevel = Get.arguments['sessionLevel'];
   final currentSession = Get.arguments['currentSession'];
+
+  SessionPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -17,14 +18,14 @@ class SessionPage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text("Session $sessionLevel", style: TextStyle(fontSize: 22)),
-            SizedBox(height: 20),
+            Text("Session $sessionLevel", style: const TextStyle(fontSize: 22)),
+            const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
                 controller.saveSession(category, sessionLevel + 1); // Move to next session
                 Get.back(); // Return to category screen
               },
-              child: Text("Complete & Next"),
+              child: const Text("Complete & Next"),
             ),
           ],
         ),

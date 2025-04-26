@@ -1,13 +1,11 @@
 import 'dart:async';
 import 'dart:math';
 import 'package:flame/src/components/router/route.dart' as FlameRoute;
-import 'package:flame/events.dart';
 import 'package:flame/flame.dart';
 import 'package:flame/game.dart';
 import 'package:flame/components.dart';
 import 'package:flame/parallax.dart';
 import 'package:flutter/material.dart';
-import 'package:voice_bridge/screens/learn_item_screen/balloon_blast/components/rectangle_test.dart';
 import 'package:voice_bridge/screens/learn_item_screen/balloon_blast/config/app_config.dart';
 import 'package:voice_bridge/screens/learn_item_screen/balloon_blast/models/fruit_model.dart';
 import 'package:voice_bridge/screens/learn_item_screen/balloon_blast/routes/game_over_page.dart';

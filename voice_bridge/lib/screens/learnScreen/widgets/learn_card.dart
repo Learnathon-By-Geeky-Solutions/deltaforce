@@ -27,14 +27,14 @@ class LearnCard extends StatelessWidget {
             color: color.withOpacity(AppColor.cardBorderOpacity),
             width: 2,
           ),
-          boxShadow: [
+          // boxShadow: [
             // BoxShadow(
             //   color: Colors.white,
             //   blurRadius: 4,
             //   offset: Offset(0, 5),
             //   spreadRadius: 2,
             // ),
-          ],
+          // ],
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

@@ -4,9 +4,9 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../../../resources/routes/routesName.dart';
-import '../../sessionScreen/controllers/sessionController.dart';
-import '../../sessionScreen/view_model/sessionModel.dart';
+import '../../../resources/routes/routes_name.dart';
+import '../../sessionScreen/controllers/session_controller.dart';
+import '../../sessionScreen/view_model/session_model.dart';
 
 class TestController extends SessionController {
   var testTopSessionLevel = <String, int>{}.obs;
