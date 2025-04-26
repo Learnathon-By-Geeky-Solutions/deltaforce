@@ -2,7 +2,7 @@ name: Flutter SonarCloud Analysis
 
 on:
   push:
-    branches: [ "fix_sonar_cloud" ]
+    branches: [ "fix_sonar_cloud","main" ]
   pull_request:
     branches: [ "main" ]
 
