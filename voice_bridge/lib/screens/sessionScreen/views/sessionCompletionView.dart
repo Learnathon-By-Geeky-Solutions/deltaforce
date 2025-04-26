@@ -4,13 +4,15 @@ import '../controllers/sessionController.dart';
 
 class SessionCompletionView extends StatelessWidget {
   final SessionController controller = Get.find();
+
+  SessionCompletionView({super.key});
   // const SessionCompletionView({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Session Completed'),
+        title: const Text('Session Completed'),
         centerTitle: true,
         automaticallyImplyLeading: false,
       ),
@@ -23,19 +25,19 @@ class SessionCompletionView extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Icon(Icons.check_circle, size: 100, color: Colors.green),
-                    SizedBox(height: 20),
-                    Text(
+                    const Icon(Icons.check_circle, size: 100, color: Colors.green),
+                    const SizedBox(height: 20),
+                    const Text(
                       'Congratulations!',
                       style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                     ),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     Text(
                       'You have successfully completed the session.',
                       textAlign: TextAlign.center,
                       style: TextStyle(fontSize: 16, color: Colors.grey[700]),
                     ),
-                    SizedBox(height: 30),
+                    const SizedBox(height: 30),
                   ],
                 ),
               )),
@@ -53,7 +55,7 @@ class SessionCompletionView extends StatelessWidget {
                     borderRadius: BorderRadius.circular(12),
                   ),
                 ),
-                child: Text(
+                child: const Text(
                   'Next Session',
                   style: TextStyle(fontSize: 30, color: Colors.white),
                 ),

@@ -6,6 +6,8 @@ import '../controllers/testController.dart';
 class NextButton extends StatelessWidget {
   final TestController controller = Get.find();
 
+  NextButton({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -20,7 +22,7 @@ class NextButton extends StatelessWidget {
               borderRadius: BorderRadius.circular(12),
             ),
           ),
-          child: Text('Next',
+          child: const Text('Next',
             style: TextStyle(fontSize: 30, color: Colors.white),
           ),
 

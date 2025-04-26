@@ -28,19 +28,19 @@ abstract class SimpleButton extends PositionComponent with TapCallbacks {
   }
   @override
   void onTapDown(TapDownEvent event){
-    _iconPaint.color = Color(0xffffffff);
-    _borderPaint.color = Color(0xffffffff);
+    _iconPaint.color = const Color(0xffffffff);
+    _borderPaint.color = const Color(0xffffffff);
   }
   @override
   void onTapUp(TapUpEvent event){
-    _iconPaint.color = Color(0xffaaaaaa);
+    _iconPaint.color = const Color(0xffaaaaaa);
     action?.call();
-    _borderPaint.color = Color(0xffaaaaaa);
+    _borderPaint.color = const Color(0xffaaaaaa);
   }
   @override
   void onTapCancel(TapCancelEvent event){
-    _iconPaint.color = Color(0xffaaaaaa);
-    _borderPaint.color = Color(0xffaaaaaa);
+    _iconPaint.color = const Color(0xffaaaaaa);
+    _borderPaint.color = const Color(0xffaaaaaa);
   }
 }
 

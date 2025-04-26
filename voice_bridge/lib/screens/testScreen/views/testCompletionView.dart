@@ -7,6 +7,8 @@ import '../../testScreen/controllers/testController.dart';
 class TestCompletionView extends StatelessWidget {
   final TestController controller = Get.find();
 
+  TestCompletionView({super.key});
+
   // const SessionCompletionView({super.key});
 
   @override
@@ -16,7 +18,7 @@ class TestCompletionView extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('SCORE'),
+        title: const Text('SCORE'),
         automaticallyImplyLeading: false,
         centerTitle: true,
       ),
@@ -32,7 +34,7 @@ class TestCompletionView extends StatelessWidget {
                     : result >= 50
                     ? 'Well done!'
                     : 'Try again',
-                  style: TextStyle(  fontSize: 50, color: Colors.green,fontWeight: FontWeight.bold),
+                  style: const TextStyle(  fontSize: 50, color: Colors.green,fontWeight: FontWeight.bold),
                 )
               )),
           Expanded(
@@ -69,7 +71,7 @@ class TestCompletionView extends StatelessWidget {
                           borderRadius: BorderRadius.circular(12),
                         ),
                       ),
-                      child: Icon(Icons.arrow_forward_outlined)),
+                      child: const Icon(Icons.arrow_forward_outlined)),
                 ),
               ))
         ],

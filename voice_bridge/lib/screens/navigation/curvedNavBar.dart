@@ -19,7 +19,7 @@ class CurvedNavBar extends StatelessWidget {
       buttonBackgroundColor: AppColor.navigationColor, // Background of the selected item
       height: 60,
 
-      animationDuration: Duration(milliseconds: 300),
+      animationDuration: const Duration(milliseconds: 300),
       animationCurve: Curves.easeInOut,
       index: controller.selectedIndex.value,
       onTap: (index) => controller.selectedIndex.value = index,

@@ -11,7 +11,6 @@ import '../controllers/baseController.dart';
 
 
 class BaseView extends StatelessWidget {
-  // HomeView({super.key});
   BaseView({super.key});
   final BaseController controller = Get.put(BaseController());
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
@@ -45,7 +44,7 @@ class BaseView extends StatelessWidget {
           ],
         elevation: 5,
         shadowColor: AppColor.appBarColor,
-        shape: RoundedRectangleBorder(
+        shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(bottom: Radius.circular(20))
         ),
       ),

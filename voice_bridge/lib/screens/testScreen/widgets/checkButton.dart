@@ -4,8 +4,9 @@ import 'package:get/get.dart';
 import '../controllers/testController.dart';
 
 class CheckButton extends StatelessWidget {
-  // const CheckButton({super.key});
   final TestController controller = Get.find();
+
+  CheckButton({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +26,7 @@ class CheckButton extends StatelessWidget {
               borderRadius: BorderRadius.circular(12),
             ),
           ),
-          child: Text(
+          child: const Text(
             'Check',
             style: TextStyle(fontSize: 30, color: Colors.white),
           ),

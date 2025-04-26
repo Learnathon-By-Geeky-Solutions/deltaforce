@@ -22,7 +22,7 @@ class PracticeScreenView extends StatelessWidget {
     return Scaffold(
       body: GridView.builder(
 
-        padding: EdgeInsets.fromLTRB(12,12,12,100),
+        padding: const EdgeInsets.fromLTRB(12,12,12,100),
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
           crossAxisSpacing: 16,

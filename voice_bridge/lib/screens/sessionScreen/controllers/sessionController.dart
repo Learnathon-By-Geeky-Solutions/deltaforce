@@ -61,12 +61,8 @@ class SessionController extends GetxController {
   Future<void> startSession(String category) async {
     if(category == "Balloon Blast"){
       Get.toNamed(RoutesName.balloonBlast);
-    }else if(category == "Shape Matching"){
-      Get.toNamed(RoutesName.shapeMatching);
     }
     else{
-
-
      currentLessonIndex.value = 0;
     currentCategory = category;
     int sessionLevel = currentSessionLevel[category] ?? 1;

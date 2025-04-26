@@ -33,16 +33,16 @@ class SessionView extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     IconButton(
-                      icon: Icon(Icons.arrow_back, size: 30),
+                      icon: const Icon(Icons.arrow_back, size: 30),
                       onPressed: () {
                         baseController.selectedIndex.value = 1;
                         Get.offNamed(RoutesName.baseView);// go to learn page
                       },
                     ),
-                    SizedBox(width: 8), // Space between the icon and text
+                    const SizedBox(width: 8), // Space between the icon and text
                     Text(
                       'Session: $sessionLevel',
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
                       ),
@@ -55,7 +55,7 @@ class SessionView extends StatelessWidget {
               Expanded(
                 child: Container(
                   width: double.infinity,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.vertical(top: Radius.circular(30)),
                   ),
@@ -80,7 +80,7 @@ class SessionView extends StatelessWidget {
                         child: Center(
                           child: Text(
                             lesson.lessonName,
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 50,
                               fontWeight: FontWeight.bold,
 
@@ -105,7 +105,7 @@ class SessionView extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(12),
                                 ),
                               ),
-                              child: Text(
+                              child: const Text(
                                 'Next',
                                 style: TextStyle(fontSize: 30, color: Colors.white),
                               ),

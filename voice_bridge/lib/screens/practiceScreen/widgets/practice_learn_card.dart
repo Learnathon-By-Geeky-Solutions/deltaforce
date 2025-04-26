@@ -55,7 +55,7 @@ class PracticeLearnCard extends StatelessWidget {
               percent: percentage,
               progressColor: Colors.deepPurple,
               backgroundColor: Colors.deepPurple.shade200,
-              barRadius: Radius.circular(10),
+              barRadius: const Radius.circular(10),
             ),
           ],
         ),

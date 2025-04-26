@@ -12,6 +12,8 @@ import '../widgets/nextButton.dart';
 class TestScreen extends StatelessWidget {
   final TestController controller = Get.find();
 
+  TestScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     // bool showingLesson = (controller.showLesson.value && controller.settingsShowLesson.value);
