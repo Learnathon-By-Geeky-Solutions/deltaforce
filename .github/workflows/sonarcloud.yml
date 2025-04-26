@@ -1,22 +1,20 @@
-name: "Build & Release"
+name: Flutter SonarCloud Analysis
 
 on:
   push:
     branches: [ "fix_sonar_cloud" ]
   pull_request:
-    branches: [ "fix_sonar_cloud" ]
-
-permissions:
-  contents: write  # ✅ Needed to allow creating releases
+    branches: [ "main" ]
 
 jobs:
-  build:
-    name: Build & Release
+  sonarcloud-analysis:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Set up Java 17
         uses: actions/setup-java@v3
@@ -27,20 +25,30 @@ jobs:
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
-          channel: 'stable'
-          architecture: x64
+          channel: stable
+          cache: true
 
       - name: Install dependencies
         run: flutter pub get
         working-directory: ./voice_bridge
 
-      - name: Build APK (Release & Split per ABI)
-        run: flutter build apk --release --split-per-abi
+      - name: Run tests with coverage
+        run: flutter test --coverage
         working-directory: ./voice_bridge
 
-      - name: Create GitHub Release
-        uses: ncipollo/release-action@v1
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarqube-scan-action@v5
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         with:
-          artifacts: "voice_bridge/build/app/outputs/apk/release/*.apk"
-          tag: v1.0.${{ github.run_number }}
-          token: ${{ secrets.GITHUB_TOKEN }}
+          args: >
+            -Dsonar.host.url=https://sonarcloud.io
+            -Dsonar.projectKey=Learnathon-By-Geeky-Solutions_ode-to-code
+            -Dsonar.organization=learnathon-by-geeky-solutions
+            -Dsonar.java.version=17
+            -Dsonar.verbose=true
+            -Dsonar.javascript.lcov.reportPaths=voice_bridge/coverage/lcov.info
+            -Dsonar.sources=voice_bridge/lib
+            -Dsonar.tests=voice_bridge/test
+            -Dsonar.test.inclusions=voice_bridge/test/features/**/*_test.dart
+            -Dsonar.exclusions=**/*.g.dart,**/*.freezed.dart,**/generated/**,**/__generated__/**,**/mocks.dart,**/*.css,voice_bridge/lib/core/localization/**/*app_translations.dart
