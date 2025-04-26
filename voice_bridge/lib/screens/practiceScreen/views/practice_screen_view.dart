@@ -1,20 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:voice_bridge/resources/routes/routesName.dart';
-
 import '../../../resources/colors/app_color.dart';
-import '../../sessionScreen/controllers/sessionController.dart';
-import '../widgets/learn_card.dart';
+import '../../../resources/routes/routes_name.dart';
+import '../../testScreen/controllers/test_controller.dart';
+import '../widgets/practice_learn_card.dart';
 
-class LearnScreenView extends StatelessWidget {
-  LearnScreenView({super.key});
+class PracticeScreenView extends StatelessWidget {
+  PracticeScreenView({super.key});
 
-  final SessionController controller = Get.put(SessionController());
-
+  final TestController controller = Get.put(TestController());
 
   final List<Map<String, dynamic>> learnItems = [
-    {"category": "Fruits Ninja", "image": "lib/resources/assets/Others/images/balloonBlast.jpg", "color": AppColor.cardOrangeColor, "route": RoutesName.balloonBlast},
-    {"category": "Study", "image": "lib/resources/assets/Others/images/study.jpg", "color": AppColor.cardYellowColor, "route": RoutesName.study},
+   {"category": "Study", "image": "lib/resources/assets/Others/images/study.jpg", "color": AppColor.cardYellowColor, "route": RoutesName.study},
     {"category": "Living Skill", "image": "lib/resources/assets/Others/images/living.jpg", "color": AppColor.cardRedColor, "route": RoutesName.livingSkill},
     {"category": "Family", "image": "lib/resources/assets/Others/images/family.jpg", "color": AppColor.cardPurpleColor, "route": RoutesName.family},
     {"category": "Emotion", "image": "lib/resources/assets/Others/images/emotion.jpg", "color": AppColor.cardGreenColor, "route": RoutesName.emotion},
@@ -24,7 +21,8 @@ class LearnScreenView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: GridView.builder(
-        padding: EdgeInsets.fromLTRB(12,12,12,100),
+
+        padding: const EdgeInsets.fromLTRB(12,12,12,100),
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
           crossAxisSpacing: 16,
@@ -35,11 +33,18 @@ class LearnScreenView extends StatelessWidget {
         itemCount: learnItems.length,
         itemBuilder: (context, index) {
           final item = learnItems[index];
-          return LearnCard(
+          return PracticeLearnCard(
             name: item['category'],
             image: item['image'],
             color: item['color'],
-            onTap: () => controller.startSession(item['category']),
+            percentage: (controller.testTopSessionLevel[item['category']]!/20),
+
+            // onTap: () => Get.toNamed(item['route']),
+            // onTap: () => controller.testStartSession(item['category']),
+            onTap: () => controller.gotoDashboard(item['category']),
+
+
+            // onTap: () => Get.to(StudyScreen()),
           );
         },
       ),

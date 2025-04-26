@@ -2,11 +2,13 @@ import 'package:dotlottie_loader/dotlottie_loader.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
-import '../../../resources/routes/routesName.dart';
-import '../controllers/testController.dart';
+import '../../../resources/routes/routes_name.dart';
+import '../controllers/test_controller.dart';
 
 class TestQuestionView extends StatelessWidget {
   final TestController controller = Get.find();
+
+  TestQuestionView({super.key});
   // final BaseController baseController = Get.find();
 
   @override
@@ -26,7 +28,7 @@ class TestQuestionView extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       IconButton(
-                        icon: Icon(Icons.arrow_back, size: 30),
+                        icon: const Icon(Icons.arrow_back, size: 30),
                         onPressed: () {
                           // baseController.selectedIndex.value = 0;
                           // Get.offNamed(RoutesName.baseView);// go to learn page
@@ -35,7 +37,7 @@ class TestQuestionView extends StatelessWidget {
                       ),
                       Text(
                         'Session: $testCurrentSessionLevel',
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
                         ),
@@ -105,7 +107,7 @@ class TestQuestionView extends StatelessWidget {
                   child: Center(
                     child: Text(
                       lesson.lessons[controller.correctIndex].lessonName,
-                      style: TextStyle(fontSize: 50, fontWeight: FontWeight.bold),
+                      style: const TextStyle(fontSize: 50, fontWeight: FontWeight.bold),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),
@@ -121,23 +123,19 @@ class TestQuestionView extends StatelessWidget {
                 return Container(
                   color: Colors.black.withOpacity(0.4),
                   child: Center(
-                    child: Container(
-                      // width: 1700,
-                      // height: 200,
-                     child:  DotLottieLoader.fromAsset(
-                         controller.isAnswerCorrect.value
-                               ? 'lib/resources/assets/Others/animations/tick-mark.lottie'
-                               : 'lib/resources/assets/Others/animations/crossmark.lottie',
-                         // "lib/resources/assets/Others/animations/confused.lottie",
-                          frameBuilder: (ctx, dotlottie) {
-                            if (dotlottie != null) {
-                              return Lottie.memory(dotlottie.animations.values.single);
-                            } else {
-                              return const Center(child: CircularProgressIndicator());
-                            }
-                          }
-                      ),
-                    ),
+                    child: DotLottieLoader.fromAsset(
+                        controller.isAnswerCorrect.value
+                              ? 'lib/resources/assets/Others/animations/tick-mark.lottie'
+                              : 'lib/resources/assets/Others/animations/crossmark.lottie',
+                        // "lib/resources/assets/Others/animations/confused.lottie",
+                         frameBuilder: (ctx, dotlottie) {
+                           if (dotlottie != null) {
+                             return Lottie.memory(dotlottie.animations.values.single);
+                           } else {
+                             return const Center(child: CircularProgressIndicator());
+                           }
+                         }
+                     ),
                   ),
                 );
               } else {

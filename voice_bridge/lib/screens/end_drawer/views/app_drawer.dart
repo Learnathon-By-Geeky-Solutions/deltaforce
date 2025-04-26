@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:voice_bridge/features/Settings/UI/settings_page_ui.dart';
 import 'package:voice_bridge/features/authentication/services/firebase_auth_service.dart';

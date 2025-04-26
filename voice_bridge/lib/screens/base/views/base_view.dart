@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:voice_bridge/resources/colors/app_color.dart';
-import 'package:voice_bridge/screens/learnScreen/views/learnScreenView.dart';
-import 'package:voice_bridge/screens/navigation/curvedNavBar.dart';
-import 'package:voice_bridge/screens/parentScreen/views/parentScreenView.dart';
-import 'package:voice_bridge/screens/practiceScreen/views/practiceScreenView.dart';
+import 'package:voice_bridge/screens/learnScreen/views/learn_screen_view.dart';
+import 'package:voice_bridge/screens/navigation/curved_nav_bar.dart';
+import 'package:voice_bridge/screens/parentScreen/views/parent_screen_view.dart';
+import 'package:voice_bridge/screens/practiceScreen/views/practice_screen_view.dart';
 
-import '../../end_drawer/views/appDrawer.dart';
-import '../controllers/baseController.dart';
+import '../../end_drawer/views/app_drawer.dart';
+import '../controllers/base_controller.dart';
 
 
 class BaseView extends StatelessWidget {
-  // HomeView({super.key});
   BaseView({super.key});
   final BaseController controller = Get.put(BaseController());
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
@@ -45,7 +44,7 @@ class BaseView extends StatelessWidget {
           ],
         elevation: 5,
         shadowColor: AppColor.appBarColor,
-        shape: RoundedRectangleBorder(
+        shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(bottom: Radius.circular(20))
         ),
       ),

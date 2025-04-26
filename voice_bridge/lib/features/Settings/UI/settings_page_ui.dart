@@ -7,11 +7,13 @@ import 'package:voice_bridge/widgets/BorderListTile.dart';
 class SettingsScreen extends StatelessWidget {
   final ThemeViewModel _themeController = Get.put(ThemeViewModel());
 
+  SettingsScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           'Settings',
           style: TextStyle(color: AppColor.whiteColor),
         ),
@@ -27,7 +29,7 @@ class SettingsScreen extends StatelessWidget {
                         ? Icons.dark_mode
                         : Icons.light_mode,
                   ),
-                  title: Text(
+                  title: const Text(
                     'Dark Mode',
                     style: TextStyle(
                       fontSize: 16,
@@ -41,17 +43,17 @@ class SettingsScreen extends StatelessWidget {
                   ),
                   borderColor: Theme.of(context).dividerColor,
                 )),
-            SizedBox(height: 12),
+            const SizedBox(height: 12),
             BorderedListTile(
-              leading: Icon(Icons.language),
-              title: Text(
+              leading: const Icon(Icons.language),
+              title: const Text(
                 'Language',
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w500,
                 ),
               ),
-              trailing: Icon(Icons.chevron_right),
+              trailing: const Icon(Icons.chevron_right),
               onTap: () {
 
               },

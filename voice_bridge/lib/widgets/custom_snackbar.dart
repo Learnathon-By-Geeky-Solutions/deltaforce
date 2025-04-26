@@ -9,7 +9,7 @@ class CustomSnackbar {
       backgroundColor: isError ? Colors.red : Colors.green,
       colorText: Colors.white,
       snackPosition: SnackPosition.BOTTOM,
-      margin: EdgeInsets.all(10),
+      margin: const EdgeInsets.all(10),
     );
   }
 }
