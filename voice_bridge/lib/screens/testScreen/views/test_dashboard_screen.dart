@@ -1,10 +1,10 @@
 import 'package:dotlottie_loader/dotlottie_loader.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-import 'package:voice_bridge/screens/testScreen/controllers/testController.dart';
-import '../../../resources/routes/routesName.dart';
-import '../../base/controllers/baseController.dart';
-import '../widgets/TestSessionCard.dart';
+import 'package:voice_bridge/screens/testScreen/controllers/test_controller.dart';
+import '../../../resources/routes/routes_name.dart';
+import '../../base/controllers/base_controller.dart';
+import '../widgets/test_session_card.dart';
 import 'package:get/get.dart';
 
 class TestDashboardScreen extends StatelessWidget {

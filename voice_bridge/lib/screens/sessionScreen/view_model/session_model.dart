@@ -1,4 +1,4 @@
-import 'lessonModel.dart';
+import 'lesson_model.dart';
 
 class Session {
   final String sessionName;

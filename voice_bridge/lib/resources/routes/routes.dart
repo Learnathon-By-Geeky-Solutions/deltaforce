@@ -2,21 +2,21 @@ import 'package:get/get.dart';
 import 'package:voice_bridge/features/authentication/views/auth/login_screen.dart';
 import 'package:voice_bridge/features/authentication/views/auth/signup_screen.dart';
 import 'package:voice_bridge/features/authentication/views/auth/splash_screen.dart';
-import 'package:voice_bridge/resources/routes/routesName.dart';
-import 'package:voice_bridge/screens/learnScreen/views/learnScreenView.dart';
+import 'package:voice_bridge/resources/routes/routes_name.dart';
+import 'package:voice_bridge/screens/learnScreen/views/learn_screen_view.dart';
 import 'package:voice_bridge/screens/learn_item_screen/balloon_blast/views/balloon_blast_screen.dart';
-import 'package:voice_bridge/screens/parentScreen/views/autismTest.dart';
-import 'package:voice_bridge/screens/parentScreen/views/parentScreenView.dart';
-import 'package:voice_bridge/screens/practiceScreen/views/practiceScreenView.dart';
-import 'package:voice_bridge/screens/testScreen/views/testDashboardScreen.dart';
+import 'package:voice_bridge/screens/parentScreen/views/autism_test.dart';
+import 'package:voice_bridge/screens/parentScreen/views/parent_screen_view.dart';
+import 'package:voice_bridge/screens/practiceScreen/views/practice_screen_view.dart';
+import 'package:voice_bridge/screens/testScreen/views/test_dashboard_screen.dart';
 import '../../screens/base/views/base_view.dart';
 import '../../screens/learn_item_screen/balloon_blast/game_main.dart';
-import '../../screens/sessionScreen/views/sessionCompletionView.dart';
-import '../../screens/sessionScreen/views/sessionView.dart';
-import '../../screens/testScreen/views/testCompletionView.dart';
-import '../../screens/testScreen/views/testLearningView.dart';
-import '../../screens/testScreen/views/testQuestionView.dart';
-import '../../screens/testScreen/views/testScreen.dart';
+import '../../screens/sessionScreen/views/session_completion_view.dart';
+import '../../screens/sessionScreen/views/session_view.dart';
+import '../../screens/testScreen/views/test_completion_view.dart';
+import '../../screens/testScreen/views/test_learning_view.dart';
+import '../../screens/testScreen/views/test_question_view.dart';
+import '../../screens/testScreen/views/test_screen.dart';
 
 class AppRoutes {
 

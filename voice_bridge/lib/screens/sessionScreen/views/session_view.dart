@@ -2,9 +2,9 @@ import 'package:dotlottie_loader/dotlottie_loader.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
-import '../../../resources/routes/routesName.dart';
-import '../../base/controllers/baseController.dart';
-import '../controllers/sessionController.dart';
+import '../../../resources/routes/routes_name.dart';
+import '../../base/controllers/base_controller.dart';
+import '../controllers/session_controller.dart';
 
 class SessionView extends StatelessWidget {
   final SessionController controller = Get.find();

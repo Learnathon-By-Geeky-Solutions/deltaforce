@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../controllers/autismController.dart';
+import '../controllers/autism_controller.dart';
 
 class AutismTest extends StatefulWidget {
   const AutismTest({super.key});

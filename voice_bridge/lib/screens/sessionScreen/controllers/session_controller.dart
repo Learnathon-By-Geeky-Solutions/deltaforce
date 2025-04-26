@@ -3,8 +3,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../../../resources/routes/routesName.dart';
-import '../view_model/sessionModel.dart';
+import '../../../resources/routes/routes_name.dart';
+import '../view_model/session_model.dart';
 
 class SessionController extends GetxController {
   var currentSessionLevel = <String, int>{}.obs;

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../controllers/testController.dart';
+import '../controllers/test_controller.dart';
 
 class NextButton extends StatelessWidget {
   final TestController controller = Get.find();

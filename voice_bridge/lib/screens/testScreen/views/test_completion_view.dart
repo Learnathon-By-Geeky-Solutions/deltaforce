@@ -2,7 +2,7 @@ import 'package:dotlottie_loader/dotlottie_loader.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
-import '../../testScreen/controllers/testController.dart';
+import '../../testScreen/controllers/test_controller.dart';
 
 class TestCompletionView extends StatelessWidget {
   final TestController controller = Get.find();

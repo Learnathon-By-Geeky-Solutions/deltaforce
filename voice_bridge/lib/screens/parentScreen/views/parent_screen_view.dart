@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
-import 'package:voice_bridge/screens/parentScreen/controllers/autismController.dart';
+import 'package:voice_bridge/screens/parentScreen/controllers/autism_controller.dart';
 import 'package:voice_bridge/widgets/custom_button.dart';
 import 'package:get/get.dart';
 
-import '../../../resources/routes/routesName.dart';
-import '../widgets/tipCard.dart';
+import '../../../resources/routes/routes_name.dart';
+import '../widgets/tips_card.dart';
 
 class ParentScreenView extends StatelessWidget {
   ParentScreenView({super.key});

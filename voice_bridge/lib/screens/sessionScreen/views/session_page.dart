@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../controllers/sessionController.dart';
+import '../controllers/session_controller.dart';
 
 class SessionPage extends StatelessWidget {
   final SessionController controller = Get.find();
