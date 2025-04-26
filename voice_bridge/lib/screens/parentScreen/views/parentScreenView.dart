@@ -65,24 +65,24 @@ class ParentScreenView extends StatelessWidget {
                       "Gestures help children understand meaning better and connect words with actions."),
                   TipCard("Talk gently and slowly",
                       "This creates a calm environment and makes it easier for your child to process words."),
-                  TipCard("Talk gently and slowly", "This will write later"),
-                  TipCard("Use hand gestures when speaking",
+                  TipCard("Talk gently and slowly11", "This will write later"),
+                  TipCard("Use hand gestures when speaking11",
                       "This will write later"),
                   TipCard(
                       "Celebrate small achievements", "This will write later"),
                   TipCard("Keep eye contact gently", "This will write later"),
                   TipCard("Use routines and visuals", "This will write later"),
                   TipCard("Talk gently and slowly 2", "This will write later"),
-                  TipCard("Use hand gestures when speaking",
+                  TipCard("Use hand gestures when speaking 2",
                       "This will write later"),
                   TipCard(
-                      "Celebrate small achievements", "This will write later"),
-                  TipCard("Keep eye contact gently", "This will write later"),
-                  TipCard("Use routines and visuals", "This will write later"),
+                      "Celebrate small achievements2", "This will write later"),
+                  TipCard("Keep eye contact gently2", "This will write later"),
+                  TipCard("Use routines and visuals2", "This will write later"),
                 ],
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 100,
             )
           ],
