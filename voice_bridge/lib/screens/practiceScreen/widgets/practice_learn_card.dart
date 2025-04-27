@@ -23,10 +23,14 @@ class PracticeLearnCard extends StatelessWidget {
       onTap: onTap,
       child: Container(
         decoration: BoxDecoration(
-          color: color.withOpacity(AppColor.cardOpacity),
+          // color: color.withOpacity(AppColor.cardOpacity),
+          color: color.withAlpha((AppColor.cardOpacity* 255).toInt()),
+
           borderRadius: BorderRadius.circular(16),
           border: Border.all(
-            color: color.withOpacity(AppColor.cardBorderOpacity),
+            // color: color.withOpacity(AppColor.cardBorderOpacity),
+            color: color.withAlpha((AppColor.cardBorderOpacity* 255).toInt()),
+
             width: 2,
           ),
         ),

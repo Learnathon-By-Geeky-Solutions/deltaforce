@@ -9,13 +9,9 @@ class TestCompletionView extends StatelessWidget {
 
   TestCompletionView({super.key});
 
-  // const SessionCompletionView({super.key});
-
   @override
   Widget build(BuildContext context) {
     int result = controller.result.value;
-    print("result = $result");
-
     return Scaffold(
       appBar: AppBar(
         title: const Text('SCORE'),
