@@ -45,10 +45,6 @@ class TestController extends SessionController {
       "Emotion",
       "Family",
       "Living Skill",
-      "Music",
-      "Profession",
-      "Psychological",
-      "Social Skill",
       "Study"
     ]; // Add all categories// Add all categories
 
