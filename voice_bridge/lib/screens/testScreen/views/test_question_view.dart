@@ -1,3 +1,4 @@
+import 'package:delayed_display/delayed_display.dart';
 import 'package:dotlottie_loader/dotlottie_loader.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -9,7 +10,6 @@ class TestQuestionView extends StatelessWidget {
   final TestController controller = Get.find();
 
   TestQuestionView({super.key});
-  // final BaseController baseController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -30,8 +30,6 @@ class TestQuestionView extends StatelessWidget {
                       IconButton(
                         icon: const Icon(Icons.arrow_back, size: 30),
                         onPressed: () {
-                          // baseController.selectedIndex.value = 0;
-                          // Get.offNamed(RoutesName.baseView);// go to learn page
                           Get.offNamed(RoutesName.testDashboardScreen);
                         },
                       ),
@@ -49,14 +47,13 @@ class TestQuestionView extends StatelessWidget {
                 // Options grid (4 options)
                 Expanded(
                   flex: 3,
-                    child: DotLottieLoader.fromAsset("lib/resources/assets/Others/animations/confused.lottie",
-                        frameBuilder: (ctx, dotlottie) {
-                          if (dotlottie != null) {
-                            return Lottie.memory(dotlottie.animations.values.single);
-                          } else {
-                            return const Center(child: CircularProgressIndicator());
+                    child: DelayedDisplay(
+                      delay: const Duration(milliseconds: 200),
+                      child: DotLottieLoader.fromAsset("lib/resources/assets/Others/animations/confused.lottie",
+                          frameBuilder: (ctx, dotlottie) {
+                            return Lottie.memory(dotlottie!.animations.values.single);
                           }
-                        }
+                      ),
                     ),
                 ),
                 Expanded(
@@ -85,15 +82,14 @@ class TestQuestionView extends StatelessWidget {
                                     width: 3),
                                 borderRadius: BorderRadius.circular(10),
                               ),
-                              child: DotLottieLoader.fromAsset(lesson.lessons[optionIndex].animationAsset,
-                                  frameBuilder: (ctx, dotlottie) {
-                                    if (dotlottie != null) {
-                                      return Lottie.memory(dotlottie.animations.values.single);
-                                    } else {
-                                      return const Center(child: CircularProgressIndicator());
+                              child: DelayedDisplay(
+                                delay: const Duration(milliseconds: 200),
+                                child: DotLottieLoader.fromAsset(lesson.lessons[optionIndex].animationAsset,
+                                    frameBuilder: (ctx, dotlottie) {
+                                      return Lottie.memory(dotlottie!.animations.values.single);
                                     }
-                                  }
-                                  ),
+                                    ),
+                              ),
                             )
                         );
                       },
@@ -121,21 +117,19 @@ class TestQuestionView extends StatelessWidget {
             Obx(() {
               if (controller.showFeedbackAnimation.value) {
                 return Container(
-                  color: Colors.black.withOpacity(0.4),
+                  color: Colors.black.withAlpha((0.4*255).toInt()),
                   child: Center(
-                    child: DotLottieLoader.fromAsset(
-                        controller.isAnswerCorrect.value
-                              ? 'lib/resources/assets/Others/animations/tick-mark.lottie'
-                              : 'lib/resources/assets/Others/animations/crossmark.lottie',
-                        // "lib/resources/assets/Others/animations/confused.lottie",
-                         frameBuilder: (ctx, dotlottie) {
-                           if (dotlottie != null) {
-                             return Lottie.memory(dotlottie.animations.values.single);
-                           } else {
-                             return const Center(child: CircularProgressIndicator());
+                    child: DelayedDisplay(
+                      delay: const Duration(milliseconds: 200),
+                      child: DotLottieLoader.fromAsset(
+                          controller.isAnswerCorrect.value
+                                ? 'lib/resources/assets/Others/animations/tick-mark.lottie'
+                                : 'lib/resources/assets/Others/animations/crossmark.lottie',
+                           frameBuilder: (ctx, dotlottie) {
+                               return Lottie.memory(dotlottie!.animations.values.single);
                            }
-                         }
-                     ),
+                       ),
+                    ),
                   ),
                 );
               } else {

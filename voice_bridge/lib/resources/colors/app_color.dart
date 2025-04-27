@@ -13,8 +13,16 @@ class AppColor {
   // static const Color primaryColor = Colors.cyan;
   static const Color buttonColor = Colors.lightGreen;
 
-  static const double cardOpacity = 0.2;
-  static const double cardBorderOpacity = 0.4;
+  static const double cardOpacity = 0.4;
+  static const double cardBorderOpacity = 0.7;
+  static const double testLockCardOpacity = 0.4;
+
+  static const Color testCardUnlockGreenColor = Color(0xFF53B175);
+  static const Color testCardLockGrayColor = Color(0xFF808080);
+  static const Color testCardStartBlueColor = Color(0xFF0000FF);
+
+
+
 
   static const Color cardTextColor = Color(0xFF000000);
   static const Color blackColor = Color(0xFF000000);

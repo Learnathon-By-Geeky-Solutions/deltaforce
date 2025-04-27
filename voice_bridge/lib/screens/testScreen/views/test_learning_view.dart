@@ -32,17 +32,15 @@ class TestLearningView extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   IconButton(
-                    icon: Icon(Icons.arrow_back, size: 30),
+                    icon: const Icon(Icons.arrow_back, size: 30),
                     onPressed: () {
-                      // baseController.selectedIndex.value = 0;
-                      // Get.offNamed(RoutesName.baseView);// go to learn page
                       Get.offNamed(RoutesName.testDashboardScreen);
                     },
                   ),
-                  SizedBox(width: 8), // Space between the icon and text
+                  const SizedBox(width: 8), // Space between the icon and text
                   Text(
                     'Session: $sessionLevel',
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
                     ),
@@ -55,7 +53,7 @@ class TestLearningView extends StatelessWidget {
             Expanded(
               child: Container(
                 width: double.infinity,
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.vertical(top: Radius.circular(30)),
                 ),
@@ -82,7 +80,7 @@ class TestLearningView extends StatelessWidget {
                       child: Center(
                         child: Text(
                           lesson.lessonName,
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 50,
                             fontWeight: FontWeight.bold,
                           ),

@@ -1,6 +1,8 @@
+import 'package:delayed_display/delayed_display.dart';
 import 'package:dotlottie_loader/dotlottie_loader.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
+import 'package:voice_bridge/resources/colors/app_color.dart';
 class TestSessionCard extends StatelessWidget {
   final int index;
   final bool isUnlocked;
@@ -24,17 +26,10 @@ class TestSessionCard extends StatelessWidget {
           height: 90,
           decoration: BoxDecoration(
             shape: BoxShape.circle,
-            color: isUnlocked ? isLastUnlocked?Colors.blue:Colors.green : Colors.grey.shade400,
-            boxShadow: isUnlocked
-                ? [
+            color: isUnlocked ? isLastUnlocked? AppColor.testCardStartBlueColor: AppColor.testCardUnlockGreenColor: AppColor.testCardLockGrayColor,
+            boxShadow:[
               BoxShadow(
-                  color: Colors.green.withOpacity(0.4),
-                  blurRadius: 10,
-                  spreadRadius: 2)
-            ]
-                : [
-              BoxShadow(
-                  color: Colors.grey.withOpacity(0.4),
+                  color: AppColor.testCardUnlockGreenColor.withAlpha((AppColor.testLockCardOpacity * 255).toInt()),
                   blurRadius: 10,
                   spreadRadius: 2)
             ],
@@ -48,15 +43,14 @@ class TestSessionCard extends StatelessWidget {
                   child: SizedBox(
                     width: 100,
                     height: 100,
-                    child: DotLottieLoader.fromAsset(
-                      "lib/resources/assets/Others/animations/start.lottie",
-                      frameBuilder: (ctx, dotlottie) {
-                        if (dotlottie != null) {
-                          return Lottie.memory(dotlottie.animations.values.single);
-                        } else {
-                          return const Center(child: CircularProgressIndicator());
-                        }
-                      },
+                    child: DelayedDisplay(
+                      delay: const Duration(milliseconds: 200),
+                      child: DotLottieLoader.fromAsset(
+                        "lib/resources/assets/Others/animations/start.lottie",
+                        frameBuilder: (ctx, dotlottie) {
+                            return Lottie.memory(dotlottie!.animations.values.single);
+                        },
+                      ),
                     ),
                   ),
                 ),
@@ -78,28 +72,27 @@ class TestSessionCard extends StatelessWidget {
           child: FutureBuilder<int>(
             future: testScore,
             builder: (context, snapshot) {
-              int stars = 0;
-              if (snapshot.connectionState == ConnectionState.done &&
-                  snapshot.hasData &&
-                  isUnlocked) {
-                final score = snapshot.data!;
-                if (score >= 90) {
-                  stars = 3;
-                } else if (score >= 75) {
-                  stars = 2;
-                }else if (score >= 50) {
-                  stars = 1;
-                } else {
-                  stars = 0;
-                }
-              }
+              final score = snapshot.data!;
+
               return Row(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: List.generate(3, (starIndex) {
-                  return Icon(Icons.star,
-                      size: starIndex == 1? 25: 18,
-                      color: starIndex < stars ? Colors.yellowAccent : Colors.white);
-                }),
+                children:[
+                  Icon(
+                    Icons.star,
+                    size:  18,
+                    color: score >= 50 ? Colors.yellowAccent : Colors.white,
+                  ),
+                  Icon(
+                    Icons.star,
+                    size: 25,
+                    color: score >= 75 ? Colors.yellowAccent : Colors.white,
+                  ),
+                  Icon(
+                    Icons.star,
+                    size:  18,
+                    color: score >= 90 ? Colors.yellowAccent : Colors.white,
+                  ),
+                ],
               );
             },
           ),

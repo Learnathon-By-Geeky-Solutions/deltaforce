@@ -37,7 +37,6 @@ class TestDashboardScreen extends StatelessWidget {
           centerTitle: true,
         ),
         backgroundColor: Colors.white,
-        // appBar: AppBar(title: Text(controller.testCurrentCategory)),
         body: Stack(
           children:[
 
@@ -69,20 +68,12 @@ class TestDashboardScreen extends StatelessWidget {
               padding: const EdgeInsets.symmetric(vertical: 1),
               itemCount: totalSessions,
               itemBuilder: (context, index) {
-                int pos = index % 6;
+                int pos = index % 2;
                 bool isUnlocked = index < controller.testTopSessionLevel[category]!;
                 return Align(
-                  alignment: (pos == 5)
-                      ? const Alignment(-0.8, 0)
-                      : (pos == 0)
-                          ? const Alignment(-0.27, 0)
-                          : (pos == 1)
-                              ? const Alignment(0.27, 0)
-                              : (pos == 2)
-                                  ? const Alignment(0.8, 0)
-                                  : (pos == 3)
-                                      ? const Alignment(0.27, 0)
-                                      : const Alignment(-0.27, 0),
+                  alignment: (pos == 0)
+                      ? const Alignment(-0.4, 0)
+                       : const Alignment(0.4, 0),
                   child: Padding(
                     padding:
                         const EdgeInsets.symmetric(vertical: 5, horizontal: 16),
