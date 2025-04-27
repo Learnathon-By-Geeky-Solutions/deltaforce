@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:voice_bridge/features/Settings/view-model/settings_view_model.dart';
 import 'package:voice_bridge/resources/colors/app_color.dart';
-import 'package:voice_bridge/widgets/BorderListTile.dart';
+import 'package:voice_bridge/widgets/border_list_tile.dart';
 
 class SettingsScreen extends StatelessWidget {
   final ThemeViewModel _themeController = Get.put(ThemeViewModel());
