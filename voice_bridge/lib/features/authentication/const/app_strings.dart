@@ -1,3 +1,5 @@
+import 'package:get/get.dart';
+
 class AppStrings {
   static const String loginSuccess = "Login successful";
   static const String signupSuccess = "Signup successful. Please verify your email.";
@@ -11,7 +13,7 @@ class AppStrings {
   static const String password = 'Password';
   static const String signUp = 'Sign Up';
   static const String login = 'Login';
-  static const String dontHaveAccount = 'Don\'t have an account? Sign up';
+  static  String dontHaveAccount = 'Don\'t have an account? Sign up';
   static const String alreadyHaveAccount = 'Already have an account? Login';
   static const String confirmPassword = 'Confirm Password';
   static const String passwordMismatch = 'Passwords do not match';

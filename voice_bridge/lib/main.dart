@@ -4,6 +4,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:voice_bridge/features/Settings/service/theme_service.dart';
 import 'package:voice_bridge/features/Settings/view-model/settings_view_model.dart';
+import 'package:voice_bridge/features/language/language.dart';
 import 'package:voice_bridge/resources/getx_localization/languages.dart';
 import 'package:voice_bridge/resources/routes/routes.dart';
 import 'package:voice_bridge/features/authentication/view_models/auth_view_model.dart';
@@ -27,7 +28,7 @@ class MyApp extends StatelessWidget {
       child: GetMaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',
-        translations: Languages(),
+        translations: AppLanguageTexts(),
         locale: const Locale('en', 'US'),
         fallbackLocale: const Locale('en', 'US'),
         theme: ThemeData.light(),
