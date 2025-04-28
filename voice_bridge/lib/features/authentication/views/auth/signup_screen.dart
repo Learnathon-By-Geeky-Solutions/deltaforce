@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:voice_bridge/features/authentication/const/app_strings.dart';
 import 'package:voice_bridge/features/authentication/view_models/auth_view_model.dart';
+import 'package:voice_bridge/features/language/language_toggle.dart';
 import 'package:voice_bridge/resources/colors/app_color.dart';
 import 'package:voice_bridge/widgets/custom_button.dart';
 
@@ -15,6 +16,8 @@ class SignupScreen extends StatelessWidget {
   final TextEditingController _nameController = TextEditingController();
   final RxBool _obscurePassword = true.obs;
   final RxBool _obscureConfirmPassword = true.obs;
+  final RxString _currentLanguage = 'en_US'.obs;
+
 
   SignupScreen({super.key});
 
@@ -22,19 +25,33 @@ class SignupScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(AppStrings.signUp,
-            style: TextStyle(
-                fontWeight: FontWeight.bold, color: AppColor.whiteColor)),
-        backgroundColor: AppColor.appBarColor,
+        title: Text(
+          'sign_up'.tr,
+          style: TextStyle(
+              color: AppColor.whiteColor, fontWeight: FontWeight.bold),
+        ),
         centerTitle: true,
+        actions: [
+          IconButton(
+            icon: Obx(() => Icon(
+              _currentLanguage.value == 'en_US'
+                  ? Icons.language
+                  : Icons.translate,
+              color: AppColor.whiteColor,
+            )),
+            onPressed: _toggleLanguage,
+          ),
+        ],
+
+        backgroundColor: AppColor.appBarColor,
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(20),
         child: Column(
           children: [
             const SizedBox(height: 20),
-            const Text(
-              AppStrings.createAccount,
+             Text(
+              'create_account'.tr,
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 30),
@@ -47,12 +64,12 @@ class SignupScreen extends StatelessWidget {
             _buildConfirmPasswordField(),
             const SizedBox(height: 30),
             CustomButton(
-              text: AppStrings.signUp,
+              text: 'sign_up'.tr,
               onPressed: _handleSignUp,
             ),
             const SizedBox(height: 20),
-            const Text(
-              "Or continue with",
+             Text(
+              "or_continue_with".tr,
               style: TextStyle(color: Colors.grey),
             ),
             const SizedBox(height: 20),
@@ -75,7 +92,7 @@ class SignupScreen extends StatelessWidget {
     return TextField(
       controller: _nameController,
       decoration: InputDecoration(
-        labelText: AppStrings.userName,
+        labelText: 'name'.tr,
         prefixIcon: const Icon(Icons.person),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
@@ -88,7 +105,7 @@ class SignupScreen extends StatelessWidget {
     return TextField(
       controller: _emailController,
       decoration: InputDecoration(
-        labelText: AppStrings.email,
+        labelText: 'email'.tr,
         prefixIcon: const Icon(Icons.email),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
@@ -102,7 +119,7 @@ class SignupScreen extends StatelessWidget {
       controller: _passwordController,
       obscureText: _obscurePassword.value,
       decoration: InputDecoration(
-        labelText: AppStrings.password,
+        labelText: 'password'.tr,
         prefixIcon: const Icon(Icons.lock),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
@@ -125,7 +142,7 @@ class SignupScreen extends StatelessWidget {
       controller: _confirmPasswordController,
       obscureText: _obscureConfirmPassword.value,
       decoration: InputDecoration(
-        labelText: AppStrings.password,
+        labelText: 'password'.tr,
         prefixIcon: const Icon(Icons.lock),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
@@ -153,17 +170,26 @@ class SignupScreen extends StatelessWidget {
         ),
       ),
       onPressed: () => _authController.signInWithGoogle(),
-      child: const Row(
+      child:  Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           FaIcon(FontAwesomeIcons.google, color: Colors.red),
           SizedBox(width: 10),
-          Text(AppStrings.signUpWithGoogle),
+          Text('sign_up_with_google'.tr),
         ],
       ),
     );
   }
-
+//Language Toggle
+  void _toggleLanguage() {
+    if (_currentLanguage.value == 'en_US') {
+      Get.updateLocale(const Locale('bn', 'BD'));
+      _currentLanguage.value = 'bn_BD';
+    } else {
+      Get.updateLocale(const Locale('en', 'US'));
+      _currentLanguage.value = 'en_US';
+    }
+  }
   void _handleSignUp() {
     if (_passwordController.text != _confirmPasswordController.text) {
       Get.snackbar(AppStrings.error, AppStrings.passwordMismatch);

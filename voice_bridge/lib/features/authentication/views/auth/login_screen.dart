@@ -7,6 +7,8 @@ import 'package:voice_bridge/features/authentication/views/auth/signup_screen.da
 import 'package:voice_bridge/resources/colors/app_color.dart';
 import 'package:voice_bridge/widgets/custom_button.dart';
 
+import '../../../language/language_toggle.dart';
+
 class LoginScreen extends StatelessWidget {
   final AuthViewModel _authController = Get.find();
   final TextEditingController _emailController = TextEditingController();
@@ -29,7 +31,7 @@ class LoginScreen extends StatelessWidget {
         actions: [
           IconButton(
             icon: Obx(() => Icon(
-                  _currentLanguage.value == 'en_US'
+              _currentLanguage.value == 'en_US'
                       ? Icons.language
                       : Icons.translate,
                   color: AppColor.whiteColor,
