@@ -5,69 +5,75 @@ import 'package:voice_bridge/features/authentication/const/app_strings.dart';
 import 'package:voice_bridge/features/authentication/view_models/auth_view_model.dart';
 import 'package:voice_bridge/resources/colors/app_color.dart';
 import 'package:voice_bridge/widgets/custom_button.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class SignupScreen extends StatelessWidget {
   final AuthViewModel _authController = Get.find();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _confirmPasswordController =
-      TextEditingController();
+  final TextEditingController _confirmPasswordController = TextEditingController();
   final TextEditingController _nameController = TextEditingController();
   final RxBool _obscurePassword = true.obs;
   final RxBool _obscureConfirmPassword = true.obs;
-
-  SignupScreen({super.key});
+  final RxBool _isLoading = false.obs;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(AppStrings.signUp,
+        title: Text(AppStrings.signUp,
             style: TextStyle(
                 fontWeight: FontWeight.bold, color: AppColor.whiteColor)),
         backgroundColor: AppColor.appBarColor,
         centerTitle: true,
       ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(20),
+      body: Obx(() => _isLoading.value
+          ? Center(
+        child: SpinKitCircle(
+          color: AppColor.appBarColor,
+          size: 50.0,
+        ),
+      )
+          : SingleChildScrollView(
+        padding: EdgeInsets.all(20),
         child: Column(
           children: [
-            const SizedBox(height: 20),
-            const Text(
+            SizedBox(height: 20),
+            Text(
               AppStrings.createAccount,
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
-            const SizedBox(height: 30),
+            SizedBox(height: 30),
             _buildNameField(),
-            const SizedBox(height: 20),
+            SizedBox(height: 20),
             _buildEmailField(),
-            const SizedBox(height: 20),
+            SizedBox(height: 20),
             _buildPasswordField(),
-            const SizedBox(height: 20),
+            SizedBox(height: 20),
             _buildConfirmPasswordField(),
-            const SizedBox(height: 30),
+            SizedBox(height: 30),
             CustomButton(
               text: AppStrings.signUp,
               onPressed: _handleSignUp,
             ),
-            const SizedBox(height: 20),
-            const Text(
+            SizedBox(height: 20),
+            Text(
               "Or continue with",
               style: TextStyle(color: Colors.grey),
             ),
-            const SizedBox(height: 20),
+            SizedBox(height: 20),
             _buildGoogleSignInButton(),
-            const SizedBox(height: 15),
+            SizedBox(height: 15),
             TextButton(
               onPressed: () => Get.back(),
-              child: const Text(
+              child: Text(
                 AppStrings.alreadyHaveAccount,
                 style: TextStyle(color: Colors.blue),
               ),
             ),
           ],
         ),
-      ),
+      )),
     );
   }
 
@@ -76,7 +82,7 @@ class SignupScreen extends StatelessWidget {
       controller: _nameController,
       decoration: InputDecoration(
         labelText: AppStrings.userName,
-        prefixIcon: const Icon(Icons.person),
+        prefixIcon: Icon(Icons.person),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
         ),
@@ -89,11 +95,12 @@ class SignupScreen extends StatelessWidget {
       controller: _emailController,
       decoration: InputDecoration(
         labelText: AppStrings.email,
-        prefixIcon: const Icon(Icons.email),
+        prefixIcon: Icon(Icons.email),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
         ),
       ),
+      keyboardType: TextInputType.emailAddress,
     );
   }
 
@@ -103,7 +110,7 @@ class SignupScreen extends StatelessWidget {
       obscureText: _obscurePassword.value,
       decoration: InputDecoration(
         labelText: AppStrings.password,
-        prefixIcon: const Icon(Icons.lock),
+        prefixIcon: Icon(Icons.lock),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
         ),
@@ -112,9 +119,7 @@ class SignupScreen extends StatelessWidget {
             _obscurePassword.value ? Icons.visibility : Icons.visibility_off,
             color: Colors.grey,
           ),
-          onPressed: () {
-            _obscurePassword.toggle();
-          },
+          onPressed: () => _obscurePassword.toggle(),
         ),
       ),
     ));
@@ -125,8 +130,8 @@ class SignupScreen extends StatelessWidget {
       controller: _confirmPasswordController,
       obscureText: _obscureConfirmPassword.value,
       decoration: InputDecoration(
-        labelText: AppStrings.password,
-        prefixIcon: const Icon(Icons.lock),
+        labelText: "Confirm Password",
+        prefixIcon: Icon(Icons.lock),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
         ),
@@ -135,9 +140,7 @@ class SignupScreen extends StatelessWidget {
             _obscureConfirmPassword.value ? Icons.visibility : Icons.visibility_off,
             color: Colors.grey,
           ),
-          onPressed: () {
-            _obscureConfirmPassword.toggle();
-          },
+          onPressed: () => _obscureConfirmPassword.toggle(),
         ),
       ),
     ));
@@ -146,14 +149,18 @@ class SignupScreen extends StatelessWidget {
   Widget _buildGoogleSignInButton() {
     return OutlinedButton(
       style: OutlinedButton.styleFrom(
-        minimumSize: const Size(double.infinity, 50),
-        side: const BorderSide(color: Colors.grey),
+        minimumSize: Size(double.infinity, 50),
+        side: BorderSide(color: Colors.grey),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10),
         ),
       ),
-      onPressed: () => _authController.signInWithGoogle(),
-      child: const Row(
+      onPressed: () async {
+        _isLoading.value = true;
+        await _authController.signInWithGoogle();
+        _isLoading.value = false;
+      },
+      child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           FaIcon(FontAwesomeIcons.google, color: Colors.red),
@@ -164,14 +171,39 @@ class SignupScreen extends StatelessWidget {
     );
   }
 
-  void _handleSignUp() {
+  void _handleSignUp() async {
+    if (_nameController.text.trim().isEmpty) {
+      Get.snackbar("Error", "Please enter your name");
+      return;
+    }
+    if (_emailController.text.trim().isEmpty) {
+      Get.snackbar("Error", "Please enter your email");
+      return;
+    }
+    if (!GetUtils.isEmail(_emailController.text.trim())) {
+      Get.snackbar("Error", "Please enter a valid email");
+      return;
+    }
+    if (_passwordController.text.isEmpty) {
+      Get.snackbar("Error", "Please enter your password");
+      return;
+    }
+    if (_confirmPasswordController.text.isEmpty) {
+      Get.snackbar("Error", "Please confirm your password");
+      return;
+    }
     if (_passwordController.text != _confirmPasswordController.text) {
       Get.snackbar(AppStrings.error, AppStrings.passwordMismatch);
       return;
     }
-    _authController.signUp(
+
+    _isLoading.value = true;
+
+    await _authController.signUp(
       _emailController.text.trim(),
       _passwordController.text.trim(),
     );
+
+    _isLoading.value = false;
   }
 }

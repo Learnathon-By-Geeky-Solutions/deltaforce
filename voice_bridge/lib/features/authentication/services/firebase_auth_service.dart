@@ -6,9 +6,17 @@ import 'package:voice_bridge/resources/colors/app_color.dart';
 import 'package:voice_bridge/utils/message.dart';
 
 class FirebaseAuthService extends GetxController {
-  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
-  final GoogleSignIn _googleSignIn = GoogleSignIn();
-  final FacebookAuth _facebookAuth = FacebookAuth.instance;
+  final FirebaseAuth _firebaseAuth;
+  final GoogleSignIn _googleSignIn;
+  final FacebookAuth _facebookAuth;
+
+  FirebaseAuthService({
+    FirebaseAuth? firebaseAuth,
+    GoogleSignIn? googleSignIn,
+    FacebookAuth? facebookAuth,
+  })  : _firebaseAuth = firebaseAuth ?? FirebaseAuth.instance,
+        _googleSignIn = googleSignIn ?? GoogleSignIn(),
+        _facebookAuth = facebookAuth ?? FacebookAuth.instance;
 
   Stream<User?> get authStateChanges => _firebaseAuth.authStateChanges();
   User? getCurrentUser() => _firebaseAuth.currentUser;
@@ -17,34 +25,48 @@ class FirebaseAuthService extends GetxController {
     try {
       final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
       if (googleUser == null) {
-        Get.snackbar(Message.googleSignInFailed, Message.cancelled,
-            backgroundColor: AppColor.buttonColor);
+        Get.snackbar(
+          Message.googleSignInFailed, Message.cancelled,
+          backgroundColor: AppColor.buttonColor,
+          duration: Get.testMode
+              ? const Duration(milliseconds: 100)
+              : null, // 👈 ADD THIS
+        );
         return null;
       }
 
-      final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
+      final GoogleSignInAuthentication googleAuth =
+          await googleUser.authentication;
       final credential = GoogleAuthProvider.credential(
         accessToken: googleAuth.accessToken,
         idToken: googleAuth.idToken,
       );
 
-      final userCredential = await _firebaseAuth.signInWithCredential(credential);
+      final userCredential =
+          await _firebaseAuth.signInWithCredential(credential);
       return userCredential.user;
     } catch (e) {
-      Get.snackbar(Message.signupError, "Error: $e",
-          backgroundColor: AppColor.buttonColor);
+      Get.snackbar(
+        Message.signupError, "Error: $e",
+        backgroundColor: AppColor.buttonColor,
+        duration: Get.testMode
+            ? const Duration(milliseconds: 100)
+            : null, // 👈 ADD THIS
+      );
       return null;
     }
   }
 
-  Future<UserCredential> signUpWithEmailAndPassword(String email, String password) async {
+  Future<UserCredential> signUpWithEmailAndPassword(
+      String email, String password) async {
     return await _firebaseAuth.createUserWithEmailAndPassword(
       email: email,
       password: password,
     );
   }
 
-  Future<UserCredential> signInWithEmailAndPassword(String email, String password) async {
+  Future<UserCredential> signInWithEmailAndPassword(
+      String email, String password) async {
     return await _firebaseAuth.signInWithEmailAndPassword(
       email: email,
       password: password,
@@ -55,7 +77,8 @@ class FirebaseAuthService extends GetxController {
     await _firebaseAuth.sendPasswordResetEmail(email: email);
   }
 
-  Future<void> updatePassword(String currentPassword, String newPassword) async {
+  Future<void> updatePassword(
+      String currentPassword, String newPassword) async {
     final user = _firebaseAuth.currentUser;
     if (user != null && user.email != null) {
       final credential = EmailAuthProvider.credential(
