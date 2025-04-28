@@ -2,7 +2,7 @@
 
 <div align="center">
   
-![DeltaForce Logo](https://via.placeholder.com/200x100?text=DeltaForce+Logo)  
+![DeltaForce Logo]([https://via.placeholder.com/200x100?text=DeltaForce+Logo](https://github.com/Learnathon-By-Geeky-Solutions/deltaforce/blob/SBF_RUSHO/voice_bridge/assets/appLogo.png))  
 **🧩 DeltaForce**  
 
 *Empowering Autistic Children Through Interactive Learning*  
