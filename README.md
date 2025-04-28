@@ -136,15 +136,15 @@ deltaforce/
 
 <div align="center">
 
-| Login Screen | Alphabet Learning | Emotion Training |
+| Login Screen | SignUp Screen | Forgot Password |
 |--------------|------------------|-----------------|
 | ![Login](https://raw.githubusercontent.com/Learnathon-By-Geeky-Solutions/deltaforce/SBF_RUSHO/voice_bridge/assets/DeltaForce-20250428T033830Z-001/DeltaForce/Screenshot_20250428_092340.png) | ![Alphabet](https://raw.githubusercontent.com/Learnathon-By-Geeky-Solutions/deltaforce/SBF_RUSHO/voice_bridge/assets/DeltaForce-20250428T033830Z-001/DeltaForce/Screenshot_20250428_092347.png) | ![Emotion](https://raw.githubusercontent.com/Learnathon-By-Geeky-Solutions/deltaforce/SBF_RUSHO/voice_bridge/assets/DeltaForce-20250428T033830Z-001/DeltaForce/Screenshot_20250428_092355.png) |
 
-| Animal Recognition | Fruit Slice Game | Progress Test |
+| Home | App Drawer | Study |
 |--------------------|-----------------|---------------|
 | ![Animals](https://raw.githubusercontent.com/Learnathon-By-Geeky-Solutions/deltaforce/SBF_RUSHO/voice_bridge/assets/DeltaForce-20250428T033830Z-001/DeltaForce/Screenshot_20250428_092426.png) | ![Game](https://raw.githubusercontent.com/Learnathon-By-Geeky-Solutions/deltaforce/SBF_RUSHO/voice_bridge/assets/DeltaForce-20250428T033830Z-001/DeltaForce/Screenshot_20250428_092431.png) | ![Test](https://raw.githubusercontent.com/Learnathon-By-Geeky-Solutions/deltaforce/SBF_RUSHO/voice_bridge/assets/DeltaForce-20250428T033830Z-001/DeltaForce/Screenshot_20250428_092441.png) |
 
-| Social Skills | Settings Screen | Profile View |
+| Living Skills | Family Relationship | Emotion |
 |---------------|-----------------|--------------|
 | ![Social](https://raw.githubusercontent.com/Learnathon-By-Geeky-Solutions/deltaforce/SBF_RUSHO/voice_bridge/assets/DeltaForce-20250428T033830Z-001/DeltaForce/Screenshot_20250428_092456.png) | ![Settings](https://raw.githubusercontent.com/Learnathon-By-Geeky-Solutions/deltaforce/SBF_RUSHO/voice_bridge/assets/DeltaForce-20250428T033830Z-001/DeltaForce/Screenshot_20250428_092502.png) | ![Profile](https://raw.githubusercontent.com/Learnathon-By-Geeky-Solutions/deltaforce/SBF_RUSHO/voice_bridge/assets/DeltaForce-20250428T033830Z-001/DeltaForce/Screenshot_20250428_092507.png) |
 
