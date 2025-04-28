@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:voice_bridge/features/authentication/const/app_strings.dart';
 import 'package:voice_bridge/features/authentication/view_models/auth_view_model.dart';
@@ -38,7 +39,7 @@ class LoginScreen extends StatelessWidget {
             Align(
               alignment: Alignment.centerRight,
               child: TextButton(
-                onPressed: () => Get.to(ForgotPasswordScreen()) ,
+                onPressed: () => Get.to(() => ForgotPasswordScreen()),
                 child: const Text('Forgot Password?'),
               ),
             ),
@@ -113,16 +114,54 @@ class LoginScreen extends StatelessWidget {
   }
 
   void _handleLogin() async {
-    await _authController.signIn(
-      _emailController.text.trim(),
-      _passwordController.text.trim(),
-    );
+    final email = _emailController.text.trim();
+    final password = _passwordController.text.trim();
+
+    // --- Validation ---
+    if (email.isEmpty) {
+      Get.snackbar('Error', 'Please enter your email');
+      return;
+    }
+    if (!GetUtils.isEmail(email)) {
+      Get.snackbar('Error', 'Please enter a valid email');
+      return;
+    }
+    if (password.isEmpty) {
+      Get.snackbar('Error', 'Please enter your password');
+      return;
+    }
+    if (password.length < 6) {
+      Get.snackbar('Error', 'Password must be at least 6 characters');
+      return;
+    }
+
+    _showLoadingDialog();
+
+    await _authController.signIn(email, password);
+
     _hideLoadingDialog();
   }
 
   void _handleGoogleLogin() async {
+    _showLoadingDialog();
     await _authController.signInWithGoogle();
     _hideLoadingDialog();
+  }
+
+  void _showLoadingDialog() {
+    showDialog(
+      context: Get.context!,
+      barrierDismissible: false,
+      builder: (_) => Dialog(
+        backgroundColor: Colors.transparent,
+        child: Center(
+          child: SpinKitFadingCircle(
+            color: AppColor.appBarColor,
+            size: 50.0,
+          ),
+        ),
+      ),
+    );
   }
 
   void _hideLoadingDialog() {

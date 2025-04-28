@@ -15,6 +15,7 @@ class AppColor {
 
   static const double cardOpacity = 0.2;
   static const double cardBorderOpacity = 0.4;
+  static const Color redColor = Colors.red;
 
   static const Color cardTextColor = Color(0xFF000000);
   static const Color blackColor = Color(0xFF000000);

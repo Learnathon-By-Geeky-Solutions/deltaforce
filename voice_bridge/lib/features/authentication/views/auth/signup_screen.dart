@@ -5,16 +5,17 @@ import 'package:voice_bridge/features/authentication/const/app_strings.dart';
 import 'package:voice_bridge/features/authentication/view_models/auth_view_model.dart';
 import 'package:voice_bridge/resources/colors/app_color.dart';
 import 'package:voice_bridge/widgets/custom_button.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class SignupScreen extends StatelessWidget {
   final AuthViewModel _authController = Get.find();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _confirmPasswordController =
-      TextEditingController();
+  final TextEditingController _confirmPasswordController = TextEditingController();
   final TextEditingController _nameController = TextEditingController();
   final RxBool _obscurePassword = true.obs;
   final RxBool _obscureConfirmPassword = true.obs;
+  final RxBool _isLoading = false.obs;
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +27,14 @@ class SignupScreen extends StatelessWidget {
         backgroundColor: AppColor.appBarColor,
         centerTitle: true,
       ),
-      body: SingleChildScrollView(
+      body: Obx(() => _isLoading.value
+          ? Center(
+        child: SpinKitCircle(
+          color: AppColor.appBarColor,
+          size: 50.0,
+        ),
+      )
+          : SingleChildScrollView(
         padding: EdgeInsets.all(20),
         child: Column(
           children: [
@@ -65,7 +73,7 @@ class SignupScreen extends StatelessWidget {
             ),
           ],
         ),
-      ),
+      )),
     );
   }
 
@@ -92,6 +100,7 @@ class SignupScreen extends StatelessWidget {
           borderRadius: BorderRadius.circular(10),
         ),
       ),
+      keyboardType: TextInputType.emailAddress,
     );
   }
 
@@ -110,9 +119,7 @@ class SignupScreen extends StatelessWidget {
             _obscurePassword.value ? Icons.visibility : Icons.visibility_off,
             color: Colors.grey,
           ),
-          onPressed: () {
-            _obscurePassword.toggle();
-          },
+          onPressed: () => _obscurePassword.toggle(),
         ),
       ),
     ));
@@ -123,7 +130,7 @@ class SignupScreen extends StatelessWidget {
       controller: _confirmPasswordController,
       obscureText: _obscureConfirmPassword.value,
       decoration: InputDecoration(
-        labelText: AppStrings.password,
+        labelText: "Confirm Password",
         prefixIcon: Icon(Icons.lock),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
@@ -133,9 +140,7 @@ class SignupScreen extends StatelessWidget {
             _obscureConfirmPassword.value ? Icons.visibility : Icons.visibility_off,
             color: Colors.grey,
           ),
-          onPressed: () {
-            _obscureConfirmPassword.toggle();
-          },
+          onPressed: () => _obscureConfirmPassword.toggle(),
         ),
       ),
     ));
@@ -150,7 +155,11 @@ class SignupScreen extends StatelessWidget {
           borderRadius: BorderRadius.circular(10),
         ),
       ),
-      onPressed: () => _authController.signInWithGoogle(),
+      onPressed: () async {
+        _isLoading.value = true;
+        await _authController.signInWithGoogle();
+        _isLoading.value = false;
+      },
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -162,14 +171,39 @@ class SignupScreen extends StatelessWidget {
     );
   }
 
-  void _handleSignUp() {
+  void _handleSignUp() async {
+    if (_nameController.text.trim().isEmpty) {
+      Get.snackbar("Error", "Please enter your name");
+      return;
+    }
+    if (_emailController.text.trim().isEmpty) {
+      Get.snackbar("Error", "Please enter your email");
+      return;
+    }
+    if (!GetUtils.isEmail(_emailController.text.trim())) {
+      Get.snackbar("Error", "Please enter a valid email");
+      return;
+    }
+    if (_passwordController.text.isEmpty) {
+      Get.snackbar("Error", "Please enter your password");
+      return;
+    }
+    if (_confirmPasswordController.text.isEmpty) {
+      Get.snackbar("Error", "Please confirm your password");
+      return;
+    }
     if (_passwordController.text != _confirmPasswordController.text) {
       Get.snackbar(AppStrings.error, AppStrings.passwordMismatch);
       return;
     }
-    _authController.signUp(
+
+    _isLoading.value = true;
+
+    await _authController.signUp(
       _emailController.text.trim(),
       _passwordController.text.trim(),
     );
+
+    _isLoading.value = false;
   }
 }

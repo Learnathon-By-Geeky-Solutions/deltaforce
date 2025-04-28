@@ -25,4 +25,5 @@ class AppStrings {
   static const String successful = "Successful";
   static const String error = "Error";
   static const String emailVerification = "Email Verification";
+  static const String welcomeBack = "Welcome";
 }
