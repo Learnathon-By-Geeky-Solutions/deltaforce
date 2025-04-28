@@ -147,7 +147,8 @@ deltaforce/
 | Living Skills | Family Relationship | Emotion |
 |---------------|-----------------|--------------|
 | ![Social](https://raw.githubusercontent.com/Learnathon-By-Geeky-Solutions/deltaforce/SBF_RUSHO/voice_bridge/assets/DeltaForce-20250428T033830Z-001/DeltaForce/Screenshot_20250428_092456.png) | ![Settings](https://raw.githubusercontent.com/Learnathon-By-Geeky-Solutions/deltaforce/SBF_RUSHO/voice_bridge/assets/DeltaForce-20250428T033830Z-001/DeltaForce/Screenshot_20250428_092502.png) | ![Profile](https://raw.githubusercontent.com/Learnathon-By-Geeky-Solutions/deltaforce/SBF_RUSHO/voice_bridge/assets/DeltaForce-20250428T033830Z-001/DeltaForce/Screenshot_20250428_092507.png) |
-
+| **Social Skills** | **Settings Screen** | **Profile View** |
+| ![Screen 10 - Family](https://raw.githubusercontent.com/Learnathon-By-Geeky-Solutions/deltaforce/SBF_RUSHO/voice_bridge/assets/DeltaForce-20250428T033830Z-001/DeltaForce/Screenshot_20250428_092519.png) | ![Screen 11 - Living Skills](https://raw.githubusercontent.com/Learnathon-By-Geeky-Solutions/deltaforce/SBF_RUSHO/voice_bridge/assets/DeltaForce-20250428T033830Z-001/DeltaForce/Screenshot_20250428_092527.png) | ![Screen 12 - Navigation](https://raw.githubusercontent.com/Learnathon-By-Geeky-Solutions/deltaforce/SBF_RUSHO/voice_bridge/assets/DeltaForce-20250428T033830Z-001/DeltaForce/Screenshot_20250428_092533.png) |
 </div>
 
 ### Steps
