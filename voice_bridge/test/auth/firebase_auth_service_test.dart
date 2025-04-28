@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:get/get.dart'; // <-- ADD THIS
+import 'package:get/get.dart';
 import 'package:mockito/mockito.dart';
 import 'package:voice_bridge/features/authentication/services/firebase_auth_service.dart';
 
@@ -173,6 +173,63 @@ void main() {
     });
 
   });
+
+  test('FirebaseAuthService constructor works', () {
+    final service = FirebaseAuthService(
+      firebaseAuth: mockFirebaseAuth,
+      googleSignIn: mockGoogleSignIn,
+      facebookAuth: mockFacebookAuth,
+    );
+
+    expect(service, isNotNull);
+  });
+
+
+  testWidgets('signInWithGoogle - user cancels', (tester) async {
+    await tester.pumpWidget(
+      GetMaterialApp(
+        home: Scaffold(),
+      ),
+    );
+
+    // Arrange
+    when(mockGoogleSignIn.signIn()).thenAnswer((_) async => null);
+
+    // Act
+    final user = await authService.signInWithGoogle();
+
+    // Let snackbar animations finish
+    await tester.pumpAndSettle();
+
+    // Assert
+    expect(user, isNull);
+    verify(mockGoogleSignIn.signIn()).called(1);
+  });
+
+
+
+
+  testWidgets('signInWithGoogle - throws exception', (tester) async {
+    await tester.pumpWidget(
+      GetMaterialApp(
+        home: Scaffold(),
+      ),
+    );
+
+    // Arrange
+    when(mockGoogleSignIn.signIn()).thenThrow(Exception('Google Sign-In failed'));
+
+    // Act
+    final user = await authService.signInWithGoogle();
+
+    // Let snackbar animations finish
+    await tester.pumpAndSettle();
+
+    // Assert
+    expect(user, isNull);
+    verify(mockGoogleSignIn.signIn()).called(1);
+  });
+
 
 }
 
