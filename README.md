@@ -132,7 +132,6 @@ deltaforce/
 - Android Studio or VSCode
 
 ### Steps
-```bash
 # Clone the repo
 git clone https://github.com/Learnathon-By-Geeky-Solutions/deltaforce.git
 
