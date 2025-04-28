@@ -47,10 +47,11 @@ class AutismController extends GetxController {
         : 0.0;
 
     double yesNoScore = yesNoAnswers.isNotEmpty
-        ? yesNoAnswers.where((e) => e).length / yesNoAnswers.length
+        ? yesNoAnswers.where((e) => !e).length / yesNoAnswers.length // if false then the value is 1
         : 0.0;
 
     double finalScore = (ratingAvg + yesNoScore) / 2;
     updateScore(finalScore);
+    // print("finalScore = $finalScore");
   }
 }

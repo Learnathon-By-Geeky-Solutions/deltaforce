@@ -1,0 +1,302 @@
+{
+  "tips": [
+    {
+      "title": "Expand Vocabulary",
+      "description": "Introduce a new word every day."
+    },
+    {
+      "title": "Use Pictures",
+      "description": "Teach new words through pictures."
+    },
+    {
+      "title": "Form Simple Sentences",
+      "description": "Practice using two- to three-word sentences."
+    },
+    {
+      "title": "Encourage Imitation",
+      "description": "Motivate the child to imitate your words and sounds."
+    },
+    {
+      "title": "Sing Songs",
+      "description": "Use songs to teach words and sentences."
+    },
+    {
+      "title": "Ask Yes/No Questions",
+      "description": "Start conversations with simple yes/no questions."
+    },
+    {
+      "title": "Describe Objects",
+      "description": "Encourage describing objects or pictures."
+    },
+    {
+      "title": "Tell Stories",
+      "description": "Tell simple stories and encourage the child to tell their own."
+    },
+    {
+      "title": "Use Gestures with Words",
+      "description": "Combine gestures with spoken words."
+    },
+    {
+      "title": "Use Language in Daily Routines",
+      "description": "Narrate daily activities using simple language."
+    },
+    {
+      "title": "Word Games",
+      "description": "Play rhyming or matching word games."
+    },
+    {
+      "title": "Name Household Items",
+      "description": "Name objects around the house and encourage the child to repeat."
+    },
+    {
+      "title": "Use Educational Videos",
+      "description": "Show short educational videos."
+    },
+    {
+      "title": "Play Interactive Games",
+      "description": "Use small games to encourage participation and language use."
+    },
+    {
+      "title": "Word Identification",
+      "description": "Let the child identify or point out named words."
+    },
+    {
+      "title": "Answer Simple Questions",
+      "description": "Practice answering easy questions."
+    },
+    {
+      "title": "Combine Words with Drawing",
+      "description": "Encourage drawing while saying related words."
+    },
+    {
+      "title": "Describe Object Usage",
+      "description": "Talk about how different objects are used."
+    },
+    {
+      "title": "Link Words to Actions",
+      "description": "Connect words to actions, like 'Take the ball.'"
+    },
+    {
+      "title": "Match Words to Pictures",
+      "description": "Match words to relevant pictures."
+    },
+    {
+      "title": "Match Similar Words",
+      "description": "Find and match words that sound or look alike, like 'ball' and 'call.'"
+    },
+    {
+      "title": "Combine Words with Numbers",
+      "description": "Use numbers and counting while speaking."
+    },
+    {
+      "title": "Combine Words with Colors",
+      "description": "Teach words while identifying different colors."
+    },
+    {
+      "title": "Combine Words with Shapes",
+      "description": "Teach words while exploring different shapes."
+    },
+    {
+      "title": "Combine Words with Smells",
+      "description": "Introduce words when experiencing different smells."
+    },
+    {
+      "title": "Combine Words with Tastes",
+      "description": "Introduce words related to different tastes."
+    },
+    {
+      "title": "Talk About Word Origins",
+      "description": "Introduce simple ideas about where things come from."
+    },
+    {
+      "title": "Combine Words with Time Concepts",
+      "description": "Teach concepts like 'morning,' 'night,' or 'today.'"
+    },
+    {
+      "title": "Combine Words with Seasons",
+      "description": "Teach words related to different seasons."
+    },
+    {
+      "title": "Combine Words with Weather",
+      "description": "Teach words while discussing the weather."
+    },
+
+    {
+      "title": "Use Eye Contact",
+      "description": "Encourage the child to maintain eye contact while communicating."
+    },
+    {
+      "title": "Use Gestures",
+      "description": "Teach how to use gestures to aid communication."
+    },
+    {
+      "title": "Use Facial Expressions",
+      "description": "Teach how to use facial expressions for communication."
+    },
+    {
+      "title": "Use Body Language",
+      "description": "Teach how to communicate using body language."
+    },
+    {
+      "title": "Use Simple Signs",
+      "description": "Teach simple signs to help with communication."
+    },
+    {
+      "title": "Encourage Question Asking",
+      "description": "Motivate the child to ask questions."
+    },
+    {
+      "title": "Practice Answering Questions",
+      "description": "Help the child practice giving answers."
+    },
+    {
+      "title": "Request Objects",
+      "description": "Encourage the child to ask for objects."
+    },
+    {
+      "title": "Request Help",
+      "description": "Encourage the child to ask for assistance."
+    },
+    {
+      "title": "Sharing Toys",
+      "description": "Encourage the child to share toys with others."
+    },
+    {
+      "title": "Taking Turns",
+      "description": "Practice taking turns with others."
+    },
+    {
+      "title": "Accepting Others’ Choices",
+      "description": "Encourage the child to accept choices made by others."
+    },
+    {
+      "title": "Listening to Others",
+      "description": "Teach the child to listen carefully to others."
+    },
+    {
+      "title": "Following Others' Lead",
+      "description": "Encourage the child to follow someone else's direction."
+    },
+    {
+      "title": "Respecting Others",
+      "description": "Practice respecting others' feelings and opinions."
+    },
+    {
+      "title": "Avoid Interrupting",
+      "description": "Teach the child not to interrupt others while they are speaking."
+    },
+    {
+      "title": "Valuing Others' Opinions",
+      "description": "Encourage giving importance to what others say."
+    },
+    {
+      "title": "Helping Others in Need",
+      "description": "Support the child in helping others when needed."
+    },
+    {
+      "title": "Helping Others Listen",
+      "description": "Help the child learn how to listen carefully to others."
+    },
+    {
+      "title": "Helping Others Follow Instructions",
+      "description": "Assist the child in following others' instructions."
+    },
+    {
+      "title": "Helping Others Feel Respected",
+      "description": "Support the child in showing respect to others."
+    },
+    {
+      "title": "Helping Others Speak Without Interruptions",
+      "description": "Help the child let others speak without interrupting."
+    },
+    {
+      "title": "Helping Others Feel Valued",
+      "description": "Encourage the child to make others feel important."
+    },
+    {
+      "title": "Encouraging Helping Behavior",
+      "description": "Motivate the child to offer help to others."
+    },
+    {
+      "title": "Encouraging Listening Behavior",
+      "description": "Motivate the child to actively listen to others."
+    },
+    {
+      "title": "Encouraging Following Directions",
+      "description": "Motivate the child to follow directions given by others."
+    },
+    {
+      "title": "Encouraging Respect for Others",
+      "description": "Motivate the child to show respect to others."
+    },
+    {
+      "title": "Encouraging Not to Interrupt Others",
+      "description": "Motivate the child to avoid interrupting others."
+    },
+    {
+      "title": "Encouraging Valuing Others",
+      "description": "Motivate the child to value others' opinions."
+    },
+
+    {
+      "title": "Social Play",
+      "description": "Engage the child in social games like 'Ring Around the Rosie'."
+    },
+    {
+      "title": "Teamwork Activities",
+      "description": "Practice teamwork through activities like building puzzles together."
+    },
+    {
+      "title": "Playing with Others",
+      "description": "Encourage the child to play cooperatively with others."
+    },
+    {
+      "title": "Sharing Toys with Others",
+      "description": "Encourage the child to share toys with peers."
+    },
+    {
+      "title": "Sharing Experiences",
+      "description": "Encourage the child to share their experiences with others."
+    },
+    {
+      "title": "Cooperating with Others",
+      "description": "Teach the child how to cooperate with others."
+    },
+    {
+      "title": "Respecting Peers",
+      "description": "Teach the child to show respect toward peers."
+    },
+    {
+      "title": "Showing Empathy",
+      "description": "Teach the child to express empathy towards others."
+    },
+    {
+      "title": "Showing Sympathy",
+      "description": "Teach the child to show sympathy when others are hurt or upset."
+    },
+    {
+      "title": "Encouraging Cooperation",
+      "description": "Motivate the child to engage in cooperative activities."
+    },
+    {
+      "title": "Encouraging Respect for Peers",
+      "description": "Motivate the child to respect their friends and classmates."
+    },
+    {
+      "title": "Encouraging Showing Empathy",
+      "description": "Encourage the child to show empathy toward others."
+    },
+    {
+      "title": "Encouraging Showing Sympathy",
+      "description": "Encourage the child to express sympathy appropriately."
+    },
+    {
+      "title": "Encouraging Helping Behavior",
+      "description": "Motivate the child to help others."
+    },
+    {
+      "title": "Planning Social Activities",
+      "description": "Create opportunities for the child to participate in social events."
+    }
+  ]
+}
