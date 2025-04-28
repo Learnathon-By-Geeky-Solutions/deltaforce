@@ -100,6 +100,7 @@ flutter:
     - lib/resources/assets/Others/animations/
     - lib/resources/assets/Others/audio/
     - lib/resources/assets/Others/images/
+    - lib/resources/assets/Others/json data/
     - lib/resources/assets/images/
     - lib/screens/learn_item_screen/balloon_blast/images/
     - assets/images/
