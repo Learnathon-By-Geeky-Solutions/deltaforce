@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:voice_bridge/features/authentication/view_models/auth_view_model.dart';
 import 'package:voice_bridge/resources/colors/app_color.dart';
-import 'package:voice_bridge/resources/routes/routesName.dart';
+import 'package:voice_bridge/resources/routes/routes_name.dart';
 import 'package:voice_bridge/features/authentication/const/app_strings.dart';
 
 class ForgotPasswordScreen extends StatelessWidget {
