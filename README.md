@@ -40,8 +40,9 @@ DeltaForce is an interactive educational app designed to support children with s
 4. [Tech Stack](#-tech-stack)
 5. [Project Structure](#-project-structure)
 6. [Installation](#-installation)
-7. [Testing Strategy](#-testing-strategy)
-8. [Contributing](#-contributing)
+7. [App Screenshots](#-app-screenshots)
+8. [Testing Strategy](#-testing-strategy)
+9. [Contributing](#-contributing)
 
 ## 👥 Team Members
 
@@ -132,6 +133,7 @@ deltaforce/
 - Android Studio or VSCode
 
 ### Steps
+```bash
 # Clone the repo
 git clone https://github.com/Learnathon-By-Geeky-Solutions/deltaforce.git
 
@@ -144,20 +146,16 @@ flutter pub get
 # Run the app
 flutter run
 
-� Testing Strategy
+📸 App Screenshots
+<div align="center">
+		
+Screen 1	Screen 2	Screen 3
+Screen 4	Screen 5	Screen 6
+Screen 7	Screen 8	Screen 9
+Screen 10	Screen 11	Screen 12
+</div>
+🧪 Testing Strategy
 Test Type	Description
 Unit Tests	Test logic inside ViewModels and Services
 Widget Tests	Verify individual UI components
 Integration Tests	Simulate real user journeys and backend interaction
-🤝 Contributing
-
-    Create feature branches:
-    bash
-
-git checkout -b feature/your-feature
-
-Make small, focused commits
-
-Open PRs for review
-
-Follow the project coding standards
