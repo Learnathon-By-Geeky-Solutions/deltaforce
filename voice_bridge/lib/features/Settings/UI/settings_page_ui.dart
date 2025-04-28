@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:voice_bridge/features/Settings/view-model/settings_view_model.dart';
+import 'package:voice_bridge/features/authentication/views/auth/change_password.dart';
 import 'package:voice_bridge/resources/colors/app_color.dart';
 import 'package:voice_bridge/widgets/border_list_tile.dart';
 
@@ -56,6 +57,21 @@ class SettingsScreen extends StatelessWidget {
               trailing: const Icon(Icons.chevron_right),
               onTap: () {
 
+              },
+            ),
+            SizedBox(height: 12),
+            BorderedListTile(
+              leading: Icon(Icons.update),
+              title: Text(
+                'Password Update',
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+              trailing: Icon(Icons.chevron_right),
+              onTap: () {
+                Get.to(PasswordUpdateScreen());
               },
             ),
           ],

@@ -14,17 +14,45 @@ class SplashScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      backgroundColor: Colors.blueAccent,
-      body: Center(
-        child: Text(
-          AppStrings.appName,
-          style: TextStyle(
-            fontSize: 28,
-            fontWeight: FontWeight.bold,
-            color: Colors.white,
+    return Scaffold(
+      backgroundColor: Colors.white70,
+      body: Stack(
+        children: [
+          Center(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                // App Logo
+                Image.asset(
+                  'assets/appLogo.png',
+                  height: 120,
+                ),
+                const SizedBox(height: 20),
+                // App Name
+                Text(
+                  AppStrings.appName,
+                  style: const TextStyle(
+                    fontSize: 30,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                    letterSpacing: 1.5,
+                  ),
+                ),
+              ],
+            ),
           ),
-        ),
+          // Loading Indicator at Bottom
+          Positioned(
+            bottom: 50,
+            left: 0,
+            right: 0,
+            child: Center(
+              child: CircularProgressIndicator(
+                valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
