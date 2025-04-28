@@ -34,26 +34,40 @@ jobs:
           cache: true
 
       - name: Install dependencies
-        run: flutter pub get
-        working-directory: ./voice_bridge
+        run: |
+          cd voice_bridge
+          flutter pub get
+      #        working-directory: ./voice_bridge
+      - name: Build Runner
+        run: |
+          cd voice_bridge
+          flutter pub run build_runner build
+
+      - name: Install dependencies
+        run: |
+          cd voice_bridge
+          flutter pub get    
 
       - name: Run tests with coverage
-        run: flutter test --coverage
-        working-directory: ./voice_bridge
+        run: |
+          cd voice_bridge
+          flutter test --coverage
+      #        working-directory: ./voice_bridge
 
       - name: SonarCloud Scan
         uses: SonarSource/sonarqube-scan-action@v5
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         with:
+          projectBaseDir: voice_bridge
           args: >
             -Dsonar.host.url=https://sonarcloud.io
             -Dsonar.projectKey=Learnathon-By-Geeky-Solutions_deltaforce
             -Dsonar.organization=learnathon-by-geeky-solutions
             -Dsonar.java.version=17
             -Dsonar.verbose=true
-            -Dsonar.javascript.lcov.reportPaths=voice_bridge/coverage/lcov.info
-            -Dsonar.sources=voice_bridge/lib
-            -Dsonar.tests=voice_bridge/test
+            -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
+            -Dsonar.sources=lib
+            -Dsonar.tests=test
             -Dsonar.test.inclusions=voice_bridge/test/features/**/*_test.dart
             -Dsonar.exclusions=**/*.g.dart,**/*.freezed.dart,**/generated/**,**/__generated__/**,**/mocks.dart,**/*.css,voice_bridge/lib/core/localization/**/*app_translations.dart
