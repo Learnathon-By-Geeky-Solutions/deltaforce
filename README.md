@@ -85,7 +85,7 @@ DeltaForce makes learning fun, interactive, and empowering for autistic children
 
 ## 🏗️ Project Structure
 
-![Project Structure](screenshots/Screenshot_from_2025-04-28_10-04-24.png)
+![Project Structure](https://github.com/Learnathon-By-Geeky-Solutions/deltaforce/blob/SBF_RUSHO/voice_bridge/assets/Screenshot%20from%202025-04-28%2010-04-24.png)
 
 deltaforce/
 │── core/
