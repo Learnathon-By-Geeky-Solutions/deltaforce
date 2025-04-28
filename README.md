@@ -73,7 +73,7 @@ DeltaForce makes learning fun, interactive, and empowering for autistic children
 | Family Relations | Understanding family roles and names |
 | Fruit Slice Game | Boosts motor control and hand-eye coordination |
 | Progress Tracker | Test-based learning outcomes and reports |
-| Authentication | Secure login/signup, password reset with SharedPreferences |
+| Authentication | Secure login/signup, password reset with Firebase |
 
 ## 🛠️ Tech Stack
 
