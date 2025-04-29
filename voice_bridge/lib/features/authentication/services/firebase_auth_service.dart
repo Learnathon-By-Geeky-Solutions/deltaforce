@@ -14,12 +14,9 @@ class FirebaseAuthService extends GetxController {
     FirebaseAuth? firebaseAuth,
     GoogleSignIn? googleSignIn,
     FacebookAuth? facebookAuth,
-  })  : _firebaseAuth = firebaseAuth ?? FirebaseAuth.instance,
-        _googleSignIn = googleSignIn ?? GoogleSignIn(),
-        _facebookAuth = facebookAuth ?? FacebookAuth.instance;
+  })  : _firebaseAuth = firebaseAuth ?? FirebaseAuth.instance,_googleSignIn = googleSignIn ?? GoogleSignIn(),_facebookAuth = facebookAuth ?? FacebookAuth.instance;
 
-  Stream<User?> get authStateChanges => _firebaseAuth.authStateChanges();
-  User? getCurrentUser() => _firebaseAuth.currentUser;
+  Stream<User?> get authStateChanges => _firebaseAuth.authStateChanges(); User? getCurrentUser() => _firebaseAuth.currentUser;
 
   Future<User?> signInWithGoogle() async {
     try {

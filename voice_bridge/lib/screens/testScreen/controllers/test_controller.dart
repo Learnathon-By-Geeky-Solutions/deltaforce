@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:math';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -32,7 +33,6 @@ class TestController extends SessionController {
   var result = 0.obs;
   var startedSessionLevel = 0.obs;
 
-
   @override
   void onInit() {
     super.onInit();
@@ -59,7 +59,6 @@ class TestController extends SessionController {
     final prefs = await SharedPreferences.getInstance();
     prefs.setInt('testSession_$category', testSessionNumber);
     testTopSessionLevel[category] = testSessionNumber;
-
   }
 
   /// Load a session from assets
@@ -85,7 +84,6 @@ class TestController extends SessionController {
         generateOptions(); // So UI gets data before building
       }
       Get.toNamed(RoutesName.testScreen);
-
     } catch (e) {
       if (kDebugMode) {
         print("Error loading session: $e");
@@ -101,12 +99,18 @@ class TestController extends SessionController {
       if (showTestCompletionScreen.value == false) {
         if (selectedIndex.value < 0) {
           isCheckButtonDisabled.value = false;
-          Get.snackbar("👆 👆 👆", "Select Correct Option",
-              backgroundColor: const Color(0xFFF44336));
+          ScaffoldMessenger.of(Get.context!).showSnackBar(
+            const SnackBar(
+              content: Text("Select Correct Option"),
+              backgroundColor: Color(0xFFF44336),
+            ),
+          );
+
+
         } else {
           showFeedbackAnimation.value = true;
           isAnswerCorrect.value = (selectedIndex.value == correctIndex);
-          isAnswerCorrect.value? score.value ++ : score.value; //count mark
+          isAnswerCorrect.value ? score.value++ : score.value; //count mark
 
           Future.delayed(const Duration(seconds: 2), () {
             showFeedbackAnimation.value = false;
@@ -114,13 +118,11 @@ class TestController extends SessionController {
             Future.delayed(const Duration(milliseconds: 500), () {
               isCheckButtonDisabled.value = false; // Enable button again
 
-              result.value = ((score*100)/lessonLength).toInt();
-
+              result.value = ((score * 100) / lessonLength).toInt();
 
               Get.toNamed(RoutesName.testCompletion);
             });
           });
-
         }
       } else {
         showTestCompletionScreen.value = false;
@@ -130,40 +132,48 @@ class TestController extends SessionController {
         var totalSessions = totalSession[category];
         showLesson.value = true; //for next lesson showing
 
-        if(topSessionLevel == currentSessionLevel){
-          if(result >= 80 ) {
-            if ( topSessionLevel! < totalSessions! ) {
+        if (topSessionLevel == currentSessionLevel) {
+          if (result >= 80) {
+            if (topSessionLevel! < totalSessions!) {
               await testSaveSession(category, topSessionLevel + 1);
-              testTopSessionLevel[category] = topSessionLevel + 1;// this line change  only// already change in savesession
+              testTopSessionLevel[category] = topSessionLevel +
+                  1; // this line change  only// already change in savesession
             }
           }
         }
 
         //fetch score
         final prefs = await SharedPreferences.getInstance();
-        int savedResult =prefs.getInt('testScore_${category}_$currentSessionLevel') ?? 0; // Default sessionLevel is 1
+        int savedResult =
+            prefs.getInt('testScore_${category}_$currentSessionLevel') ??
+                0; // Default sessionLevel is 1
 
-        if(result >  savedResult){
-          await prefs.setInt('testScore_${category}_$currentSessionLevel', result.value);//write in share pref
+        if (result > savedResult) {
+          await prefs.setInt('testScore_${category}_$currentSessionLevel',
+              result.value); //write in share pref
         }
         Get.toNamed(RoutesName.testDashboardScreen);
-
       }
       print("con result $result");
       if (kDebugMode) {
         print(
             'session change lesson index = $testCurrentLessonIndex lessonLength = $lessonLength');
       }
-    } else if (testCurrentLessonIndex.value != null &&
-        testCurrentLessonIndex.value < lessonLength - 1) {
+    } else if (testCurrentLessonIndex.value < lessonLength - 1) {
       if (selectedIndex.value < 0) {
         isCheckButtonDisabled.value = false;
-        Get.snackbar("👆 👆 👆", "Select Correct Option",
-            backgroundColor: const Color(0xFFF44336));
+        ScaffoldMessenger.of(Get.context!).showSnackBar(
+          const SnackBar(
+            content: Text("Select Correct Option"),
+            backgroundColor: Color(0xFFF44336),
+          ),
+        );
+
+
       } else {
         showFeedbackAnimation.value = true;
         isAnswerCorrect.value = (selectedIndex.value == correctIndex);
-        isAnswerCorrect.value? score.value ++ : score.value; //count mark
+        isAnswerCorrect.value ? score.value++ : score.value; //count mark
 
         Future.delayed(const Duration(seconds: 2), () {
           showFeedbackAnimation.value = false;
@@ -171,7 +181,7 @@ class TestController extends SessionController {
           Future.delayed(const Duration(milliseconds: 500), () {
             testCurrentLessonIndex.value++;
             selectedIndex.value = -1;
-            isCheckButtonDisabled.value = false;// Enable button again
+            isCheckButtonDisabled.value = false; // Enable button again
 
             if (settingsShowLesson.value) {
               showLesson.value = true;
@@ -181,10 +191,6 @@ class TestController extends SessionController {
             }
           });
         });
-      }
-      if (kDebugMode) {
-        print(
-            'show value = $showLesson lesson index = $testCurrentLessonIndex lessonLength = $lessonLength');
       }
     }
   }
@@ -209,8 +215,7 @@ class TestController extends SessionController {
     options.shuffle(); // Shuffle for random order
   }
 
-
-  void gotoDashboard(String category){
+  void gotoDashboard(String category) {
     testCurrentCategory = category;
     Get.toNamed(RoutesName.testDashboardScreen);
     if (kDebugMode) {
@@ -218,10 +223,11 @@ class TestController extends SessionController {
     }
   }
 
-  Future<int> testScores(category,currentSessionLevel) async {
+  Future<int> testScores(category, currentSessionLevel) async {
     final prefs = await SharedPreferences.getInstance();
-    int testScores = prefs.getInt('testScore_${category}_$currentSessionLevel') ?? 0; // Default sessionLevel is 1
+    int testScores =
+        prefs.getInt('testScore_${category}_$currentSessionLevel') ??
+            0; // Default sessionLevel is 1
     return testScores;
   }
-
 }
