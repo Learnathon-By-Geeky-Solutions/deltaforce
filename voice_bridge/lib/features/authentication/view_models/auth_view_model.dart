@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -6,12 +8,16 @@ import 'package:voice_bridge/features/authentication/const/app_strings.dart';
 import 'package:voice_bridge/resources/routes/routes_name.dart';
 
 class AuthViewModel extends GetxController {
-  final FirebaseAuthService _firebaseAuthService = FirebaseAuthService();
+  // final FirebaseAuthService _firebaseAuthService = FirebaseAuthService();
+  final FirebaseAuthService _firebaseAuthService;
   final Rx<User?> _user = Rx<User?>(null);
   final RxString _error = ''.obs;
-
   final TextEditingController currentPasswordController = TextEditingController();
   final TextEditingController newPasswordController = TextEditingController();
+  late final StreamSubscription<User?> _authStateSubscription;
+
+  AuthViewModel({FirebaseAuthService? firebaseAuthService})
+      : _firebaseAuthService = firebaseAuthService ?? FirebaseAuthService();
 
   User? get user => _user.value;
   String get error => _error.value;
@@ -19,7 +25,17 @@ class AuthViewModel extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    _firebaseAuthService.authStateChanges.listen(_handleAuthChange);
+    // _firebaseAuthService.authStateChanges.listen(_handleAuthChange);
+    _authStateSubscription =_firebaseAuthService.authStateChanges.listen(_handleAuthChange);
+
+  }
+
+  @override
+  void onClose() {
+    _authStateSubscription.cancel();
+    currentPasswordController.dispose();
+    newPasswordController.dispose();
+    super.onClose();
   }
 
   void _handleAuthChange(User? firebaseUser) async {

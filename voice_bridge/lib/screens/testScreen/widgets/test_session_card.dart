@@ -48,9 +48,13 @@ class TestSessionCard extends StatelessWidget {
                       child: DotLottieLoader.fromAsset(
                         "lib/resources/assets/Others/animations/start.lottie",
                         frameBuilder: (ctx, dotlottie) {
-                            return Lottie.memory(dotlottie!.animations.values.single);
+                          if (dotlottie == null || dotlottie.animations.isEmpty) {
+                            return const SizedBox.shrink(); // or fallback animation
+                          }
+                          return Lottie.memory(dotlottie.animations.values.single);
                         },
                       ),
+
                     ),
                   ),
                 ),
@@ -72,14 +76,26 @@ class TestSessionCard extends StatelessWidget {
           child: FutureBuilder<int>(
             future: testScore,
             builder: (context, snapshot) {
-              final score = snapshot.data!;
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const SizedBox.shrink(); // or a loading spinner
+              } else if (snapshot.hasError || !snapshot.hasData) {
+                return const Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(Icons.star, size: 18, color: Colors.white),
+                    Icon(Icons.star, size: 25, color: Colors.white),
+                    Icon(Icons.star, size: 18, color: Colors.white),
+                  ],
+                );
+              }
 
+              final score = snapshot.data!;
               return Row(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children:[
+                children: [
                   Icon(
                     Icons.star,
-                    size:  18,
+                    size: 18,
                     color: score >= 50 ? Colors.yellowAccent : Colors.white,
                   ),
                   Icon(
@@ -89,7 +105,7 @@ class TestSessionCard extends StatelessWidget {
                   ),
                   Icon(
                     Icons.star,
-                    size:  18,
+                    size: 18,
                     color: score >= 90 ? Colors.yellowAccent : Colors.white,
                   ),
                 ],
