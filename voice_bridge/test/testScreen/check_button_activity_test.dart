@@ -1,55 +1,52 @@
-// import 'package:fake_async/fake_async.dart';
-// import 'package:flutter_test/flutter_test.dart';
-// import 'package:get/get.dart';
-// import 'package:voice_bridge/screens/testScreen/controllers/test_controller.dart';
-//
-// void main() {
-//   late TestController controller;
-//
-//   setUp(() {
-//     Get.testMode = true; // To prevent Get.toNamed from real navigation
-//     controller = TestController();
-//     controller.lessonLength = 2; // set 2 lessons
-//     controller.generateOptions(); // generate options
-//   });
-//
-//   test('Check button activity - correct answer increases score and completes session', () {
-//     fakeAsync((async) {
-//       controller.selectedIndex.value = controller.correctIndex; // Select correct answer
-//       controller.isCheckButtonDisabled.value = false;
-//
-//       controller.checkButtonActivity();
-//
-//       // Simulate 2 seconds first delay
-//       async.elapse(const Duration(seconds: 2));
-//
-//       expect(controller.showFeedbackAnimation.value, false);
-//       expect(controller.showTestCompletionScreen.value, true); // After answering last lesson
-//
-//       // Simulate 0.5 seconds second delay
-//       async.elapse(const Duration(milliseconds: 500));
-//
-//       expect(controller.isCheckButtonDisabled.value, false); // Button re-enabled
-//     });
-//   });
-//
-//   test('Check button activity - no answer selected shows snackbar', () {
-//     fakeAsync((async) {
-//       controller.selectedIndex.value = -1; // No answer selected
-//       controller.isCheckButtonDisabled.value = false;
-//
-//       controller.checkButtonActivity();
-//
-//       async.elapse(const Duration(seconds: 1));
-//
-//       expect(controller.isCheckButtonDisabled.value, false); // Button remains enabled after warning
-//     });
-//   });
-// }
+import 'package:flutter/material.dart'; // ✅ Required for Route
 import 'package:flutter_test/flutter_test.dart';
+import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:voice_bridge/screens/testScreen/controllers/test_controller.dart';
+import 'package:voice_bridge/resources/routes/routes_name.dart';
+
+class FakeNavigatorObserver extends NavigatorObserver {
+  final List<String> navigatedRoutes = [];
+
+  @override
+  void didPush(Route route, Route? previousRoute) {
+    if (route.settings.name != null) {
+      navigatedRoutes.add(route.settings.name!);
+    }
+    super.didPush(route, previousRoute);
+  }
+}
 
 void main() {
-  test('dummy test for coverage', () {
-    expect(true, isTrue);
+  TestWidgetsFlutterBinding.ensureInitialized();
+
+  testWidgets('checkButtonActivity triggers testCompletion when last lesson and answer is selected', (tester) async {
+    SharedPreferences.setMockInitialValues({});
+    final controller = TestController();
+    Get.put(controller);
+
+    controller.lessonLength = 1;
+    controller.testCurrentLessonIndex.value = 0;
+    controller.selectedIndex.value = 0;
+    controller.correctIndex = 0;
+    controller.testCurrentCategory = "Emotion";
+    controller.testTopSessionLevel["Emotion"] = 1;
+    controller.startedSessionLevel.value = 1;
+    controller.totalSession["Emotion"] = 2;
+
+    final observer = FakeNavigatorObserver();
+    await tester.pumpWidget(GetMaterialApp(
+      navigatorObservers: [observer],
+      getPages: [
+        GetPage(name: RoutesName.testCompletion, page: () => const SizedBox()),
+        GetPage(name: RoutesName.testDashboardScreen, page: () => const SizedBox()),
+      ],
+      home: const SizedBox(),
+    ));
+
+    await controller.checkButtonActivity();
+    await tester.pump(const Duration(seconds: 3)); // Simulate time passage
+
+    expect(observer.navigatedRoutes.contains(RoutesName.testCompletion), isTrue);
   });
 }
