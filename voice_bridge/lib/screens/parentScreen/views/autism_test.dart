@@ -53,11 +53,17 @@ class _AutismTestState extends State<AutismTest> {
             ElevatedButton(
               onPressed: () {
                 if (yesNoAnswers.contains(null)) {
-                  Get.snackbar("Incomplete", "Please answer all Yes/No questions",
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text("Please answer all Yes/No questions"),
                       backgroundColor: Colors.redAccent,
-                      colorText: Colors.white);
+                      duration: Duration(milliseconds: 500),
+                    ),
+                  );
+
                   return;
                 }
+
 
                 controller.calculateFromAnswers(ratingAnswers, yesNoAnswers.cast<bool>());
                 Get.back(); // Return to dashboard
