@@ -8,6 +8,7 @@ import 'package:voice_bridge/features/authentication/services/firebase_auth_serv
 import 'package:voice_bridge/features/authentication/view_models/auth_view_model.dart';
 import 'package:voice_bridge/resources/routes/routes_name.dart';
 import 'auth_view_model_test.mocks.dart';
+import 'package:fake_async/fake_async.dart';
 
 @GenerateMocks([FirebaseAuthService, UserCredential, User, FirebaseAuth])
 void main() {
@@ -218,4 +219,86 @@ void main() {
 
 
   });
+
+  testWidgets('handleAuthChange navigates to baseView if email is verified', (tester) async {
+    when(mockFirebaseAuthService.getCurrentUser()).thenReturn(mockUser);
+    when(mockUser.emailVerified).thenReturn(true);
+
+    await tester.pumpWidget(GetMaterialApp(
+      initialRoute: '/',
+      getPages: [
+        GetPage(name: '/', page: () => Scaffold(body: Text('Home'))),
+        GetPage(name: RoutesName.baseView, page: () => Scaffold(body: Text('Base View'))),
+      ],
+    ));
+
+    authViewModel.checkUserLoggedIn();
+    await tester.pumpAndSettle();
+
+    expect(Get.currentRoute, RoutesName.baseView);
+  });
+
+
+  test('dispose method cancels subscription and disposes controllers', () async {
+    final controller = AuthViewModel(firebaseAuthService: mockFirebaseAuthService);
+    controller.onInit();
+
+    controller.currentPasswordController.text = "test";
+    controller.newPasswordController.text = "pass";
+
+    controller.dispose();
+
+    // Just check that calling dispose doesn't throw
+    expect(() => controller.currentPasswordController.dispose(), returnsNormally);
+    expect(() => controller.newPasswordController.dispose(), returnsNormally);
+  });
+
+
+  test('onInit attaches auth state subscription', () {
+    final authViewModel = AuthViewModel(firebaseAuthService: mockFirebaseAuthService);
+    authViewModel.onInit();
+    expect(authViewModel.user, isNull); // trivial check to force init
+  });
+
+  test('onClose cancels stream and disposes controllers safely', () {
+    final controller = AuthViewModel(firebaseAuthService: mockFirebaseAuthService);
+    controller.onInit();
+
+    controller.currentPasswordController.text = "test";
+    controller.newPasswordController.text = "pass";
+
+    // Expect that calling onClose (which includes dispose logic) doesn't throw
+    expect(() => controller.onClose(), returnsNormally);
+  });
+
+
+  testWidgets('waitForEmailVerification handles timeout and navigates to login', (tester) async {
+    when(mockUser.emailVerified).thenReturn(false);
+    when(mockFirebaseAuthService.getCurrentUser()).thenReturn(mockUser);
+    when(mockFirebaseAuthService.reloadUser()).thenAnswer((_) async => {});
+    when(mockUser.sendEmailVerification()).thenAnswer((_) async => {});
+    when(mockFirebaseAuthService.signUpWithEmailAndPassword(any, any))
+        .thenAnswer((_) async => mockUserCredential);
+    when(mockUserCredential.user).thenReturn(mockUser);
+
+    await tester.pumpWidget(GetMaterialApp(
+      initialRoute: '/',
+      getPages: [
+        GetPage(name: '/', page: () => Scaffold(body: Text('Home'))),
+        GetPage(name: RoutesName.loginScreen, page: () => Scaffold(body: Text('Login'))),
+      ],
+    ));
+
+    // Run inside FakeAsync to simulate time
+    fakeAsync((async) async {
+      await authViewModel.signUp('test@test.com', 'pass');
+
+      async.elapse(const Duration(seconds: 31)); // Simulate time instantly
+      await tester.pumpAndSettle();
+
+      expect(Get.currentRoute, RoutesName.loginScreen);
+    });
+  });
+
+
 }

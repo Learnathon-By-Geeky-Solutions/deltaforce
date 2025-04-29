@@ -12,7 +12,6 @@ class TestDashboardScreen extends StatelessWidget {
   final BaseController baseController = Get.find();
 
   TestDashboardScreen({super.key});
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,63 +37,54 @@ class TestDashboardScreen extends StatelessWidget {
         ),
         backgroundColor: Colors.white,
         body: Stack(
-          children:[
-
+          children: [
             Positioned.fill(
-                child:  DotLottieLoader.fromAsset("lib/resources/assets/Others/animations/falling-snow.lottie",
-                    frameBuilder: (ctx, dotlottie) {
-                      if (dotlottie != null) {
-                        return SizedBox.expand(
-                          child: Lottie.memory(
-                              dotlottie.animations.values.single,
-                            fit: BoxFit.cover,
-                            repeat: true,
-
-                          ),
-
-                        );
-                      } else {
-                        return const Center(child: CircularProgressIndicator());
-                      }
-                    }
-              ),
+              child: DotLottieLoader.fromAsset(
+                  "lib/resources/assets/Others/animations/falling-snow.lottie",
+                  frameBuilder: (ctx, dotlottie) {if (dotlottie != null) {return SizedBox.expand(child: Lottie.memory(dotlottie.animations.values.single,fit: BoxFit.cover,repeat: true,),
+                  );
+                } else {
+                  return const Center(child: CircularProgressIndicator());
+                }
+              }),
             ),
             Obx(() {
-            final category = controller.testCurrentCategory;
-            final totalSessions = controller.totalSession[category] ?? 0;
-            var topUnlockSession = controller.testTopSessionLevel[category]!;
+              final category = controller.testCurrentCategory;
+              final totalSessions = controller.totalSession[category] ?? 0;
+              var topUnlockSession = controller.testTopSessionLevel[category]!;
 
-            return ListView.builder(
-              padding: const EdgeInsets.symmetric(vertical: 1),
-              itemCount: totalSessions,
-              itemBuilder: (context, index) {
-                int pos = index % 2;
-                bool isUnlocked = index < controller.testTopSessionLevel[category]!;
-                return Align(
-                  alignment: (pos == 0)
-                      ? const Alignment(-0.4, 0)
-                       : const Alignment(0.4, 0),
-                  child: Padding(
-                    padding:
-                        const EdgeInsets.symmetric(vertical: 5, horizontal: 16),
-                    child: GestureDetector(
-                      onTap: isUnlocked
-                          ? () => controller.testStartSession(category,index+1)
-                          : null,
-                      child: TestSessionCard(
-                        index: index + 1,
-                        isUnlocked: isUnlocked,
-                        testScore : controller.testScores(category,index+1),
-                        isLastUnlocked: topUnlockSession == index + 1,
+              return ListView.builder(
+                padding: const EdgeInsets.symmetric(vertical: 1),
+                itemCount: totalSessions,
+                itemBuilder: (context, index) {
+                  int pos = index % 2;
+                  bool isUnlocked =
+                      index < controller.testTopSessionLevel[category]!;
+                  return Align(
+                    alignment: (pos == 0)
+                        ? const Alignment(-0.4, 0)
+                        : const Alignment(0.4, 0),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 5, horizontal: 16),
+                      child: GestureDetector(
+                        onTap: isUnlocked
+                            ? () =>
+                                controller.testStartSession(category, index + 1)
+                            : null,
+                        child: TestSessionCard(
+                          index: index + 1,
+                          isUnlocked: isUnlocked,
+                          testScore: controller.testScores(category, index + 1),
+                          isLastUnlocked: topUnlockSession == index + 1,
+                        ),
                       ),
                     ),
-                  ),
-                );
-              },
-            );
-          })
-    ],
+                  );
+                },
+              );
+            })
+          ],
         ));
   }
-
 }
