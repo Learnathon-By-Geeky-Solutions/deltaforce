@@ -79,7 +79,9 @@ class AuthViewModel extends GetxController {
           backgroundColor: Colors.orange,
           colorText: Colors.white,
         );
-        await _waitForEmailVerification();
+        // await _waitForEmailVerification();
+        await waitForEmailVerification(); // as-is in prod
+
       }
     } catch (e) {
       _error.value = e.toString();
@@ -92,40 +94,29 @@ class AuthViewModel extends GetxController {
     }
   }
 
-  Future<void> _waitForEmailVerification() async {
+  Future<void> waitForEmailVerification({Future<void> Function(Duration)? delayFn}) async {
     const int maxAttempts = 10;
     const Duration checkInterval = Duration(seconds: 3);
     int attempts = 0;
 
     while (attempts < maxAttempts) {
-      await Future.delayed(checkInterval);
+      await (delayFn ?? Future.delayed)(checkInterval); // make testable
       await _firebaseAuthService.reloadUser();
       _user.value = _firebaseAuthService.getCurrentUser();
-
       if (_user.value?.emailVerified ?? false) break;
-
       attempts++;
     }
 
     if (_user.value?.emailVerified ?? false) {
-      Get.snackbar(
-        AppStrings.successful,
-        'Email verified successfully. Please log in.',
-        backgroundColor: Colors.green,
-        colorText: Colors.white,
-      );
-      await _firebaseAuthService.signOut();
-      Get.offAllNamed(RoutesName.loginScreen);
+      Get.snackbar(AppStrings.successful, 'Email verified successfully. Please log in.',
+          backgroundColor: Colors.green, colorText: Colors.white);
     } else {
-      Get.snackbar(
-        AppStrings.emailVerification,
-        'Email not verified. Please check again later.',
-        backgroundColor: Colors.orange,
-        colorText: Colors.white,
-      );
-      await _firebaseAuthService.signOut();
-      Get.offAllNamed(RoutesName.loginScreen);
+      Get.snackbar(AppStrings.emailVerification, 'Email not verified. Please check again later.',
+          backgroundColor: Colors.orange, colorText: Colors.white);
     }
+
+    await _firebaseAuthService.signOut();
+    Get.offAllNamed(RoutesName.loginScreen);
   }
 
   Future<void> signIn(String email, String password) async {
