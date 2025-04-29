@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:voice_bridge/features/Settings/UI/settings_page_ui.dart';
-import 'package:voice_bridge/features/authentication/services/firebase_auth_service.dart';
-import 'package:voice_bridge/features/Settings/UI/help_feedback.dart';
-import 'package:voice_bridge/resources/colors/app_color.dart';
+import '../../../features/Settings/UI/help_feedback.dart';
+import '../../../features/Settings/UI/settings_page_ui.dart';
+import '../../../features/authentication/services/firebase_auth_service.dart';
+import '../../../resources/colors/app_color.dart';
 
 class AppDrawer extends StatelessWidget {
-  AppDrawer({super.key});
+  final FirebaseAuthService services;
 
-  final services = FirebaseAuthService();
+  AppDrawer({super.key, FirebaseAuthService? services})
+      : services = services ?? FirebaseAuthService();
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +43,6 @@ class AppDrawer extends StatelessWidget {
             title: const Text('Home'),
             onTap: () {
               Navigator.pop(context);
-              // Navigate to home screen
             },
           ),
           ListTile(
@@ -50,7 +50,6 @@ class AppDrawer extends StatelessWidget {
             title: const Text('Profile'),
             onTap: () {
               Navigator.pop(context);
-              // Navigate to profile screen
             },
           ),
           ListTile(
@@ -58,8 +57,8 @@ class AppDrawer extends StatelessWidget {
             title: const Text('Settings'),
             onTap: () {
               Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) => SettingsScreen()));
-              // Navigate to settings screen
+                MaterialPageRoute(builder: (context) => SettingsScreen()),
+              );
             },
           ),
           ListTile(
@@ -67,15 +66,6 @@ class AppDrawer extends StatelessWidget {
             title: const Text('Notifications'),
             onTap: () {
               Navigator.pop(context);
-              // Navigate to notifications screen
-            },
-          ),
-          ListTile(
-            leading: const Icon(Icons.payment),
-            title: const Text('Make Payment'),
-            onTap: () {
-              Navigator.pop(context);
-              // Navigate to notifications screen
             },
           ),
           const Divider(),
@@ -88,7 +78,6 @@ class AppDrawer extends StatelessWidget {
                   builder: (context) => const HelpAndFeedbackScreen(),
                 ),
               );
-              // Navigate to help screen
             },
           ),
           ListTile(
@@ -96,15 +85,14 @@ class AppDrawer extends StatelessWidget {
             title: const Text('About'),
             onTap: () {
               Navigator.pop(context);
-              // Navigate to about screen
             },
           ),
           const Divider(),
           ListTile(
             leading: const Icon(Icons.exit_to_app),
             title: const Text('Sign Out'),
-            onTap: () {
-              services.signOut();
+            onTap: () async {
+              await services.signOut();
               Navigator.pop(context);
             },
           ),

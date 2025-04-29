@@ -17,6 +17,8 @@ class SignupScreen extends StatelessWidget {
   final RxBool _obscureConfirmPassword = true.obs;
   final RxBool _isLoading = false.obs;
 
+  SignupScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
