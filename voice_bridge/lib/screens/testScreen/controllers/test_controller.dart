@@ -92,108 +92,105 @@ class TestController extends SessionController {
   }
 
   Future<void> checkButtonActivity() async {
-    if (isCheckButtonDisabled.value) return; // Block when animation is showing
-    isCheckButtonDisabled.value = true; // Disable button during processing
+    if (isCheckButtonDisabled.value) return;
+    isCheckButtonDisabled.value = true;
+
+    if (selectedIndex.value < 0) {
+      _showSelectOptionError();
+      return;
+    }
 
     if (testCurrentLessonIndex.value == lessonLength - 1) {
-      if (showTestCompletionScreen.value == false) {
-        if (selectedIndex.value < 0) {
-          isCheckButtonDisabled.value = false;
-          ScaffoldMessenger.of(Get.context!).showSnackBar(
-            const SnackBar(
-              content: Text("Select Correct Option"),
-              backgroundColor: Color(0xFFF44336),
-            ),
-          );
-
-
-        } else {
-          showFeedbackAnimation.value = true;
-          isAnswerCorrect.value = (selectedIndex.value == correctIndex);
-          isAnswerCorrect.value ? score.value++ : score.value; //count mark
-
-          Future.delayed(const Duration(seconds: 2), () {
-            showFeedbackAnimation.value = false;
-            showTestCompletionScreen.value = true;
-            Future.delayed(const Duration(milliseconds: 500), () {
-              isCheckButtonDisabled.value = false; // Enable button again
-
-              result.value = ((score * 100) / lessonLength).toInt();
-
-              Get.toNamed(RoutesName.testCompletion);
-            });
-          });
-        }
-      } else {
-        showTestCompletionScreen.value = false;
-        String category = testCurrentCategory;
-        var topSessionLevel = testTopSessionLevel[category];
-        var currentSessionLevel = startedSessionLevel.value;
-        var totalSessions = totalSession[category];
-        showLesson.value = true; //for next lesson showing
-
-        if (topSessionLevel == currentSessionLevel) {
-          if (result >= 80) {
-            if (topSessionLevel! < totalSessions!) {
-              await testSaveSession(category, topSessionLevel + 1);
-              testTopSessionLevel[category] = topSessionLevel +
-                  1; // this line change  only// already change in savesession
-            }
-          }
-        }
-
-        //fetch score
-        final prefs = await SharedPreferences.getInstance();
-        int savedResult =
-            prefs.getInt('testScore_${category}_$currentSessionLevel') ??
-                0; // Default sessionLevel is 1
-
-        if (result > savedResult) {
-          await prefs.setInt('testScore_${category}_$currentSessionLevel',
-              result.value); //write in share pref
-        }
-        Get.toNamed(RoutesName.testDashboardScreen);
-      }
-      print("con result $result");
-      if (kDebugMode) {
-        print(
-            'session change lesson index = $testCurrentLessonIndex lessonLength = $lessonLength');
-      }
-    } else if (testCurrentLessonIndex.value < lessonLength - 1) {
-      if (selectedIndex.value < 0) {
-        isCheckButtonDisabled.value = false;
-        ScaffoldMessenger.of(Get.context!).showSnackBar(
-          const SnackBar(
-            content: Text("Select Correct Option"),
-            backgroundColor: Color(0xFFF44336),
-          ),
-        );
-
-
-      } else {
-        showFeedbackAnimation.value = true;
-        isAnswerCorrect.value = (selectedIndex.value == correctIndex);
-        isAnswerCorrect.value ? score.value++ : score.value; //count mark
-
-        Future.delayed(const Duration(seconds: 2), () {
-          showFeedbackAnimation.value = false;
-
-          Future.delayed(const Duration(milliseconds: 500), () {
-            testCurrentLessonIndex.value++;
-            selectedIndex.value = -1;
-            isCheckButtonDisabled.value = false; // Enable button again
-
-            if (settingsShowLesson.value) {
-              showLesson.value = true;
-            } else {
-              showLesson.value = false;
-              generateOptions();
-            }
-          });
-        });
-      }
+      await _handleFinalLesson();
+    } else {
+      await _handleIntermediateLesson();
     }
   }
+
+
+  void _showSelectOptionError() {
+    isCheckButtonDisabled.value = false;
+    ScaffoldMessenger.of(Get.context!).showSnackBar(
+      const SnackBar(
+        content: Text("Select Correct Option"),
+        backgroundColor: Color(0xFFF44336),
+      ),
+    );
+  }
+
+  Future<void> _handleFinalLesson() async {
+    if (!showTestCompletionScreen.value) {
+      await _showFinalFeedbackAndResult();
+    } else {
+      await _processPostTestSession();
+    }
+
+    if (kDebugMode) {
+      print("con result $result");
+      print('session change lesson index = $testCurrentLessonIndex lessonLength = $lessonLength');
+    }
+  }
+
+  Future<void> _showFinalFeedbackAndResult() async {
+    showFeedbackAnimation.value = true;
+    isAnswerCorrect.value = (selectedIndex.value == correctIndex);
+    if (isAnswerCorrect.value) score.value++;
+
+    await Future.delayed(const Duration(seconds: 2));
+    showFeedbackAnimation.value = false;
+    showTestCompletionScreen.value = true;
+
+    await Future.delayed(const Duration(milliseconds: 500));
+    result.value = ((score * 100) / lessonLength).toInt();
+    isCheckButtonDisabled.value = false;
+
+    Get.toNamed(RoutesName.testCompletion);
+  }
+
+  Future<void> _processPostTestSession() async {
+    showTestCompletionScreen.value = false;
+    showLesson.value = true;
+
+    final category = testCurrentCategory;
+    final topSessionLevel = testTopSessionLevel[category];
+    final currentSessionLevel = startedSessionLevel.value;
+    final totalSessions = totalSession[category];
+
+    if (topSessionLevel == currentSessionLevel && result >= 80) {
+      if (topSessionLevel! < totalSessions!) {
+        await testSaveSession(category, topSessionLevel + 1);
+        testTopSessionLevel[category] = topSessionLevel + 1;
+      }
+    }
+
+    final prefs = await SharedPreferences.getInstance();
+    final key = 'testScore_${category}_$currentSessionLevel';
+    final savedResult = prefs.getInt(key) ?? 0;
+
+    if (result > savedResult) {
+      await prefs.setInt(key, result.value);
+    }
+
+    Get.toNamed(RoutesName.testDashboardScreen);
+  }
+
+  Future<void> _handleIntermediateLesson() async {
+    showFeedbackAnimation.value = true;
+    isAnswerCorrect.value = (selectedIndex.value == correctIndex);
+    if (isAnswerCorrect.value) score.value++;
+
+    await Future.delayed(const Duration(seconds: 2));
+    showFeedbackAnimation.value = false;
+
+    await Future.delayed(const Duration(milliseconds: 500));
+    testCurrentLessonIndex.value++;
+    selectedIndex.value = -1;
+    isCheckButtonDisabled.value = false;
+    showLesson.value = settingsShowLesson.value;
+
+    if (!settingsShowLesson.value) generateOptions();
+  }
+
 
   void nextButtonActivity() {
     showLesson.value = false;

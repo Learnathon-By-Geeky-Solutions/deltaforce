@@ -17,77 +17,92 @@ class TestCompletionView extends StatelessWidget {
         automaticallyImplyLeading: false,
         centerTitle: true,
       ),
-      body: Obx(() { // <-- ADD Obx here
-        int result = controller.result.value;
+      body: Obx(() {
+        final result = controller.result.value;
+
         return Column(
           children: [
-            Expanded(
-              flex: 3,
-              child: Center(
-                child: Text(
-                  result >= 90
-                      ? "Excellent!"
-                      : result >= 75
-                      ? 'Great job!'
-                      : result >= 50
-                      ? 'Well done!'
-                      : 'Try again',
-                  style: const TextStyle(
-                    fontSize: 50,
-                    color: Colors.green,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-            ),
-            Expanded(
-              flex: 16,
-              child: Center(
-                child: DotLottieLoader.fromAsset(
-                  result >= 90
-                      ? 'lib/resources/assets/Others/animations/badge-3.lottie'
-                      : result >= 75
-                      ? 'lib/resources/assets/Others/animations/badge-2.lottie'
-                      : result >= 50
-                      ? 'lib/resources/assets/Others/animations/badge-1.lottie'
-                      : 'lib/resources/assets/Others/animations/no-star.lottie',
-                  frameBuilder: (ctx, dotlottie) {
-                    if (dotlottie != null) {
-                      return Lottie.memory(dotlottie.animations.values.single);
-                    } else {
-                      return const Center(child: CircularProgressIndicator());
-                    }
-                  },
-                ),
-              ),
-            ),
-            Expanded(
-              flex: 3,
-              child: Padding(
-                padding: const EdgeInsets.only(
-                  left: 40,
-                  right: 40,
-                  top: 16,
-                  bottom: 16,
-                ),
-                child: SizedBox(
-                  width: double.infinity,
-                  child: ElevatedButton(
-                    onPressed: controller.checkButtonActivity,
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.red,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                    ),
-                    child: const Icon(Icons.arrow_forward_outlined),
-                  ),
-                ),
-              ),
-            )
+            _buildTitleSection(result),
+            _buildAnimationSection(result),
+            _buildButtonSection(controller),
           ],
         );
       }),
     );
+  }
+
+  Widget _buildTitleSection(int result) {
+    return Expanded(
+      flex: 3,
+      child: Center(
+        child: Text(
+          _getResultTitle(result),
+          style: const TextStyle(
+            fontSize: 50,
+            color: Colors.green,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildAnimationSection(int result) {
+    return Expanded(
+      flex: 16,
+      child: Center(
+        child: DotLottieLoader.fromAsset(
+          _getLottieAssetPath(result),
+          frameBuilder: (ctx, dotlottie) {
+            if (dotlottie != null) {
+              return Lottie.memory(dotlottie.animations.values.single);
+            } else {
+              return const Center(child: CircularProgressIndicator());
+            }
+          },
+        ),
+      ),
+    );
+  }
+
+  Widget _buildButtonSection(TestController controller) {
+    return Expanded(
+      flex: 3,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 16),
+        child: SizedBox(
+          width: double.infinity,
+          child: ElevatedButton(
+            onPressed: controller.checkButtonActivity,
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.red,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12),
+              ),
+            ),
+            child: const Icon(Icons.arrow_forward_outlined),
+          ),
+        ),
+      ),
+    );
+  }
+
+  String _getResultTitle(int result) {
+    if (result >= 90) return "Excellent!";
+    if (result >= 75) return "Great job!";
+    if (result >= 50) return "Well done!";
+    return "Try again";
+  }
+
+  String _getLottieAssetPath(int result) {
+    if (result >= 90) {
+      return 'lib/resources/assets/Others/animations/badge-3.lottie';
+    } else if (result >= 75) {
+      return 'lib/resources/assets/Others/animations/badge-2.lottie';
+    } else if (result >= 50) {
+      return 'lib/resources/assets/Others/animations/badge-1.lottie';
+    } else {
+      return 'lib/resources/assets/Others/animations/no-star.lottie';
+    }
   }
 }
