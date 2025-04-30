@@ -5,14 +5,8 @@ import 'package:mockito/mockito.dart';
 import 'package:voice_bridge/features/authentication/const/app_strings.dart';
 import 'package:voice_bridge/features/authentication/view_models/auth_view_model.dart';
 import 'package:voice_bridge/features/authentication/views/auth/signup_screen.dart';
-import 'package:voice_bridge/features/authentication/views/auth/forgot_password_screen.dart';
-import 'package:voice_bridge/resources/colors/app_color.dart';
 import 'package:voice_bridge/widgets/custom_button.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:get/get_instance/src/lifecycle.dart'; // for InternalFinalCallback
-
-import 'package:get/get_instance/src/lifecycle.dart';
 
 class FakeInternalFinalCallback extends InternalFinalCallback<void> {
   @override
