@@ -1,0 +1,47 @@
+{
+  "sessionName": "Session 17",
+  "lessons": [
+    {
+      "lessonName": "Sad",
+      "imageAsset": "lib/resources/assets/Emotion/images/sad-expression.jpg",
+      "animationAsset": "lib/resources/assets/Emotion/animations/sad-expression.lottie",
+      "audioAsset": "lib/resources/assets/Study/Emotion/sad-expression.mp3"
+    },
+    {
+      "lessonName": "Shocking",
+      "imageAsset": "lib/resources/assets/Emotion/images/shocking-expression.jpg",
+      "animationAsset": "lib/resources/assets/Emotion/animations/shocking-expression.lottie",
+      "audioAsset": "lib/resources/assets/Emotion/audio/shocking-expression.mp3"
+    },
+    {
+      "lessonName": "Disgust",
+      "imageAsset": "lib/resources/assets/Emotion/images/disgust-expression.jpg",
+      "animationAsset": "lib/resources/assets/Emotion/animations/disgust-expression.lottie",
+      "audioAsset": "lib/resources/assets/Emotion/audio/disgust-expression.mp3"
+    },
+    {
+      "lessonName": "Happy",
+      "imageAsset": "lib/resources/assets/Emotion/images/happy-expression.jpg",
+      "animationAsset": "lib/resources/assets/Emotion/animations/happy-expression.lottie",
+      "audioAsset": "lib/resources/assets/Emotion/audio/happy-expression.mp3"
+    },
+    {
+      "lessonName": "Angry",
+      "imageAsset": "lib/resources/assets/Emotion/images/angry-expression.jpg",
+      "animationAsset": "lib/resources/assets/Emotion/animations/angry-expression.lottie",
+      "audioAsset": "lib/resources/assets/Emotion/audio/angry-expression.mp3"
+    },
+    {
+      "lessonName": "Crying",
+      "imageAsset": "lib/resources/assets/Emotion/images/crying-expression.jpg",
+      "animationAsset": "lib/resources/assets/Emotion/animations/crying-expression.lottie",
+      "audioAsset": "lib/resources/assets/Emotion/audio/crying-expression.mp3"
+    },
+    {
+      "lessonName": "Frustrated",
+      "imageAsset": "lib/resources/assets/Emotion/images/frustrated-expression.jpg",
+      "animationAsset": "lib/resources/assets/Emotion/animations/frustrated-expression.lottie",
+      "audioAsset": "lib/resources/assets/Emotion/audio/frustrated-expression.mp3"
+    }
+  ]
+}

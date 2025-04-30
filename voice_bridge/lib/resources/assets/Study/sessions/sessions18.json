@@ -1,0 +1,59 @@
+{
+  "sessionName": "Session 18",
+  "lessons": [
+    {
+      "lessonName": "Teacher",
+      "imageAsset": "lib/resources/assets/Study/images/teacher.jpg",
+      "animationAsset": "lib/resources/assets/Study/animations/teacher.lottie",
+      "audioAsset": "lib/resources/assets/Study/audio/teacher.mp3"
+    },
+    {
+      "lessonName": "Dentist",
+      "imageAsset": "lib/resources/assets/Study/images/dentist.jpg",
+      "animationAsset": "lib/resources/assets/Study/animations/dentist.lottie",
+      "audioAsset": "lib/resources/assets/Study/audio/dentist.mp3"
+    },
+    {
+      "lessonName": "Chef",
+      "imageAsset": "lib/resources/assets/Study/images/chef.jpg",
+      "animationAsset": "lib/resources/assets/Study/animations/chef.lottie",
+      "audioAsset": "lib/resources/assets/Study/audio/chef.mp3"
+    },
+    {
+      "lessonName": "Lawyer",
+      "imageAsset": "lib/resources/assets/Study/images/lawyer.jpg",
+      "animationAsset": "lib/resources/assets/Study/animations/lawyer.lottie",
+      "audioAsset": "lib/resources/assets/Study/audio/lawyer.mp3"
+    },
+    {
+      "lessonName": "Engineer",
+      "imageAsset": "lib/resources/assets/Study/images/engineer.jpg",
+      "animationAsset": "lib/resources/assets/Study/animations/engineer.lottie",
+      "audioAsset": "lib/resources/assets/Study/audio/engineer.mp3"
+    },
+    {
+      "lessonName": "Doctor",
+      "imageAsset": "lib/resources/assets/Study/images/doctor.jpg",
+      "animationAsset": "lib/resources/assets/Study/animations/doctor.lottie",
+      "audioAsset": "lib/resources/assets/Study/audio/doctor.mp3"
+    },
+    {
+      "lessonName": "Plumber",
+      "imageAsset": "lib/resources/assets/Study/images/plumber.jpg",
+      "animationAsset": "lib/resources/assets/Study/animations/plumber.lottie",
+      "audioAsset": "lib/resources/assets/Study/audio/plumber.mp3"
+    },
+    {
+      "lessonName": "Electrician",
+      "imageAsset": "lib/resources/assets/Study/images/electrician.jpg",
+      "animationAsset": "lib/resources/assets/Study/animations/electrician.lottie",
+      "audioAsset": "lib/resources/assets/Study/audio/electrician.mp3"
+    },
+    {
+      "lessonName": "Architect",
+      "imageAsset": "lib/resources/assets/Study/images/architect.jpg",
+      "animationAsset": "lib/resources/assets/Study/animations/architect.lottie",
+      "audioAsset": "lib/resources/assets/Study/audio/architect.mp3"
+    }
+  ]
+}

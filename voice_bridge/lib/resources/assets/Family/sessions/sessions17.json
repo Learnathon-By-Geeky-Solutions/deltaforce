@@ -1,0 +1,41 @@
+{
+  "sessionName": "Session 17",
+  "lessons": [
+    {
+      "lessonName": "Brother Sister",
+      "imageAsset": "lib/resources/assets/Family/images/brother-sister.jpg",
+      "animationAsset": "lib/resources/assets/Family/animations/brother-sister.lottie",
+      "audioAsset": "lib/resources/assets/Family/audio/brother-sister.mp3"
+    },
+    {
+      "lessonName": "Father Daughter",
+      "imageAsset": "lib/resources/assets/Family/images/father-carry-daughter.jpg",
+      "animationAsset": "lib/resources/assets/Family/animations/father-carry-daughter.lottie",
+      "audioAsset": "lib/resources/assets/Family/audio/father-carry-daughter.mp3"
+    },
+    {
+      "lessonName": "Brother",
+      "imageAsset": "lib/resources/assets/Family/images/brother.jpg",
+      "animationAsset": "lib/resources/assets/Family/animations/brother.lottie",
+      "audioAsset": "lib/resources/assets/Family/audio/brother.mp3"
+    },
+    {
+      "lessonName": "Mother",
+      "imageAsset": "lib/resources/assets/Family/images/mother.jpg",
+      "animationAsset": "lib/resources/assets/Family/animations/mother.lottie",
+      "audioAsset": "lib/resources/assets/Family/audio/mother.mp3"
+    },
+    {
+      "lessonName": "Grand Father",
+      "imageAsset": "lib/resources/assets/Family/images/grandfather.jpg",
+      "animationAsset": "lib/resources/assets/Family/animations/grandfather.lottie",
+      "audioAsset": "lib/resources/assets/Family/audio/grandfather.mp3"
+    },
+    {
+      "lessonName": "Grand Mother",
+      "imageAsset": "lib/resources/assets/Family/images/grandmother.jpg",
+      "animationAsset": "lib/resources/assets/Family/animations/grandmother.lottie",
+      "audioAsset": "lib/resources/assets/Family/audio/grandmother.mp3"
+    }
+  ]
+}

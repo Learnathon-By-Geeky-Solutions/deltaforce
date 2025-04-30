@@ -1,0 +1,42 @@
+{
+  "sessionName": "Session 19",
+  "lessons": [
+    {
+      "lessonName": "Washing Hand",
+      "imageAsset": "lib/resources/assets/Living Skill/images/washing_hand.jpg",
+      "animationAsset": "lib/resources/assets/Living Skill/animations/washing_hand.lottie",
+      "audioAsset": "lib/resources/assets/Living Skill/audio/washing_hand.mp3"
+    },
+    {
+      "lessonName": "Wake Up",
+      "imageAsset": "lib/resources/assets/Living Skill/images/wake_up.jpg",
+      "animationAsset": "lib/resources/assets/Living Skill/animations/wake_up.lottie",
+      "audioAsset": "lib/resources/assets/Living Skill/audio/wake_up.mp3"
+    },
+    {
+      "lessonName": "Taking Bath",
+      "imageAsset": "lib/resources/assets/Living Skill/images/taking_bath.jpg",
+      "animationAsset": "lib/resources/assets/Living Skill/animations/taking_bath.lottie",
+      "audioAsset": "lib/resources/assets/Living Skill/audio/taking_bath.mp3"
+    },
+
+    {
+      "lessonName": "Cooking",
+      "imageAsset": "lib/resources/assets/Living Skill/images/cooking.jpg",
+      "animationAsset": "lib/resources/assets/Living Skill/animations/cooking.lottie",
+      "audioAsset": "lib/resources/assets/Living Skill/audio/cooking.mp3"
+    },
+    {
+      "lessonName": "Cutting Food",
+      "imageAsset": "lib/resources/assets/Living Skill/images/cutting-food.jpg",
+      "animationAsset": "lib/resources/assets/Living Skill/animations/cutting-food.lottie",
+      "audioAsset": "lib/resources/assets/Living Skill/audio/cutting-food.mp3"
+    },
+    {
+      "lessonName": "Cooking Food",
+      "imageAsset": "lib/resources/assets/Living Skill/images/cooking-food.jpg",
+      "animationAsset": "lib/resources/assets/Living Skill/animations/cooking-food.lottie",
+      "audioAsset": "lib/resources/assets/Living Skill/audio/cooking-food.mp3"
+    }
+  ]
+}

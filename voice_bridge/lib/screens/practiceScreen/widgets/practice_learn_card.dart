@@ -37,11 +37,13 @@ class PracticeLearnCard extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset(
+            ClipRRect(
+              borderRadius: BorderRadius.circular(12), // Rounded image corners
+              child: Image.asset(
                 image,
                 height: 130,
-                // width: 80,
-                fit: BoxFit.cover
+                fit: BoxFit.cover,
+              ),
             ),
             const SizedBox(height: 10),
             Text(
@@ -52,6 +54,7 @@ class PracticeLearnCard extends StatelessWidget {
                 color: AppColor.cardTextColor,
               ),
             ),
+            const SizedBox(height: 8),
             LinearPercentIndicator(
               animation: true,
               animationDuration: 1000,
@@ -62,7 +65,8 @@ class PracticeLearnCard extends StatelessWidget {
               barRadius: const Radius.circular(10),
             ),
           ],
-        ),
+        )
+        ,
       ),
     );
   }

@@ -1,0 +1,65 @@
+{
+  "sessionName": "Session 11",
+  "lessons": [
+    {
+      "lessonName": "A",
+      "imageAsset": "lib/resources/assets/Study/images/a.jpg",
+      "animationAsset": "lib/resources/assets/Study/animations/a.lottie",
+      "audioAsset": "lib/resources/assets/Study/audio/a.mp3"
+    },
+    {
+      "lessonName": "B",
+      "imageAsset": "lib/resources/assets/Study/images/b.jpg",
+      "animationAsset": "lib/resources/assets/Study/animations/b.lottie",
+      "audioAsset": "lib/resources/assets/Study/audio/b.mp3"
+    },
+    {
+      "lessonName": "C",
+      "imageAsset": "lib/resources/assets/Study/images/c.jpg",
+      "animationAsset": "lib/resources/assets/Study/animations/c.lottie",
+      "audioAsset": "lib/resources/assets/Study/audio/c.mp3"
+    },
+    {
+      "lessonName": "D",
+      "imageAsset": "lib/resources/assets/Study/images/d.jpg",
+      "animationAsset": "lib/resources/assets/Study/animations/d.lottie",
+      "audioAsset": "lib/resources/assets/Study/audio/d.mp3"
+    },
+    {
+      "lessonName": "E",
+      "imageAsset": "lib/resources/assets/Study/images/e.jpg",
+      "animationAsset": "lib/resources/assets/Study/animations/e.lottie",
+      "audioAsset": "lib/resources/assets/Study/audio/e.mp3"
+    },
+    {
+      "lessonName": "F",
+      "imageAsset": "lib/resources/assets/Study/images/f.jpg",
+      "animationAsset": "lib/resources/assets/Study/animations/f.lottie",
+      "audioAsset": "lib/resources/assets/Study/audio/f.mp3"
+    },
+    {
+      "lessonName": "G",
+      "imageAsset": "lib/resources/assets/Study/images/g.jpg",
+      "animationAsset": "lib/resources/assets/Study/animations/g.lottie",
+      "audioAsset": "lib/resources/assets/Study/audio/g.mp3"
+    },
+    {
+      "lessonName": "H",
+      "imageAsset": "lib/resources/assets/Study/images/h.jpg",
+      "animationAsset": "lib/resources/assets/Study/animations/h.lottie",
+      "audioAsset": "lib/resources/assets/Study/audio/h.mp3"
+    },
+    {
+      "lessonName": "I",
+      "imageAsset": "lib/resources/assets/Study/images/i.jpg",
+      "animationAsset": "lib/resources/assets/Study/animations/i.lottie",
+      "audioAsset": "lib/resources/assets/Study/audio/i.mp3"
+    },
+    {
+      "lessonName": "J",
+      "imageAsset": "lib/resources/assets/Study/images/j.jpg",
+      "animationAsset": "lib/resources/assets/Study/animations/j.lottie",
+      "audioAsset": "lib/resources/assets/Study/audio/j.mp3"
+    }
+  ]
+}

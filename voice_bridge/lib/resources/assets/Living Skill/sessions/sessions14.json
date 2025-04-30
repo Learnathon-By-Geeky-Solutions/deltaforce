@@ -1,0 +1,41 @@
+{
+  "sessionName": "Session 14",
+  "lessons": [
+    {
+      "lessonName": "Running",
+      "imageAsset": "lib/resources/assets/Living Skill/images/running.jpg",
+      "animationAsset": "lib/resources/assets/Living Skill/animations/running.lottie",
+      "audioAsset": "lib/resources/assets/Living Skill/audio/running.mp3"
+    },
+    {
+      "lessonName": "Mom Teaching",
+      "imageAsset": "lib/resources/assets/Living Skill/images/mom_teaching.jpg",
+      "animationAsset": "lib/resources/assets/Living Skill/animations/mom_teaching.lottie",
+      "audioAsset": "lib/resources/assets/Living Skill/audio/mom_teaching.mp3"
+    },
+    {
+      "lessonName": "Mom Cleaning",
+      "imageAsset": "lib/resources/assets/Living Skill/images/mom_cleaning.jpg",
+      "animationAsset": "lib/resources/assets/Living Skill/animations/mom_cleaning.lottie",
+      "audioAsset": "lib/resources/assets/Living Skill/audio/mom_cleaning.mp3"
+    },
+    {
+      "lessonName": "School",
+      "imageAsset": "lib/resources/assets/Living Skill/images/school.jpg",
+      "animationAsset": "lib/resources/assets/Living Skill/animations/school.lottie",
+      "audioAsset": "lib/resources/assets/Living Skill/audio/school.mp3"
+    },
+    {
+      "lessonName": "Reading in School",
+      "imageAsset": "lib/resources/assets/Living Skill/images/reading_in_school.jpg",
+      "animationAsset": "lib/resources/assets/Living Skill/animations/reading_in_school.lottie",
+      "audioAsset": "lib/resources/assets/Living Skill/audio/reading_in_school.mp3"
+    },
+    {
+      "lessonName": "Ludo",
+      "imageAsset": "lib/resources/assets/Living Skill/images/ludo.jpg",
+      "animationAsset": "lib/resources/assets/Living Skill/animations/ludo.lottie",
+      "audioAsset": "lib/resources/assets/Living Skill/audio/ludo.mp3"
+    }
+  ]
+}

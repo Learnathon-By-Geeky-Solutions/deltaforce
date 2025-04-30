@@ -2,10 +2,28 @@
   "sessionName": "Session 1",
   "lessons": [
     {
-      "lessonName": "Cleaning Tooth",
-      "imageAsset": "lib/resources/assets/Living Skill/images/girl-cleaning-tooth.jpg",
-      "animationAsset": "lib/resources/assets/Living Skill/animations/girl-cleaning-tooth.lottie",
-      "audioAsset": "lib/resources/assets/Living Skill/audio/girl-cleaning-tooth.mp3"
+      "lessonName": "Washing Hand",
+      "imageAsset": "lib/resources/assets/Living Skill/images/washing_hand.jpg",
+      "animationAsset": "lib/resources/assets/Living Skill/animations/washing_hand.lottie",
+      "audioAsset": "lib/resources/assets/Living Skill/audio/washing_hand.mp3"
+    },
+    {
+      "lessonName": "Wake Up",
+      "imageAsset": "lib/resources/assets/Living Skill/images/wake_up.jpg",
+      "animationAsset": "lib/resources/assets/Living Skill/animations/wake_up.lottie",
+      "audioAsset": "lib/resources/assets/Living Skill/audio/wake_up.mp3"
+    },
+    {
+      "lessonName": "Taking Bath",
+      "imageAsset": "lib/resources/assets/Living Skill/images/taking_bath.jpg",
+      "animationAsset": "lib/resources/assets/Living Skill/animations/taking_bath.lottie",
+      "audioAsset": "lib/resources/assets/Living Skill/audio/taking_bath.mp3"
+    },
+    {
+      "lessonName": "Sleeping",
+      "imageAsset": "lib/resources/assets/Living Skill/images/sleeping.jpg",
+      "animationAsset": "lib/resources/assets/Living Skill/animations/sleeping.lottie",
+      "audioAsset": "lib/resources/assets/Living Skill/audio/sleeping.mp3"
     },
     {
       "lessonName": "Walking",
@@ -14,22 +32,16 @@
       "audioAsset": "lib/resources/assets/Living Skill/audio/walking.mp3"
     },
     {
-      "lessonName": "Ironing Clothes",
-      "imageAsset": "lib/resources/assets/Living Skill/images/ironing-clothes.jpg",
-      "animationAsset": "lib/resources/assets/Living Skill/animations/ironing-clothes.lottie",
-      "audioAsset": "lib/resources/assets/Living Skill/audio/ironing-clothes.mp3"
+      "lessonName": "Running",
+      "imageAsset": "lib/resources/assets/Living Skill/images/running.jpg",
+      "animationAsset": "lib/resources/assets/Living Skill/animations/running.lottie",
+      "audioAsset": "lib/resources/assets/Living Skill/audio/running.mp3"
     },
     {
-      "lessonName": "Cleaning House",
-      "imageAsset": "lib/resources/assets/Living Skill/images/clean-up-the-house.jpg",
-      "animationAsset": "lib/resources/assets/Living Skill/animations/clean-up-the-house.lottie",
-      "audioAsset": "lib/resources/assets/Living Skill/audio/clean-up-the-house.mp3"
-    },
-    {
-      "lessonName": "Drinking Water",
-      "imageAsset": "lib/resources/assets/Living Skill/images/drinking-water.jpg",
-      "animationAsset": "lib/resources/assets/Living Skill/animations/drinking-water.lottie",
-      "audioAsset": "lib/resources/assets/Living Skill/audio/drinking-water.mp3"
+      "lessonName": "Mom Teaching",
+      "imageAsset": "lib/resources/assets/Living Skill/images/mom_teaching.jpg",
+      "animationAsset": "lib/resources/assets/Living Skill/animations/mom_teaching.lottie",
+      "audioAsset": "lib/resources/assets/Living Skill/audio/mom_teaching.mp3"
     }
   ]
 }

@@ -43,11 +43,13 @@ class LearnCard extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset(
+            ClipRRect(
+              borderRadius: BorderRadius.circular(16), // You can change 16 to your desired corner radius
+              child: Image.asset(
                 image,
                 height: 150,
-                // width: 80,
-                fit: BoxFit.cover
+                fit: BoxFit.cover,
+              ),
             ),
             const SizedBox(height: 10),
             Text(
@@ -59,7 +61,8 @@ class LearnCard extends StatelessWidget {
               ),
             ),
           ],
-        ),
+        )
+
       ),
     );
   }

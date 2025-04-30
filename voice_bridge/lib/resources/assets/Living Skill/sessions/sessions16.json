@@ -1,0 +1,36 @@
+{
+  "sessionName": "Session 16",
+  "lessons": [
+
+    {
+      "lessonName": "Eating Bread",
+      "imageAsset": "lib/resources/assets/Living Skill/images/eating-bread.jpg",
+      "animationAsset": "lib/resources/assets/Living Skill/animations/eating-bread.lottie",
+      "audioAsset": "lib/resources/assets/Living Skill/audio/eating-bread.mp3"
+    },
+    {
+      "lessonName": "Eating Pop-Stick",
+      "imageAsset": "lib/resources/assets/Living Skill/images/eating-pop-stick.jpg",
+      "animationAsset": "lib/resources/assets/Living Skill/animations/eating-pop-stick.lottie",
+      "audioAsset": "lib/resources/assets/Living Skill/audio/eating-pop-stick.mp3"
+    },
+    {
+      "lessonName": "Cooking",
+      "imageAsset": "lib/resources/assets/Living Skill/images/cooking.jpg",
+      "animationAsset": "lib/resources/assets/Living Skill/animations/cooking.lottie",
+      "audioAsset": "lib/resources/assets/Living Skill/audio/cooking.mp3"
+    },
+    {
+      "lessonName": "Cutting Food",
+      "imageAsset": "lib/resources/assets/Living Skill/images/cutting-food.jpg",
+      "animationAsset": "lib/resources/assets/Living Skill/animations/cutting-food.lottie",
+      "audioAsset": "lib/resources/assets/Living Skill/audio/cutting-food.mp3"
+    },
+    {
+      "lessonName": "Cooking Food",
+      "imageAsset": "lib/resources/assets/Living Skill/images/cooking-food.jpg",
+      "animationAsset": "lib/resources/assets/Living Skill/animations/cooking-food.lottie",
+      "audioAsset": "lib/resources/assets/Living Skill/audio/cooking-food.mp3"
+    }
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "sessionName": "Session 9",
+  "lessons": [
+    {
+      "lessonName": "Washing Hand",
+      "imageAsset": "lib/resources/assets/Living Skill/images/washing_hand.jpg",
+      "animationAsset": "lib/resources/assets/Living Skill/animations/washing_hand.lottie",
+      "audioAsset": "lib/resources/assets/Living Skill/audio/washing_hand.mp3"
+    },
+    {
+      "lessonName": "Wake Up",
+      "imageAsset": "lib/resources/assets/Living Skill/images/wake_up.jpg",
+      "animationAsset": "lib/resources/assets/Living Skill/animations/wake_up.lottie",
+      "audioAsset": "lib/resources/assets/Living Skill/audio/wake_up.mp3"
+    },
+    {
+      "lessonName": "Taking Bath",
+      "imageAsset": "lib/resources/assets/Living Skill/images/taking_bath.jpg",
+      "animationAsset": "lib/resources/assets/Living Skill/animations/taking_bath.lottie",
+      "audioAsset": "lib/resources/assets/Living Skill/audio/taking_bath.mp3"
+    },
+    {
+      "lessonName": "Sleeping",
+      "imageAsset": "lib/resources/assets/Living Skill/images/sleeping.jpg",
+      "animationAsset": "lib/resources/assets/Living Skill/animations/sleeping.lottie",
+      "audioAsset": "lib/resources/assets/Living Skill/audio/sleeping.mp3"
+    },
+    {
+      "lessonName": "Walking",
+      "imageAsset": "lib/resources/assets/Living Skill/images/walking.jpg",
+      "animationAsset": "lib/resources/assets/Living Skill/animations/walking.lottie",
+      "audioAsset": "lib/resources/assets/Living Skill/audio/walking.mp3"
+    },
+    {
+      "lessonName": "Running",
+      "imageAsset": "lib/resources/assets/Living Skill/images/running.jpg",
+      "animationAsset": "lib/resources/assets/Living Skill/animations/running.lottie",
+      "audioAsset": "lib/resources/assets/Living Skill/audio/running.mp3"
+    },
+    {
+      "lessonName": "Mom Teaching",
+      "imageAsset": "lib/resources/assets/Living Skill/images/mom_teaching.jpg",
+      "animationAsset": "lib/resources/assets/Living Skill/animations/mom_teaching.lottie",
+      "audioAsset": "lib/resources/assets/Living Skill/audio/mom_teaching.mp3"
+    }
+  ]
+}

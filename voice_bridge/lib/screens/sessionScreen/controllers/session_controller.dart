@@ -70,7 +70,7 @@ class SessionController extends GetxController {
 
   /// Load a session from assets
   Future<void> startSession(String category) async {
-    if (category == "Fruits Ninja") {
+    if (category == "Fruits Slice") {
       Get.toNamed(RoutesName.balloonBlast);
     } else {
       currentLessonIndex.value = 0;
