@@ -21,21 +21,51 @@ void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
   setUp(() async {
-    Get.testMode = true;
+    Get.testMode = true; // Prevents animations from running actual tickers
     SharedPreferences.setMockInitialValues({});
   });
 
   tearDown(() async {
+    // Reset GetX state after each test to prevent overlay/snackbar leaks
     Get.reset();
+  });
+
+  testWidgets('checkButtonActivity triggers testCompletion when last lesson and answer is selected', (tester) async {
+    SharedPreferences.setMockInitialValues({});
+    final controller = TestController();
+    Get.put(controller);
+
+    controller.lessonLength = 1;
+    controller.testCurrentLessonIndex.value = 0;
+    controller.selectedIndex.value = 0;
+    controller.correctIndex = 0;
+    controller.testCurrentCategory = "Emotion";
+    controller.testTopSessionLevel["Emotion"] = 1;
+    controller.startedSessionLevel.value = 1;
+    controller.totalSession["Emotion"] = 2;
+
+    final observer = FakeNavigatorObserver();
+    await tester.pumpWidget(GetMaterialApp(
+      navigatorObservers: [observer],
+      getPages: [
+        GetPage(name: RoutesName.testCompletion, page: () => const SizedBox()),
+        GetPage(name: RoutesName.testDashboardScreen, page: () => const SizedBox()),
+      ],
+      home: const SizedBox(),
+    ));
+
+    await controller.checkButtonActivity();
+    await tester.pump(const Duration(seconds: 3)); // Simulate time passage
+
+    expect(observer.navigatedRoutes.contains(RoutesName.testCompletion), isTrue);
   });
 
 
   testWidgets('Should do nothing if button is already disabled', (tester) async {
     final controller = TestController();
     controller.isCheckButtonDisabled.value = true;
-
-    // No need to pump anything because nothing should happen
     await controller.checkButtonActivity();
+    // No exception = success
   });
 
   testWidgets('Should show snackbar if no option is selected on last question', (tester) async {
@@ -53,10 +83,15 @@ void main() {
     );
 
     await controller.checkButtonActivity();
-    await tester.pump(const Duration(seconds: 1));
+    await tester.pump();
+    await tester.pump(const Duration(seconds: 3));
     await tester.pumpAndSettle();
 
-    expect(find.textContaining("Select Correct Option"), findsOneWidget);
+    expect(find.byWidgetPredicate((widget) {
+      return widget is Text &&
+          widget.data != null &&
+          widget.data!.contains("Select Correct Option");
+    }), findsOneWidget);
   });
 
   testWidgets('Should handle already completed test and go to dashboard', (tester) async {
@@ -86,7 +121,6 @@ void main() {
 
     await controller.checkButtonActivity();
     await tester.pump(const Duration(milliseconds: 600));
-    await tester.pumpAndSettle();
 
     expect(observer.navigatedRoutes, contains(RoutesName.testDashboardScreen));
   });
@@ -106,71 +140,31 @@ void main() {
     );
 
     await controller.checkButtonActivity();
-    await tester.pump(const Duration(seconds: 1));
+    await tester.pump();
+    await tester.pump(const Duration(seconds: 3));
     await tester.pumpAndSettle();
 
-    expect(find.textContaining("Select Correct Option"), findsOneWidget);
+    expect(find.byWidgetPredicate((widget) {
+      return widget is Text &&
+          widget.data != null &&
+          widget.data!.contains("Select Correct Option");
+    }), findsOneWidget);
   });
 
+  testWidgets('Should go to next question if answer selected mid-lesson', (tester) async {
+    final controller = TestController();
+    Get.put(controller);
 
+    controller.lessonLength = 5;
+    controller.testCurrentLessonIndex.value = 2;
+    controller.selectedIndex.value = 1;
+    controller.correctIndex = 1;
 
+    await tester.pumpWidget(GetMaterialApp(home: Scaffold()));
+    await controller.checkButtonActivity();
+    await tester.pump(const Duration(seconds: 3));
 
-
-  // testWidgets('checkButtonActivity triggers testCompletion when last lesson and answer is selected', (tester) async {
-  //   SharedPreferences.setMockInitialValues({});
-  //   final controller = TestController();
-  //   Get.put(controller);
-  //
-  //   controller.lessonLength = 1;
-  //   controller.testCurrentLessonIndex.value = 0;
-  //   controller.selectedIndex.value = 0;
-  //   controller.correctIndex = 0;
-  //   controller.testCurrentCategory = "Emotion";
-  //   controller.testTopSessionLevel["Emotion"] = 1;
-  //   controller.startedSessionLevel.value = 1;
-  //   controller.totalSession["Emotion"] = 2;
-  //
-  //   final observer = FakeNavigatorObserver();
-  //   await tester.pumpWidget(GetMaterialApp(
-  //     navigatorObservers: [observer],
-  //     getPages: [
-  //       GetPage(name: RoutesName.testCompletion, page: () => const SizedBox()),
-  //       GetPage(name: RoutesName.testDashboardScreen, page: () => const SizedBox()),
-  //     ],
-  //     home: Scaffold(body: const Text('Test Screen')), // ✅ Give context to Get.context!
-  //   ));
-  //
-  //   await controller.checkButtonActivity();
-  //
-  //   await tester.pump(const Duration(seconds: 3));
-  //   await tester.pumpAndSettle();
-  //
-  //   expect(observer.navigatedRoutes.contains(RoutesName.testCompletion), isTrue);
-  // });
-
-
-
-  // testWidgets('Should go to next question if answer selected mid-lesson', (tester) async {
-  //   final controller = TestController();
-  //   Get.put(controller);
-  //
-  //   controller.lessonLength = 5;
-  //   controller.testCurrentLessonIndex.value = 2;
-  //   controller.selectedIndex.value = 1;
-  //   controller.correctIndex = 1;
-  //
-  //   await tester.pumpWidget(
-  //     GetMaterialApp(
-  //       home: Scaffold(body: const Text('Question Screen')), // ✅ needed context
-  //     ),
-  //   );
-  //
-  //   await controller.checkButtonActivity();
-  //
-  //   await tester.pump(const Duration(seconds: 3));
-  //   await tester.pumpAndSettle();
-  //
-  //   expect(controller.testCurrentLessonIndex.value, 3);
-  //   expect(controller.selectedIndex.value, -1);
-  // });
+    expect(controller.testCurrentLessonIndex.value, 3);
+    expect(controller.selectedIndex.value, -1);
+  });
 }
