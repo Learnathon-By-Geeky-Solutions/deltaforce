@@ -103,7 +103,7 @@ void main() {
       home: const SizedBox(),
     ));
 
-    await controller.startSession("Fruits Ninja");
+    await controller.startSession("Fruits Slice");
     await tester.pumpAndSettle();
 
     expect(observer.navigatedRoutes, contains(RoutesName.balloonBlast));
