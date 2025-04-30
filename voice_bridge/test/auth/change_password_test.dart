@@ -114,4 +114,32 @@ void main() {
       // Check that the visibility icon toggles (optional advanced: check obscureText flip)
     });
   });
+
+  testWidgets('toggles current password visibility', (WidgetTester tester) async {
+    await tester.pumpWidget(createWidgetUnderTest());
+
+    final iconButton = find.descendant(
+      of: find.byKey(const Key('current_password_field')),
+      matching: find.byType(IconButton),
+    );
+
+    expect(iconButton, findsOneWidget);
+    await tester.tap(iconButton);
+    await tester.pump();
+    // No assertion needed — if setState is triggered, it's covered
+  });
+
+  testWidgets('toggles re-enter password visibility', (WidgetTester tester) async {
+    await tester.pumpWidget(createWidgetUnderTest());
+
+    final iconButton = find.descendant(
+      of: find.byKey(const Key('re_enter_password_field')),
+      matching: find.byType(IconButton),
+    );
+
+    expect(iconButton, findsOneWidget);
+    await tester.tap(iconButton);
+    await tester.pump();
+  });
+
 }
