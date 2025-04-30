@@ -9,7 +9,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:voice_bridge/features/authentication/services/firebase_auth_service.dart';
 import 'package:voice_bridge/features/authentication/view_models/auth_view_model.dart';
 import 'package:voice_bridge/resources/routes/routes_name.dart';
-import '../app_drawer_test.dart';
+// import '../app_drawer_test.dart';
 import 'auth_view_model_test.mocks.dart';
 
 @GenerateMocks([FirebaseAuthService, UserCredential, User, FirebaseAuth])
@@ -300,46 +300,36 @@ void main() {
     expect(Get.currentRoute, RoutesName.loginScreen);
   });
 
-  // testWidgets('waitForEmailVerification completes early and navigates to login on success', (tester) async {
-  //   // Track internal mock state
-  //   int attemptCounter = 0;
-  //   bool emailVerified = false;
-  //
-  //   when(mockUserCredential.user).thenReturn(mockUser);
-  //   when(mockUser.sendEmailVerification()).thenAnswer((_) async {});
-  //   when(mockFirebaseAuthService.signUpWithEmailAndPassword(any, any))
-  //       .thenAnswer((_) async => mockUserCredential);
-  //   when(mockFirebaseAuthService.signOut()).thenAnswer((_) async {});
-  //   when(mockFirebaseAuthService.reloadUser()).thenAnswer((_) async {
-  //     attemptCounter++;
-  //     if (attemptCounter >= 3) {
-  //       emailVerified = true;
-  //     }
-  //   });
-  //   when(mockUser.emailVerified).thenAnswer((_) => emailVerified);
-  //   when(mockFirebaseAuthService.getCurrentUser()).thenAnswer((_) => mockUser);
-  //
-  //   await tester.pumpWidget(GetMaterialApp(
-  //     initialRoute: '/',
-  //     getPages: [
-  //       GetPage(name: '/', page: () => Scaffold(body: Text('Home'))),
-  //       GetPage(name: RoutesName.loginScreen, page: () => Scaffold(body: Text('Login'))),
-  //     ],
-  //   ));
-  //
-  //   await authViewModel.signUp('verified@user.com', 'password');
-  //
-  //   // Simulate time passing to allow retries
-  //   for (int i = 0; i < 10; i++) {
-  //     await tester.pump(const Duration(seconds: 3));
-  //     if (emailVerified) break;
-  //   }
-  //
-  //   await authViewModel.waitForEmailVerification(delayFn: (_) async {}); // skips real delay
-  //   await tester.pumpAndSettle(); // finish snackbars
-  //   expect(Get.currentRoute, RoutesName.loginScreen);
-  //
-  // });
+  testWidgets('waitForEmailVerification completes early when email is verified', (tester) async {
+    int attemptCounter = 0;
+
+    when(mockUserCredential.user).thenReturn(mockUser);
+    when(mockUser.sendEmailVerification()).thenAnswer((_) async {});
+    when(mockFirebaseAuthService.signOut()).thenAnswer((_) async {});
+    when(mockFirebaseAuthService.reloadUser()).thenAnswer((_) async {
+      attemptCounter++;
+    });
+    when(mockUser.emailVerified).thenAnswer((_) => attemptCounter >= 2);
+    when(mockFirebaseAuthService.getCurrentUser()).thenReturn(mockUser);
+
+    await tester.pumpWidget(GetMaterialApp(
+      initialRoute: '/',
+      getPages: [
+        GetPage(name: '/', page: () => const Scaffold(body: Text('Home'))),
+        GetPage(name: RoutesName.loginScreen, page: () => const Scaffold(body: Text('Login'))),
+      ],
+    ));
+
+    await authViewModel.waitForEmailVerification(delayFn: (_) async {});
+    await tester.pump(); // Trigger frame
+
+    // 🛠 Add this to allow the Snackbar's timer to complete
+    await tester.pump(const Duration(seconds: 4));
+    await tester.pumpAndSettle();
+
+    expect(Get.currentRoute, RoutesName.loginScreen);
+  });
+
 
 
 

@@ -62,7 +62,7 @@ void main() {
     expect(find.byIcon(Icons.star), findsNWidgets(3));
   });
 
-  testWidgets('Shows nothing while waiting for score', (WidgetTester tester) async {
+  testWidgets('Shows fallback stars while waiting for score', (WidgetTester tester) async {
     final completer = Completer<int>();
     await tester.pumpWidget(MaterialApp(
       home: Scaffold(
@@ -75,7 +75,14 @@ void main() {
       ),
     ));
 
-    expect(find.byIcon(Icons.star), findsNothing);
+    await tester.pump();
+
+    final starIcons = tester.widgetList<Icon>(find.byIcon(Icons.star));
+    expect(starIcons.length, 3); // fallback shows 3
+
+    for (final icon in starIcons) {
+      expect(icon.color, equals(Colors.white));
+    }
   });
 
   testWidgets('Shows DotLottie animation when lastUnlocked is true', (WidgetTester tester) async {
