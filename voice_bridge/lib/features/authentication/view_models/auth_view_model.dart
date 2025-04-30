@@ -209,7 +209,7 @@ class AuthViewModel extends GetxController {
       Get.back();
 
       // Clear the fields after successful update
-      Future.delayed(Duration(milliseconds: 300), () {
+      Future.delayed(const Duration(milliseconds: 300), () {
         currentPasswordController.clear();
         newPasswordController.clear();
       });

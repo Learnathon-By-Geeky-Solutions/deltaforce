@@ -16,7 +16,7 @@ class SettingsScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text(
           'Settings',
-          style: TextStyle(color: AppColor.whiteColor),
+          style: const TextStyle(color: AppColor.whiteColor),
         ),
         backgroundColor: AppColor.appBarColor,
       ),
@@ -59,10 +59,10 @@ class SettingsScreen extends StatelessWidget {
 
               },
             ),
-            SizedBox(height: 12),
+            const SizedBox(height: 12),
             BorderedListTile(
               leading: Icon(Icons.update),
-              title: Text(
+              title:const Text(
                 'Password Update',
                 style: TextStyle(
                   fontSize: 16,

@@ -23,37 +23,37 @@ class SignupScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(AppStrings.signUp,
+        title:const Text(AppStrings.signUp,
             style: TextStyle(
                 fontWeight: FontWeight.bold, color: AppColor.whiteColor)),
         backgroundColor: AppColor.appBarColor,
         centerTitle: true,
       ),
       body: Obx(() => _isLoading.value
-          ? Center(
+            ? const Center(
         child: SpinKitCircle(
           color: AppColor.appBarColor,
           size: 50.0,
         ),
       )
           : SingleChildScrollView(
-        padding: EdgeInsets.all(20),
+        padding:const EdgeInsets.all(20),
         child: Column(
           children: [
-            SizedBox(height: 20),
-            Text(
+            const SizedBox(height: 20),
+            const Text(
               AppStrings.createAccount,
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: 30),
+           const SizedBox(height: 30),
             _buildNameField(),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             _buildEmailField(),
-            SizedBox(height: 20),
+           const SizedBox(height: 20),
             _buildPasswordField(),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             _buildConfirmPasswordField(),
-            SizedBox(height: 30),
+           const SizedBox(height: 30),
             CustomButton(
               text: AppStrings.signUp,
               onPressed: _handleSignUp,
@@ -63,12 +63,12 @@ class SignupScreen extends StatelessWidget {
               "Or continue with",
               style: TextStyle(color: Colors.grey),
             ),
-            SizedBox(height: 20),
+           const SizedBox(height: 20),
             _buildGoogleSignInButton(),
-            SizedBox(height: 15),
+            const SizedBox(height: 15),
             TextButton(
               onPressed: () => Get.back(),
-              child: Text(
+              child:const Text(
                 AppStrings.alreadyHaveAccount,
                 style: TextStyle(color: Colors.blue),
               ),
@@ -84,7 +84,7 @@ class SignupScreen extends StatelessWidget {
       controller: _nameController,
       decoration: InputDecoration(
         labelText: AppStrings.userName,
-        prefixIcon: Icon(Icons.person),
+        prefixIcon:const Icon(Icons.person),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
         ),
@@ -97,7 +97,7 @@ class SignupScreen extends StatelessWidget {
       controller: _emailController,
       decoration: InputDecoration(
         labelText: AppStrings.email,
-        prefixIcon: Icon(Icons.email),
+        prefixIcon:const Icon(Icons.email),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
         ),
@@ -112,7 +112,7 @@ class SignupScreen extends StatelessWidget {
       obscureText: _obscurePassword.value,
       decoration: InputDecoration(
         labelText: AppStrings.password,
-        prefixIcon: Icon(Icons.lock),
+        prefixIcon:const Icon(Icons.lock),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
         ),
@@ -133,7 +133,7 @@ class SignupScreen extends StatelessWidget {
       obscureText: _obscureConfirmPassword.value,
       decoration: InputDecoration(
         labelText: "Confirm Password",
-        prefixIcon: Icon(Icons.lock),
+        prefixIcon:const Icon(Icons.lock),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
         ),
@@ -151,8 +151,8 @@ class SignupScreen extends StatelessWidget {
   Widget _buildGoogleSignInButton() {
     return OutlinedButton(
       style: OutlinedButton.styleFrom(
-        minimumSize: Size(double.infinity, 50),
-        side: BorderSide(color: Colors.grey),
+        minimumSize:const Size(double.infinity, 50),
+        side:const BorderSide(color: Colors.grey),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10),
         ),
@@ -162,7 +162,7 @@ class SignupScreen extends StatelessWidget {
         await _authController.signInWithGoogle();
         _isLoading.value = false;
       },
-      child: Row(
+      child:const Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           FaIcon(FontAwesomeIcons.google, color: Colors.red),

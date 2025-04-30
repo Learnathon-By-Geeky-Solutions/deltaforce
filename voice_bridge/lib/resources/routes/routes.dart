@@ -97,7 +97,7 @@ class AppRoutes {
 
     GetPage(
       name: RoutesName.testCompletion,
-      page: () => TestCompletionView(),
+      page: () =>const TestCompletionView(),
     ),
 
     GetPage(
