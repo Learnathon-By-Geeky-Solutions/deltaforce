@@ -154,7 +154,7 @@ class LoginScreen extends StatelessWidget {
     showDialog(
       context: Get.context!,
       barrierDismissible: false,
-      builder: (_) => Dialog(
+      builder: (_) =>const Dialog(
         backgroundColor: Colors.transparent,
         child: Center(
           child: SpinKitFadingCircle(

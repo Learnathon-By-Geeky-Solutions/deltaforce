@@ -92,8 +92,9 @@ class AppDrawer extends StatelessWidget {
             leading: const Icon(Icons.exit_to_app),
             title: const Text('Sign Out'),
             onTap: () async {
+              final navigator = Navigator.of(context);
               await services.signOut();
-              Navigator.pop(context);
+              navigator.pop();
             },
           ),
         ],

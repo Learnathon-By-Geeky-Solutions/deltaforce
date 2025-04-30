@@ -5,7 +5,7 @@ import 'package:voice_bridge/features/authentication/const/app_strings.dart';
 import 'package:voice_bridge/features/authentication/view_models/auth_view_model.dart';
 
 class SplashScreen extends StatefulWidget {
-  SplashScreen({super.key});
+  const SplashScreen({super.key});
 
   @override
   State<SplashScreen> createState() => _SplashScreenState();
@@ -59,7 +59,7 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
                   ),
                   const SizedBox(height: 20),
                   // App Name
-                  Text(
+                 const Text(
                     AppStrings.appName,
                     style: const TextStyle(
                       fontSize: 30,
@@ -73,7 +73,7 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
             ),
           ),
           // Fancy Loading Indicator at Bottom
-          Positioned(
+         const Positioned(
             bottom: 50,
             left: 0,
             right: 0,

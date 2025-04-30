@@ -27,10 +27,10 @@ class SendFeedbackScreen extends StatelessWidget {
                   borderRadius: BorderRadius.circular(12),
                 ),
                 filled: true,
-                fillColor: AppColor.cardGreenColor.withOpacity(0.1),
+                fillColor: AppColor.cardGreenColor.withValues(alpha: 0.1),
                 contentPadding: const EdgeInsets.all(16),
               ),
-              style: TextStyle(color: AppColor.primaryTextColor),
+              style:const TextStyle(color: AppColor.primaryTextColor),
             ),
             const SizedBox(height: 20),
             ElevatedButton(

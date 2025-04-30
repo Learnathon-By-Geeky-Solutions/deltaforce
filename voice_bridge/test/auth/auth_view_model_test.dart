@@ -9,6 +9,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:voice_bridge/features/authentication/services/firebase_auth_service.dart';
 import 'package:voice_bridge/features/authentication/view_models/auth_view_model.dart';
 import 'package:voice_bridge/resources/routes/routes_name.dart';
+import '../app_drawer_test.dart';
 import 'auth_view_model_test.mocks.dart';
 
 @GenerateMocks([FirebaseAuthService, UserCredential, User, FirebaseAuth])
