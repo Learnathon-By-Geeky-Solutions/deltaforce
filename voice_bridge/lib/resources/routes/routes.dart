@@ -30,7 +30,7 @@ class AppRoutes {
 
     GetPage(
         name: RoutesName.splashScreen,
-        page: () => SplashScreen(),
+        page: () => const SplashScreen(),
     ),
 
     GetPage(

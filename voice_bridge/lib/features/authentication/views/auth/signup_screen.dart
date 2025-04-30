@@ -58,8 +58,8 @@ class SignupScreen extends StatelessWidget {
               text: AppStrings.signUp,
               onPressed: _handleSignUp,
             ),
-            SizedBox(height: 20),
-            Text(
+            const SizedBox(height: 20),
+            const Text(
               "Or continue with",
               style: TextStyle(color: Colors.grey),
             ),
