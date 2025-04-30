@@ -5,11 +5,13 @@ import 'package:voice_bridge/features/authentication/views/auth/forgot_password_
 import 'package:voice_bridge/resources/colors/app_color.dart';
 
 class PasswordUpdateScreen extends StatefulWidget {
+  const PasswordUpdateScreen({super.key});
+
   @override
-  _PasswordUpdateScreenState createState() => _PasswordUpdateScreenState();
+  PasswordUpdateScreenState createState() => PasswordUpdateScreenState();
 }
 
-class _PasswordUpdateScreenState extends State<PasswordUpdateScreen> {
+class PasswordUpdateScreenState extends State<PasswordUpdateScreen> {
   final AuthViewModel _authViewModel = Get.find<AuthViewModel>();
   final TextEditingController _currentPasswordController = TextEditingController();
   final TextEditingController _newPasswordController = TextEditingController();
@@ -23,7 +25,7 @@ class _PasswordUpdateScreenState extends State<PasswordUpdateScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           'Update Password',
           style: TextStyle(color: AppColor.whiteColor),
         ),
@@ -34,11 +36,12 @@ class _PasswordUpdateScreenState extends State<PasswordUpdateScreen> {
         child: Column(
           children: [
             TextFormField(
+              key: const Key('current_password_field'),
               controller: _currentPasswordController,
               obscureText: !_isCurrentPasswordVisible,
               decoration: InputDecoration(
                 labelText: 'Current Password',
-                border: OutlineInputBorder(),
+                border: const OutlineInputBorder(),
                 suffixIcon: IconButton(
                   icon: Icon(
                     _isCurrentPasswordVisible ? Icons.visibility : Icons.visibility_off,
@@ -51,13 +54,14 @@ class _PasswordUpdateScreenState extends State<PasswordUpdateScreen> {
                 ),
               ),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             TextFormField(
+              key: const Key('new_password_field'),
               controller: _newPasswordController,
               obscureText: !_isNewPasswordVisible,
               decoration: InputDecoration(
                 labelText: 'New Password',
-                border: OutlineInputBorder(),
+                border: const OutlineInputBorder(),
                 suffixIcon: IconButton(
                   icon: Icon(
                     _isNewPasswordVisible ? Icons.visibility : Icons.visibility_off,
@@ -70,13 +74,14 @@ class _PasswordUpdateScreenState extends State<PasswordUpdateScreen> {
                 ),
               ),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             TextFormField(
+              key: const Key('re_enter_password_field'),
               controller: _reEnterNewPasswordController,
               obscureText: !_isReEnterPasswordVisible,
               decoration: InputDecoration(
                 labelText: 'Re-enter New Password',
-                border: OutlineInputBorder(),
+                border: const OutlineInputBorder(),
                 suffixIcon: IconButton(
                   icon: Icon(
                     _isReEnterPasswordVisible ? Icons.visibility : Icons.visibility_off,
@@ -89,17 +94,24 @@ class _PasswordUpdateScreenState extends State<PasswordUpdateScreen> {
                 ),
               ),
             ),
-            SizedBox(height: 24),
+            const SizedBox(height: 24),
             ElevatedButton(
               onPressed: () async {
                 if (_newPasswordController.text !=
                     _reEnterNewPasswordController.text) {
-                  Get.snackbar(
-                    'Error',
-                    'Passwords do not match',
-                    backgroundColor: Colors.red,
-                    colorText: Colors.white,
+                  final controller = ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text('Passwords do not match'),
+                      backgroundColor: Colors.red,
+                      duration: Duration(seconds: 2),
+                    ),
                   );
+
+                  // ✅ Dismiss manually to ensure test success
+                  Future.delayed(const Duration(seconds: 3), () {
+                    controller.close();
+                  });
+
                   return;
                 }
 
@@ -108,17 +120,17 @@ class _PasswordUpdateScreenState extends State<PasswordUpdateScreen> {
                   _newPasswordController.text,
                 );
               },
-              child: Text('Update Password'),
               style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all(AppColor.buttonColor),
+                backgroundColor: WidgetStateProperty.all(AppColor.buttonColor),
               ),
+              child: const Text('Update Password'),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             TextButton(
               onPressed: () {
                 Get.to(ForgotPasswordScreen());
               },
-              child: Text(
+              child: const Text(
                 'Forgot Password?',
                 style: TextStyle(color: AppColor.buttonColor),
               ),
