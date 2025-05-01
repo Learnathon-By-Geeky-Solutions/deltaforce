@@ -3,8 +3,17 @@ import 'package:flutter/material.dart';
 import 'package:voice_bridge/features/Settings/service/theme_service.dart';
 
 class ThemeViewModel extends GetxController {
-  final ThemeService _themeService = ThemeService();
+  final ThemeService _themeService;
   var isDarkMode = false.obs;
+
+  ThemeViewModel({ThemeService? themeService})
+      : _themeService = themeService ?? ThemeService();
+
+  factory ThemeViewModel.withService(ThemeService service) {
+    final vm = ThemeViewModel(themeService: service);
+    vm.isDarkMode.value = service.theme == ThemeMode.dark;
+    return vm;
+  }
 
   @override
   void onInit() {
@@ -15,6 +24,6 @@ class ThemeViewModel extends GetxController {
   void toggleTheme() {
     isDarkMode.toggle();
     _themeService.switchTheme();
-    update(); // Notify listeners
+    update();
   }
 }
